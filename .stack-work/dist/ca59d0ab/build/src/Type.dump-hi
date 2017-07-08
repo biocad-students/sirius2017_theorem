@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-07 10:12:45.3839497 UTC
+2017-07-08 09:26:57.8921576 UTC
 
 interface proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Type 8002
-  interface hash: 60e1b378d43645cd606b8dbe0d6ef716
-  ABI hash: 754e705a6aca0fec1902d33a64c7521e
+  interface hash: 5ae78e1444dd62ad9bb72bab99db0edc
+  ABI hash: b7ba7c7ea34e0ed52eb5154b9b3554ce
   export-list hash: b472081dbee7110444820ea50fdb7c82
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 9b927a2d36abe52536408c440c6086b5
@@ -31,6 +31,23 @@ import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
 import  -/  base-4.9.1.0:Text.ParserCombinators.ReadPrec 5cc8ec62ab8aeda628247695b64f5e42
 import  -/  base-4.9.1.0:Text.Read.Lex a861691fe58d2d0a125f55a5ebadf631
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
+6248cbcca85ecfa46b50bacefd50c8ab
+  $fEqTerm :: GHC.Classes.Eq Type.Term
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Term Type.$fEqTerm_$c== Type.$fEqTerm_$c/= -}
+6248cbcca85ecfa46b50bacefd50c8ab
+  $fEqTerm_$c/= :: Type.Term -> Type.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: Type.Term) (b :: Type.Term) ->
+                 case Type.$fEqTerm_$c== a b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+6248cbcca85ecfa46b50bacefd50c8ab
+  $fEqTerm_$c== :: Type.Term -> Type.Term -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
 9dc339e1c83370f86f802fbed15eacce
   $fEqVar :: GHC.Classes.Eq Type.Var
   DFunId
@@ -54,7 +71,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                 (Sym (Type.N:Var[0])
                  ->_R Sym (Type.N:Var[0])
                  ->_R <GHC.Types.Bool>_R) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm :: GHC.Read.Read Type.Term
   DFunId
   {- Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -64,7 +81,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   Type.$fReadTerm_$creadList
                   Type.$fReadTerm_$creadPrec
                   Type.$fReadTerm_$creadListPrec -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm1 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> forall b.
@@ -83,7 +100,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    eta
                    @ b
                    eta1) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm2 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> Text.ParserCombinators.ReadP.ReadP Type.Term
@@ -97,7 +114,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                          ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.Term>_R))
                         (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                                   <Type.Term>_R)))) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm3 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> forall b.
@@ -110,7 +127,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    (w1 :: Type.Term -> Text.ParserCombinators.ReadP.P b) ->
                  case w of ww { GHC.Types.I# ww1 ->
                  Type.$w$creadPrec ww1 @ b w1 }) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm4 :: Text.ParserCombinators.ReadP.P [Type.Term]
   {- Unfolding: (GHC.Read.list1
                    @ Type.Term
@@ -121,14 +138,14 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    @ [Type.Term]
                    (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
                       @ [Type.Term])) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm_$creadList ::
     Text.ParserCombinators.ReadP.ReadS [Type.Term]
   {- Arity: 1,
      Unfolding: (Text.ParserCombinators.ReadP.run
                    @ [Type.Term]
                    Type.$fReadTerm4) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm_$creadListPrec ::
     Text.ParserCombinators.ReadPrec.ReadPrec [Type.Term]
   {- Arity: 2, Strictness: <L,U><L,U>,
@@ -140,7 +157,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                       ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <[Type.Term]>_R))
                      (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                                <[Type.Term]>_R))) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm_$creadPrec ::
     Text.ParserCombinators.ReadPrec.ReadPrec Type.Term
   {- Arity: 1,
@@ -149,7 +166,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   `cast`
                 (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                           <Type.Term>_R)) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fReadTerm_$creadsPrec ::
     GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Type.Term
   {- Arity: 1, Strictness: <L,U>,
@@ -295,7 +312,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                       @ Type.Var
                       (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
                          @ Type.Var))) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fShowTerm :: GHC.Show.Show Type.Term
   DFunId
   {- Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -304,12 +321,12 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   Type.$fShowTerm_$cshowsPrec
                   Type.$fShowTerm_$cshow
                   Type.$fShowTerm_$cshowList -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fShowTerm1 :: Type.Term -> GHC.Show.ShowS
   {- Arity: 2,
      Unfolding: (\ (w :: Type.Term) (w1 :: GHC.Base.String) ->
                  Type.$w$cshowsPrec 0# w w1) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fShowTerm_$cshow :: Type.Term -> GHC.Base.String
   {- Arity: 1, Strictness: <S,1*U>,
      Unfolding: InlineRule (1, True, False)
@@ -318,11 +335,11 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    GHC.Show.shows22
                    x
                    (GHC.Types.[] @ GHC.Types.Char)) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fShowTerm_$cshowList :: [Type.Term] -> GHC.Show.ShowS
   {- Arity: 2,
      Unfolding: (GHC.Show.showList__ @ Type.Term Type.$fShowTerm1) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $fShowTerm_$cshowsPrec ::
     GHC.Types.Int -> Type.Term -> GHC.Show.ShowS
   {- Arity: 3, Strictness: <S(S),1*U(U)><S,1*U><L,U>,
@@ -468,7 +485,7 @@ ca360980d8eccbd1c86bd8e689b24083
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"#) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $w$creadPrec ::
     GHC.Prim.Int#
     -> forall b.
@@ -523,7 +540,7 @@ ca360980d8eccbd1c86bd8e689b24083
                          (Text.ParserCombinators.ReadP.N:ReadP[0] <()>_R)
                            @ b
                            k) }) -}
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   $w$cshowsPrec ::
     GHC.Prim.Int# -> Type.Term -> GHC.Base.String -> GHC.Base.String
   {- Arity: 3, Strictness: <S,U><S,1*U><L,U>, Inline: [0] -}
@@ -565,14 +582,14 @@ ca360980d8eccbd1c86bd8e689b24083
                                     (GHC.Types.: @ GHC.Types.Char GHC.Show.shows4 w1))))) }) -}
 69706716b66ef24c3b64f28fcefa9d6c
   type Name = GHC.Base.String
-84b2bf5d10ddf417f7a40aea081e7282
+6248cbcca85ecfa46b50bacefd50c8ab
   data Term
     = Var {var :: Type.Var}
     | App {alg :: Type.Term, dat :: Type.Term}
     | Lam {var :: Type.Var, body :: Type.Term}
 9dc339e1c83370f86f802fbed15eacce
   newtype Var = V Type.Name
-843a58dc336c8eee3691e6984f7ea557
+1d5e1980dfb2bded78967c8cef8e3a56
   alg :: Type.Term -> Type.Term
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -580,10 +597,10 @@ ca360980d8eccbd1c86bd8e689b24083
                 (\ (ds :: Type.Term) ->
                  case ds of wild {
                    DEFAULT -> Type.alg1 Type.App ds1 ds2 -> ds1 }) -}
-6db63d8e8f3c52771ed6d4f8021331ac
+a9e8127325113ea2ab2c0edb4b91073c
   alg1 :: Type.Term
   {- Strictness: x -}
-242e603bebf3182b3a077c388fe74123
+b0b0ba94345a2f2398b7adf946f161ba
   body :: Type.Term -> Type.Term
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -591,10 +608,10 @@ ca360980d8eccbd1c86bd8e689b24083
                 (\ (ds :: Type.Term) ->
                  case ds of wild {
                    DEFAULT -> Type.body1 Type.Lam ds1 ds2 -> ds2 }) -}
-97e52fdc934f95201d25c38f77cbb334
+3ebbeaa4fc1a13359dfcc00ce8637fed
   body1 :: Type.Term
   {- Strictness: x -}
-ae2c26a0a0eaf80344c81637f6f214cd
+25a9679e49e755039ab608a9b5998a63
   dat :: Type.Term -> Type.Term
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -602,10 +619,10 @@ ae2c26a0a0eaf80344c81637f6f214cd
                 (\ (ds :: Type.Term) ->
                  case ds of wild {
                    DEFAULT -> Type.dat1 Type.App ds1 ds2 -> ds2 }) -}
-aa1e688d4b7180b1e58d413de4fd6e24
+9c7ea117c40ed1ea04f9ecf8b9e4d2a9
   dat1 :: Type.Term
   {- Strictness: x -}
-4ad552100a5a51102d128b28119d4fcc
+dcfefbb08c7eaa2cdd6f9f45826a821c
   var :: Type.Term -> Type.Var
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -618,6 +635,7 @@ aa1e688d4b7180b1e58d413de4fd6e24
 6fab4a60bd136a332b0db6734cec7b4d
   var1 :: Type.Var
   {- Strictness: x -}
+instance [safe] GHC.Classes.Eq [Type.Term] = Type.$fEqTerm
 instance [safe] GHC.Classes.Eq [Type.Var] = Type.$fEqVar
 instance [safe] GHC.Read.Read [Type.Term] = Type.$fReadTerm
 instance [safe] GHC.Read.Read [Type.Var] = Type.$fReadVar

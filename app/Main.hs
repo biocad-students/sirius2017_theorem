@@ -8,4 +8,5 @@ main = do
         t2 = V "y"
         t3 = Lam t1 (Lam t2 (App (Lam t1 $ Var t1) $ Var t2))
         t4 = App t3 (App (Var t2) (Var t1))
-    putStr . showTerm . reduce $ t4
+        t5 = App (Lam t1 (App (Var t1) (Var t1))) (Var t2)
+    putStr . showTerm . reduce $ t5

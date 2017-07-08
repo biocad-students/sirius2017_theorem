@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-07 18:19:59.3593932 UTC
+2017-07-08 09:28:25.0775606 UTC
 
 interface main@main:Main 8002
-  interface hash: 6be3b20941b753d50e5f603520b6ca5a
-  ABI hash: 96f5758b754c486026be13963cf63e3b
+  interface hash: 14e1f32c3b84dbf9951cfcb6b34466af
+  ABI hash: 15421cd98055056b65753811ecd58d5e
   export-list hash: a678e4b7622a2129534a9ad19b263f70
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: f297102f924d7c678f1b8acaa35ac921
@@ -27,9 +27,9 @@ import  -/  base-4.9.1.0:GHC.Base 4caea1123ecf4b46e27cbccd6d279377
 import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
 import  -/  base-4.9.1.0:System.IO 5daf3f384209c11d9566e3409af8ec5d
 import  -/  ghc-prim-0.5.0.0:GHC.Types 89f8de4f08018c9177c98d979eae0e45
-import  -/  proj-0.1.0.0@proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Lib 87aa0ba7d8d2abdbb2055c8b12f97670
-import  -/  proj-0.1.0.0@proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Reduce e1efaa60ed7b2104899afe84f7f47996
-import  -/  proj-0.1.0.0@proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Type 754e705a6aca0fec1902d33a64c7521e
+import  -/  proj-0.1.0.0@proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Lib d017022eb5d8a90c7d1a50a2b8e54f12
+import  -/  proj-0.1.0.0@proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Reduce e7c31f5f2d3dd772820c5ae540f6177d
+import  -/  proj-0.1.0.0@proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Type b7ba7c7ea34e0ed52eb5154b9b3554ce
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -42,12 +42,12 @@ d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule2 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "main"#) -}
-d00700d4aa2c4842506666ada53cfb77
+317e0d333c26a924e30a04128a7cf377
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-0df1e4fa499c37ff060bedad8c5ba439
+235881e0a0663594d73537b38489c945
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
@@ -59,51 +59,63 @@ d00700d4aa2c4842506666ada53cfb77
                    Main.main2
                    GHC.Types.False
                    eta) -}
-3f6a554a977117b09d041750f42c28e0
-  main10 :: Type.Term
-  {- Unfolding: (Type.App Main.main11 Main.main7) -}
-719d8bdf34b90097f3c5440a6c1fd44f
+300795921ce20fee481a6d66418c11ae
+  main10 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "y"#) -}
+068aca186b47e88e3283a7ad1d637422
   main11 :: Type.Term
   {- Unfolding: (Type.Lam
-                   Main.main6 `cast` (Sym (Type.N:Var[0]))
-                   Main.main5) -}
-583d87b5c8c0093a49d93766342233f5
-  main12 ::
+                   Main.main8 `cast` (Sym (Type.N:Var[0]))
+                   Main.main12) -}
+3f4551045c1a8705e4bb7dcec4e3261e
+  main12 :: Type.Term
+  {- Unfolding: (Type.Lam
+                   Main.main10 `cast` (Sym (Type.N:Var[0]))
+                   Main.main13) -}
+0f4b8752941dd6f6a6045dadcc8a1f2a
+  main13 :: Type.Term
+  {- Unfolding: (Type.App Main.main14 Main.main9) -}
+9c3a05bf0fb81d577baae51bd147ce98
+  main14 :: Type.Term
+  {- Unfolding: (Type.Lam
+                   Main.main8 `cast` (Sym (Type.N:Var[0]))
+                   Main.main7) -}
+9a6c44db1def88923e544501c1a0d3c2
+  main15 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1,
      Unfolding: (GHC.TopHandler.runMainIO1
                    @ ()
                    Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
-b39164435ab4d76a3ffcd7812b7c8320
+da3ced6063cab3ae602b281cec729de6
   main2 :: GHC.Base.String
   {- Unfolding: (Lib.showTerm Main.main3) -}
-fed5baddda73cfa049f3896a4ff218d2
+1c0e8909a0fa357a7ec17337ac022e39
   main3 :: Type.Term
-  {- Unfolding: (Reduce.subs
-                   Main.main9
-                   Main.main6 `cast` (Sym (Type.N:Var[0]))
-                   Main.main4) -}
-a9c2404024301e655a9e2891d0043eb0
+  {- Unfolding: (Reduce.reduce'' Main.main4) -}
+c44aec006abbd7fd4c0f1fae7b0f7811
   main4 :: Type.Term
-  {- Unfolding: (Type.App Main.main7 Main.main5) -}
-353f8a2d17df2e9054d00f2f475dc213
+  {- Unfolding: (Reduce.rename'
+                   (GHC.Types.[] @ (Type.Var, GHC.Types.Int))
+                   Reduce.reduce1
+                   Main.main5) -}
+e3db9b9e2abe196a1f98dec7eba266ae
   main5 :: Type.Term
-  {- Unfolding: (Type.Var Main.main6 `cast` (Sym (Type.N:Var[0]))) -}
-709d37a99e02d15b8ff50f10421636c1
-  main6 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "x"#) -}
-71cdc1f3b1aa7ecc867b88f3c865be1d
+  {- Unfolding: (Type.App Main.main11 Main.main6) -}
+24b58da7248aadccddd8dcae85049e2f
+  main6 :: Type.Term
+  {- Unfolding: (Type.App Main.main9 Main.main7) -}
+d95c6d50dd24d22d59cbfbd860bfc985
   main7 :: Type.Term
   {- Unfolding: (Type.Var Main.main8 `cast` (Sym (Type.N:Var[0]))) -}
-8c1d5926c350df7785bfd7a3d7cf30dd
+e1e18dd211f302ad0ee90890817b02a6
   main8 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "y"#) -}
-2b944f5f211dcae51a1a291bb304aa88
+  {- Unfolding: (GHC.CString.unpackCString# "x"#) -}
+7452a3159b0a197faccfddbe5a60ca75
   main9 :: Type.Term
-  {- Unfolding: (Type.Lam
-                   Main.main8 `cast` (Sym (Type.N:Var[0]))
-                   Main.main10) -}
+  {- Unfolding: (Type.Var
+                   Main.main10 `cast` (Sym (Type.N:Var[0]))) -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:

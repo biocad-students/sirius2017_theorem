@@ -10,4 +10,4 @@ data Term   = Var { var     :: Var  }
                   , dat     :: Term }
             | Lam { var     :: Var  
                   , body    :: Term }
-    deriving (Show, Read)
+    deriving (Show, Read, Eq)

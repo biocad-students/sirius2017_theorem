@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-07 18:19:58.3433359 UTC
+2017-07-08 09:26:58.9361661 UTC
 
 interface proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Lib 8002
-  interface hash: d4cc34dfeff25a222e645db1f0b95e37
-  ABI hash: 87aa0ba7d8d2abdbb2055c8b12f97670
+  interface hash: db2d81ee2ad09f8fac9fba6e41eee7ac
+  ABI hash: d017022eb5d8a90c7d1a50a2b8e54f12
   export-list hash: 9f62d00ec6a6c178fb5e079d51517b18
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 26c0c808fd3a5a4217cc82e90b56d9ff
@@ -26,19 +26,19 @@ family instance modules: base-4.9.1.0:Control.Applicative
 import  -/  base-4.9.1.0:GHC.Base 4caea1123ecf4b46e27cbccd6d279377
 import  -/  base-4.9.1.0:GHC.Err 20faef8829fd13c027d0ee2213637534
 import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
-import  -/  Reduce e1efaa60ed7b2104899afe84f7f47996
-  exports: bb9425de1936d61010d8e2cdc6885ebf
-import  -/  Type 754e705a6aca0fec1902d33a64c7521e
+import  -/  Reduce 5946911a637c1524989613054b56ebb5
+  exports: d5d0829edc88c2b5e78b4ac4caa385d4
+import  -/  Type b7ba7c7ea34e0ed52eb5154b9b3554ce
   exports: b472081dbee7110444820ea50fdb7c82
-  App 4cb29c180fef48be97a200335bbba980
-  Lam 00ce991cf56e250ace71a10dcc975a0b
-  Term 84b2bf5d10ddf417f7a40aea081e7282
+  App 028610684679a2a1b78f577cb5f804c3
+  Lam d02ebc69c1427afc56b0adc83fef121e
+  Term 6248cbcca85ecfa46b50bacefd50c8ab
   V fcc0baae0b12a55a56d67d4b07cac759
-  Var b0a6233ba2e8e729f35bd5a217f53aa7
-  alg 843a58dc336c8eee3691e6984f7ea557
-  body 242e603bebf3182b3a077c388fe74123
-  dat ae2c26a0a0eaf80344c81637f6f214cd
-  var 4ad552100a5a51102d128b28119d4fcc
+  Var de0c36501ff52403878aea2ae5a0b25f
+  alg 1d5e1980dfb2bded78967c8cef8e3a56
+  body b0b0ba94345a2f2398b7adf946f161ba
+  dat 25a9679e49e755039ab608a9b5998a63
+  var dcfefbb08c7eaa2cdd6f9f45826a821c
 310a04e9c1b124fd31a2202e8c4c7b32
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -52,19 +52,19 @@ f9d0d370a5956bcc3d660c04ecc74c52
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"#) -}
-35932572c80b4bcc4c7518a39b70ca62
+eefea1f3f40835075c81192950b80519
   readTerm :: GHC.Base.String -> Type.Term
   {- Arity: 1, Strictness: <B,1*U>x,
      Unfolding: InlineRule (1, True, False)
                 (\ (ds :: [GHC.Types.Char]) ->
                  case ds of wild { [] -> Lib.readTerm2 : x xs -> Lib.readTerm1 }) -}
-3b9ae042b358a1e7021ecf5a4366f380
+ebc331f8a06319bebfc82d0b183aefad
   readTerm1 :: Type.Term
   {- Strictness: x -}
-4f3e3382747db609671436541ea1cfad
+c971bf4b129197f1a112547b903638d5
   readTerm2 :: Type.Term
   {- Strictness: x -}
-fd8bdd6482de7b0c299f24cec5dc68ef
+892d2c2c570500242a5b551e2d79fd95
   showTerm :: Type.Term -> GHC.Base.String
   {- Arity: 1, Strictness: <S,1*U> -}
 vectorised variables:
