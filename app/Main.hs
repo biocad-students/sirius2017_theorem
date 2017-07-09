@@ -1,12 +1,17 @@
+
 import Lib
 import Type
 import Reduce
 
 main :: IO ()
 main = do
-    let t1 = V "x"
-        t2 = V "y"
-        t3 = Lam t1 (Lam t2 (App (Lam t1 $ Var t1) $ Var t2))
-        t4 = App t3 (App (Var t2) (Var t1))
-        t5 = App (Lam t1 (App (Var t1) (Var t1))) (Var t2)
-    putStr . showTerm . reduce $ t5
+    let x = V "x"
+        y = V "y"
+        z = V "z"
+        v = Var . V
+        t3 = Lam x (Lam y (App (Lam x $ Var x) $ Var y))
+        t4 = App t3 (App (Var x) (Var x))
+        t5 = App (Lam x (App (Var x) (Var x))) (Var y)
+        tId = Lam x $ Var x
+        tConst = Lam x (Lam y (Var x))
+    putStr . showTerm $ t4

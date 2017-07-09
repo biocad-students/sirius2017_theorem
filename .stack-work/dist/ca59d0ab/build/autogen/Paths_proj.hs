@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "C:\\Users\\timur\\Documents\\proj\\proj\\.stack-work\\install\\ed14a2f4\\bin"
-libdir     = "C:\\Users\\timur\\Documents\\proj\\proj\\.stack-work\\install\\ed14a2f4\\lib\\x86_64-windows-ghc-8.0.2\\proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"
-dynlibdir  = "C:\\Users\\timur\\Documents\\proj\\proj\\.stack-work\\install\\ed14a2f4\\lib\\x86_64-windows-ghc-8.0.2"
-datadir    = "C:\\Users\\timur\\Documents\\proj\\proj\\.stack-work\\install\\ed14a2f4\\share\\x86_64-windows-ghc-8.0.2\\proj-0.1.0.0"
-libexecdir = "C:\\Users\\timur\\Documents\\proj\\proj\\.stack-work\\install\\ed14a2f4\\libexec"
-sysconfdir = "C:\\Users\\timur\\Documents\\proj\\proj\\.stack-work\\install\\ed14a2f4\\etc"
+bindir     = "C:\\Users\\timur\\Documents\\sirius2017_theorem\\.stack-work\\install\\ed14a2f4\\bin"
+libdir     = "C:\\Users\\timur\\Documents\\sirius2017_theorem\\.stack-work\\install\\ed14a2f4\\lib\\x86_64-windows-ghc-8.0.2\\proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"
+dynlibdir  = "C:\\Users\\timur\\Documents\\sirius2017_theorem\\.stack-work\\install\\ed14a2f4\\lib\\x86_64-windows-ghc-8.0.2"
+datadir    = "C:\\Users\\timur\\Documents\\sirius2017_theorem\\.stack-work\\install\\ed14a2f4\\share\\x86_64-windows-ghc-8.0.2\\proj-0.1.0.0"
+libexecdir = "C:\\Users\\timur\\Documents\\sirius2017_theorem\\.stack-work\\install\\ed14a2f4\\libexec"
+sysconfdir = "C:\\Users\\timur\\Documents\\sirius2017_theorem\\.stack-work\\install\\ed14a2f4\\etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "proj_bindir") (\_ -> return bindir)

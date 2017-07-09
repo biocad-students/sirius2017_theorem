@@ -1,19 +1,23 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-08 09:26:57.8921576 UTC
+2017-07-09 11:06:30.4459454 UTC
 
 interface proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Type 8002
-  interface hash: 5ae78e1444dd62ad9bb72bab99db0edc
-  ABI hash: b7ba7c7ea34e0ed52eb5154b9b3554ce
-  export-list hash: b472081dbee7110444820ea50fdb7c82
+  interface hash: d95c48561fde8104a66fef339fa85c9b
+  ABI hash: 4f415a5c7446bd912e332dc7e124bd82
+  export-list hash: 3324492b52d478a440033a99b78b4052
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 9b927a2d36abe52536408c440c6086b5
   sig of: Nothing
   used TH splices: False
   where
 exports:
+  Type.Context{Type.Context}
   Type.Name
+  Type.Substitution
+  Type.TS{Type.TS}
   Type.Term{Type.App Type.Lam Type.Var alg body dat var}
+  Type.Type{Type.Arrow Type.Type}
   Type.Var{Type.V}
 module dependencies:
 package dependencies: base-4.9.1.0* ghc-prim-0.5.0.0
@@ -31,13 +35,103 @@ import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
 import  -/  base-4.9.1.0:Text.ParserCombinators.ReadPrec 5cc8ec62ab8aeda628247695b64f5e42
 import  -/  base-4.9.1.0:Text.Read.Lex a861691fe58d2d0a125f55a5ebadf631
 import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
-6248cbcca85ecfa46b50bacefd50c8ab
+a0f65bb8e1580d26acafd64f75d57550
+  $fEqContext :: GHC.Classes.Eq Type.Context
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Context Type.$fEqContext_$c== Type.$fEqContext_$c/= -}
+f282757e8ba05578b51b709e854a0c1f
+  $fEqContext1 :: GHC.Classes.Eq (Type.Var, Type.Type)
+  {- Strictness: m,
+     Unfolding: InlineRule (0, True, True) Type.$fEqContext_$s$fEq(,) -}
+9cfd89b5c512ae5ac1681cd1bac6dae3
+  $fEqContext2 ::
+    [(Type.Var, Type.Type)]
+    -> [(Type.Var, Type.Type)] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (GHC.Classes.$fEq[]_$c==
+                   @ (Type.Var, Type.Type)
+                   Type.$fEqContext_$s$fEq(,)) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fEqContext_$c/= :: Type.Context -> Type.Context -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fEqContext_$s$fEq[]_$c/=
+                  `cast`
+                (Sym (Type.N:Context[0])
+                 ->_R Sym (Type.N:Context[0])
+                 ->_R <GHC.Types.Bool>_R) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fEqContext_$c== :: Type.Context -> Type.Context -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fEqContext2
+                  `cast`
+                (Sym (Type.N:Context[0])
+                 ->_R Sym (Type.N:Context[0])
+                 ->_R <GHC.Types.Bool>_R) -}
+f6648dd6f84f3264569c41b7271ac49d
+  $fEqContext_$s$fEq(,) :: GHC.Classes.Eq (Type.Var, Type.Type)
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ (Type.Var, Type.Type)
+                  (GHC.Classes.$fEq(,)_$c==
+                     @ Type.Var
+                     @ Type.Type
+                     Type.$fEqVar
+                     Type.$fEqType)
+                  (GHC.Classes.$fEq(,)_$c/=
+                     @ Type.Var
+                     @ Type.Type
+                     Type.$fEqVar
+                     Type.$fEqType) -}
+965539b633223dabcc9fc1192120032b
+  $fEqContext_$s$fEq[]_$c/= ::
+    [(Type.Var, Type.Type)]
+    -> [(Type.Var, Type.Type)] -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: [(Type.Var, Type.Type)]) (y :: [(Type.Var, Type.Type)]) ->
+                 GHC.Classes.not
+                   (GHC.Classes.$fEq[]_$c==
+                      @ (Type.Var, Type.Type)
+                      Type.$fEqContext1
+                      x
+                      y)) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fEqTS :: GHC.Classes.Eq Type.TS
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:. @ Type.TS Type.$fEqTS_$c== Type.$fEqTS_$c/= -}
+ab09ea83386043a5980140eaf27b4a31
+  $fEqTS_$c/= :: Type.TS -> Type.TS -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U)><S(SL),1*U(1*U,1*U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Type.TS) (w1 :: Type.TS) ->
+                 case w of ww { Type.TS ww1 ww2 ->
+                 case w1 of ww3 { Type.TS ww4 ww5 ->
+                 Type.$w$c/= ww1 ww2 ww4 ww5 } }) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fEqTS_$c== :: Type.TS -> Type.TS -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U)><S(SL),1*U(1*U,1*U)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Type.TS) (w1 :: Type.TS) ->
+                 case w of ww { Type.TS ww1 ww2 ->
+                 case w1 of ww3 { Type.TS ww4 ww5 ->
+                 Type.$w$c== ww1 ww2 ww4 ww5 } }) -}
+fb713e5fc7f296cf68ac8e595f28c88b
   $fEqTerm :: GHC.Classes.Eq Type.Term
   DFunId
   {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
      Unfolding: DFun:.
                   @ Type.Term Type.$fEqTerm_$c== Type.$fEqTerm_$c/= -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fEqTerm_$c/= :: Type.Term -> Type.Term -> GHC.Types.Bool
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
      Unfolding: InlineRule (2, True, False)
@@ -45,15 +139,32 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                  case Type.$fEqTerm_$c== a b of wild {
                    GHC.Types.False -> GHC.Types.True
                    GHC.Types.True -> GHC.Types.False }) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fEqTerm_$c== :: Type.Term -> Type.Term -> GHC.Types.Bool
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
-9dc339e1c83370f86f802fbed15eacce
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fEqType :: GHC.Classes.Eq Type.Type
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Type Type.$fEqType_$c== Type.$fEqType_$c/= -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fEqType_$c/= :: Type.Type -> Type.Type -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: Type.Type) (b :: Type.Type) ->
+                 case Type.$fEqType_$c== a b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fEqType_$c== :: Type.Type -> Type.Type -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+f1a1d9600c91402d3c3cb96094cb7c58
   $fEqVar :: GHC.Classes.Eq Type.Var
   DFunId
   {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
      Unfolding: DFun:. @ Type.Var Type.$fEqVar_$c== Type.$fEqVar_$c/= -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fEqVar_$c/= :: Type.Var -> Type.Var -> GHC.Types.Bool
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
      Unfolding: InlineRule (0, True, True)
@@ -62,7 +173,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                 (Sym (Type.N:Var[0])
                  ->_R Sym (Type.N:Var[0])
                  ->_R <GHC.Types.Bool>_R) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fEqVar_$c== :: Type.Var -> Type.Var -> GHC.Types.Bool
   {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
      Unfolding: InlineRule (0, True, True)
@@ -71,7 +182,266 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                 (Sym (Type.N:Var[0])
                  ->_R Sym (Type.N:Var[0])
                  ->_R <GHC.Types.Bool>_R) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext :: GHC.Read.Read Type.Context
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Context
+                  Type.$fReadContext_$creadsPrec
+                  Type.$fReadContext_$creadList
+                  Type.$fReadContext_$creadPrec
+                  Type.$fReadContext_$creadListPrec -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext1 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       ([Type.Context] -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <L,U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (eta :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (eta1 :: [Type.Context] -> Text.ParserCombinators.ReadP.P b) ->
+                 GHC.Read.list1
+                   @ Type.Context
+                   Type.$fReadContext2
+                     `cast`
+                   (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                             <Type.Context>_R))
+                   eta
+                   @ b
+                   eta1) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext2 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> Text.ParserCombinators.ReadP.ReadP Type.Context
+  {- Arity: 1,
+     Unfolding: (GHC.Read.parens1
+                   @ Type.Context
+                   Type.$fReadContext3
+                     `cast`
+                   (Trans
+                        (<Text.ParserCombinators.ReadPrec.Prec>_R
+                         ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                       <Type.Context>_R))
+                        (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                  <Type.Context>_R)))) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext3 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Type.Context -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Type.Context -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Type.$w$creadPrec ww1 @ b w1 }) -}
+3ca38230be60bf6de4990bc8ef859b30
+  $fReadContext4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Context"#) -}
+aaadf2eb6c04a998108a20626685fd67
+  $fReadContext5 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 11#) -}
+50137a945fa7ee88ccbc92b8db16f094
+  $fReadContext6 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b1.
+       ((Type.Var, Type.Type) -> Text.ParserCombinators.ReadP.P b1)
+       -> Text.ParserCombinators.ReadP.P b1
+  {- Arity: 2,
+     Unfolding: (GHC.Read.$fRead(,)2
+                   @ Type.Var
+                   @ Type.Type
+                   Type.$fReadVar
+                   Type.$fReadType) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext7 :: Text.ParserCombinators.ReadP.P [Type.Context]
+  {- Unfolding: (GHC.Read.list1
+                   @ Type.Context
+                   Type.$fReadContext2
+                     `cast`
+                   (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                             <Type.Context>_R))
+                   GHC.Read.$fRead()5
+                   @ [Type.Context]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Type.Context])) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext_$creadList ::
+    Text.ParserCombinators.ReadP.ReadS [Type.Context]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Type.Context]
+                   Type.$fReadContext7) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Type.Context]
+  {- Arity: 2, Strictness: <L,U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fReadContext1
+                  `cast`
+                (Trans
+                     (<Text.ParserCombinators.ReadPrec.Prec>_R
+                      ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                    <[Type.Context]>_R))
+                     (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                               <[Type.Context]>_R))) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext_$creadPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec Type.Context
+  {- Arity: 1,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fReadContext2
+                  `cast`
+                (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                          <Type.Context>_R)) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fReadContext_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Type.Context
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (eta :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Type.Context
+                   ((GHC.Read.parens1
+                       @ Type.Context
+                       Type.$fReadContext3
+                         `cast`
+                       (Trans
+                            (<Text.ParserCombinators.ReadPrec.Prec>_R
+                             ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                           <Type.Context>_R))
+                            (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                      <Type.Context>_R)))
+                       eta)
+                      `cast`
+                    (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.Context>_R)
+                      @ Type.Context
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ Type.Context))) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS :: GHC.Read.Read Type.TS
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.TS
+                  Type.$fReadTS_$creadsPrec
+                  Type.$fReadTS_$creadList
+                  Type.$fReadTS_$creadPrec
+                  Type.$fReadTS_$creadListPrec -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS1 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       ([Type.TS] -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <L,U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (eta :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (eta1 :: [Type.TS] -> Text.ParserCombinators.ReadP.P b) ->
+                 GHC.Read.list1
+                   @ Type.TS
+                   Type.$fReadTS2
+                     `cast`
+                   (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <Type.TS>_R))
+                   eta
+                   @ b
+                   eta1) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS2 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> Text.ParserCombinators.ReadP.ReadP Type.TS
+  {- Arity: 1,
+     Unfolding: (GHC.Read.parens1
+                   @ Type.TS
+                   Type.$fReadTS3
+                     `cast`
+                   (Trans
+                        (<Text.ParserCombinators.ReadPrec.Prec>_R
+                         ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.TS>_R))
+                        (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                  <Type.TS>_R)))) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS3 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Type.TS -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Type.TS -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Type.$w$creadPrec3 ww1 @ b w1 }) -}
+b13a3dba05b58a284108301480621ea8
+  $fReadTS4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "TS"#) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS5 :: Text.ParserCombinators.ReadP.P [Type.TS]
+  {- Unfolding: (GHC.Read.list1
+                   @ Type.TS
+                   Type.$fReadTS2
+                     `cast`
+                   (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <Type.TS>_R))
+                   GHC.Read.$fRead()5
+                   @ [Type.TS]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Type.TS])) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS_$creadList :: Text.ParserCombinators.ReadP.ReadS [Type.TS]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Type.TS]
+                   Type.$fReadTS5) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Type.TS]
+  {- Arity: 2, Strictness: <L,U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fReadTS1
+                  `cast`
+                (Trans
+                     (<Text.ParserCombinators.ReadPrec.Prec>_R
+                      ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <[Type.TS]>_R))
+                     (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                               <[Type.TS]>_R))) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS_$creadPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec Type.TS
+  {- Arity: 1,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fReadTS2
+                  `cast`
+                (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                          <Type.TS>_R)) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fReadTS_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Type.TS
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (eta :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Type.TS
+                   ((GHC.Read.parens1
+                       @ Type.TS
+                       Type.$fReadTS3
+                         `cast`
+                       (Trans
+                            (<Text.ParserCombinators.ReadPrec.Prec>_R
+                             ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.TS>_R))
+                            (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <Type.TS>_R)))
+                       eta)
+                      `cast`
+                    (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.TS>_R)
+                      @ Type.TS
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure @ Type.TS))) -}
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm :: GHC.Read.Read Type.Term
   DFunId
   {- Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -81,7 +451,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   Type.$fReadTerm_$creadList
                   Type.$fReadTerm_$creadPrec
                   Type.$fReadTerm_$creadListPrec -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm1 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> forall b.
@@ -100,7 +470,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    eta
                    @ b
                    eta1) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm2 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> Text.ParserCombinators.ReadP.ReadP Type.Term
@@ -114,7 +484,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                          ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.Term>_R))
                         (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                                   <Type.Term>_R)))) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm3 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> forall b.
@@ -126,8 +496,8 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    @ b
                    (w1 :: Type.Term -> Text.ParserCombinators.ReadP.P b) ->
                  case w of ww { GHC.Types.I# ww1 ->
-                 Type.$w$creadPrec ww1 @ b w1 }) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+                 Type.$w$creadPrec4 ww1 @ b w1 }) -}
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm4 :: Text.ParserCombinators.ReadP.P [Type.Term]
   {- Unfolding: (GHC.Read.list1
                    @ Type.Term
@@ -138,14 +508,14 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    @ [Type.Term]
                    (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
                       @ [Type.Term])) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm_$creadList ::
     Text.ParserCombinators.ReadP.ReadS [Type.Term]
   {- Arity: 1,
      Unfolding: (Text.ParserCombinators.ReadP.run
                    @ [Type.Term]
                    Type.$fReadTerm4) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm_$creadListPrec ::
     Text.ParserCombinators.ReadPrec.ReadPrec [Type.Term]
   {- Arity: 2, Strictness: <L,U><L,U>,
@@ -157,7 +527,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                       ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <[Type.Term]>_R))
                      (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                                <[Type.Term]>_R))) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm_$creadPrec ::
     Text.ParserCombinators.ReadPrec.ReadPrec Type.Term
   {- Arity: 1,
@@ -166,7 +536,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   `cast`
                 (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                           <Type.Term>_R)) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fReadTerm_$creadsPrec ::
     GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Type.Term
   {- Arity: 1, Strictness: <L,U>,
@@ -189,7 +559,131 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                       @ Type.Term
                       (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
                          @ Type.Term))) -}
-9dc339e1c83370f86f802fbed15eacce
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType :: GHC.Read.Read Type.Type
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Type
+                  Type.$fReadType_$creadsPrec
+                  Type.$fReadType_$creadList
+                  Type.$fReadType_$creadPrec
+                  Type.$fReadType_$creadListPrec -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType1 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       ([Type.Type] -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <L,U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (eta :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (eta1 :: [Type.Type] -> Text.ParserCombinators.ReadP.P b) ->
+                 GHC.Read.list1
+                   @ Type.Type
+                   Type.$fReadType2
+                     `cast`
+                   (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <Type.Type>_R))
+                   eta
+                   @ b
+                   eta1) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType2 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> Text.ParserCombinators.ReadP.ReadP Type.Type
+  {- Arity: 1,
+     Unfolding: (GHC.Read.parens1
+                   @ Type.Type
+                   Type.$fReadType3
+                     `cast`
+                   (Trans
+                        (<Text.ParserCombinators.ReadPrec.Prec>_R
+                         ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.Type>_R))
+                        (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                  <Type.Type>_R)))) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType3 ::
+    Text.ParserCombinators.ReadPrec.Prec
+    -> forall b.
+       (Type.Type -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S(S),1*U(U)><L,C(U)>, Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Text.ParserCombinators.ReadPrec.Prec)
+                   @ b
+                   (w1 :: Type.Type -> Text.ParserCombinators.ReadP.P b) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Type.$w$creadPrec1 ww1 @ b w1 }) -}
+fb4eec5d4a211f7e999d99a1b3234b34
+  $fReadType4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Type"#) -}
+62ee3633acbe6282545b24b0fd669e99
+  $fReadType5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Arrow"#) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType6 :: Text.ParserCombinators.ReadP.P [Type.Type]
+  {- Unfolding: (GHC.Read.list1
+                   @ Type.Type
+                   Type.$fReadType2
+                     `cast`
+                   (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0] <Type.Type>_R))
+                   GHC.Read.$fRead()5
+                   @ [Type.Type]
+                   (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                      @ [Type.Type])) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType_$creadList ::
+    Text.ParserCombinators.ReadP.ReadS [Type.Type]
+  {- Arity: 1,
+     Unfolding: (Text.ParserCombinators.ReadP.run
+                   @ [Type.Type]
+                   Type.$fReadType6) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType_$creadListPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec [Type.Type]
+  {- Arity: 2, Strictness: <L,U><L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fReadType1
+                  `cast`
+                (Trans
+                     (<Text.ParserCombinators.ReadPrec.Prec>_R
+                      ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <[Type.Type]>_R))
+                     (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                               <[Type.Type]>_R))) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType_$creadPrec ::
+    Text.ParserCombinators.ReadPrec.ReadPrec Type.Type
+  {- Arity: 1,
+     Unfolding: InlineRule (0, True, True)
+                Type.$fReadType2
+                  `cast`
+                (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                          <Type.Type>_R)) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fReadType_$creadsPrec ::
+    GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Type.Type
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (eta :: GHC.Types.Int) ->
+                 Text.ParserCombinators.ReadP.run
+                   @ Type.Type
+                   ((GHC.Read.parens1
+                       @ Type.Type
+                       Type.$fReadType3
+                         `cast`
+                       (Trans
+                            (<Text.ParserCombinators.ReadPrec.Prec>_R
+                             ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.Type>_R))
+                            (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                      <Type.Type>_R)))
+                       eta)
+                      `cast`
+                    (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.Type>_R)
+                      @ Type.Type
+                      (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
+                         @ Type.Type))) -}
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar :: GHC.Read.Read Type.Var
   DFunId
   {- Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -199,7 +693,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   Type.$fReadVar_$creadList
                   Type.$fReadVar_$creadPrec
                   Type.$fReadVar_$creadListPrec -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar1 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> forall b.
@@ -218,7 +712,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    eta
                    @ b
                    eta1) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar2 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> Text.ParserCombinators.ReadP.ReadP Type.Var
@@ -232,7 +726,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                          ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <Type.Var>_R))
                         (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                                   <Type.Var>_R)))) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar3 ::
     Text.ParserCombinators.ReadPrec.Prec
     -> forall b.
@@ -244,15 +738,12 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    @ b
                    (w1 :: Type.Var -> Text.ParserCombinators.ReadP.P b) ->
                  case w of ww { GHC.Types.I# ww1 ->
-                 Type.$w$creadPrec1 ww1 @ b w1 }) -}
+                 Type.$w$creadPrec2 ww1 @ b w1 }) -}
 6b20b65212033a88038ce46a092a9ff5
   $fReadVar4 :: [GHC.Types.Char]
   {- Unfolding: (GHC.CString.unpackCString# "V"#) -}
-2b5bb9b4e1eda0aa5ff634c91d7fda97
-  $fReadVar5 :: GHC.Types.Int
-  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 11#) -}
-9dc339e1c83370f86f802fbed15eacce
-  $fReadVar6 :: Text.ParserCombinators.ReadP.P [Type.Var]
+f1a1d9600c91402d3c3cb96094cb7c58
+  $fReadVar5 :: Text.ParserCombinators.ReadP.P [Type.Var]
   {- Unfolding: (GHC.Read.list1
                    @ Type.Var
                    Type.$fReadVar2
@@ -262,14 +753,14 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    @ [Type.Var]
                    (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
                       @ [Type.Var])) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar_$creadList ::
     Text.ParserCombinators.ReadP.ReadS [Type.Var]
   {- Arity: 1,
      Unfolding: (Text.ParserCombinators.ReadP.run
                    @ [Type.Var]
-                   Type.$fReadVar6) -}
-9dc339e1c83370f86f802fbed15eacce
+                   Type.$fReadVar5) -}
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar_$creadListPrec ::
     Text.ParserCombinators.ReadPrec.ReadPrec [Type.Var]
   {- Arity: 2, Strictness: <L,U><L,U>,
@@ -281,7 +772,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                       ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0] <[Type.Var]>_R))
                      (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                                <[Type.Var]>_R))) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar_$creadPrec ::
     Text.ParserCombinators.ReadPrec.ReadPrec Type.Var
   {- Arity: 1,
@@ -290,7 +781,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   `cast`
                 (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
                           <Type.Var>_R)) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fReadVar_$creadsPrec ::
     GHC.Types.Int -> Text.ParserCombinators.ReadP.ReadS Type.Var
   {- Arity: 1, Strictness: <L,U>,
@@ -312,7 +803,116 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                       @ Type.Var
                       (Text.ParserCombinators.ReadP.$fApplicativeP_$cpure
                          @ Type.Var))) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+a0f65bb8e1580d26acafd64f75d57550
+  $fShowContext :: GHC.Show.Show Type.Context
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Context
+                  Type.$fShowContext_$cshowsPrec
+                  Type.$fShowContext_$cshow
+                  Type.$fShowContext_$cshowList -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fShowContext1 :: Type.Context -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ (w :: Type.Context) (w1 :: GHC.Base.String) ->
+                 Type.$w$cshowsPrec 0# w w1) -}
+b270d0a3f6bd07f0a0933a0f0f2f81da
+  $fShowContext2 ::
+    (Type.Var, Type.Type) -> GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 2,
+     Unfolding: (\ (w3 :: (Type.Var, Type.Type))
+                   (w4 :: GHC.Base.String)[OneShot] ->
+                 case w3 of ww { (,) ww1 ww2 ->
+                 GHC.Types.:
+                   @ GHC.Types.Char
+                   GHC.Show.shows7
+                   (Type.$w$cshowsPrec2
+                      0#
+                      ww1
+                      (GHC.Types.:
+                         @ GHC.Types.Char
+                         GHC.Show.shows5
+                         (GHC.Show.$fShow(,)_$sgo
+                            (GHC.Types.: @ GHC.Types.Char GHC.Show.shows4 w4)
+                            (\ (w :: GHC.Base.String) -> Type.$w$cshowsPrec1 0# ww2 w)
+                            (GHC.Types.[] @ GHC.Show.ShowS)))) }) -}
+dcdcc76085e501b8544c470b37954053
+  $fShowContext3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "V "#) -}
+0e619b017347218d49398ad7351859d9
+  $fShowContext4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Context "#) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fShowContext_$cshow :: Type.Context -> GHC.Base.String
+  {- Arity: 1, Strictness: <L,1*U>,
+     Unfolding: (\ (x :: Type.Context) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   Type.$fShowContext4
+                   (GHC.Show.showList__
+                      @ (Type.Var, Type.Type)
+                      Type.$fShowContext2
+                      x `cast` (Type.N:Context[0])
+                      (GHC.Types.[] @ GHC.Types.Char))) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fShowContext_$cshowList :: [Type.Context] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ Type.Context
+                   Type.$fShowContext1) -}
+a0f65bb8e1580d26acafd64f75d57550
+  $fShowContext_$cshowsPrec ::
+    GHC.Types.Int -> Type.Context -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S(S),1*U(U)><L,1*U><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int)
+                   (w1 :: Type.Context)
+                   (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Type.$w$cshowsPrec ww1 w1 w2 }) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fShowTS :: GHC.Show.Show Type.TS
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.TS
+                  Type.$fShowTS_$cshowsPrec
+                  Type.$fShowTS_$cshow
+                  Type.$fShowTS_$cshowList -}
+ab09ea83386043a5980140eaf27b4a31
+  $fShowTS1 :: Type.TS -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ (w :: Type.TS) (w1 :: GHC.Base.String) ->
+                 case w of ww { Type.TS ww1 ww2 ->
+                 Type.$w$cshowsPrec3 0# ww1 ww2 w1 }) -}
+21826606de8de3b55b3cd2d853f74190
+  $fShowTS2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "TS "#) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fShowTS_$cshow :: Type.TS -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: Type.TS) ->
+                 Type.$fShowTS_$cshowsPrec
+                   GHC.Show.shows22
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fShowTS_$cshowList :: [Type.TS] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ Type.TS Type.$fShowTS1) -}
+ab09ea83386043a5980140eaf27b4a31
+  $fShowTS_$cshowsPrec :: GHC.Types.Int -> Type.TS -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S(S),1*U(U)><S,1*U(1*U,1*U)><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int) (w1 :: Type.TS) (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { Type.TS ww3 ww4 ->
+                 Type.$w$cshowsPrec3 ww1 ww3 ww4 w2 } }) -}
+fb713e5fc7f296cf68ac8e595f28c88b
   $fShowTerm :: GHC.Show.Show Type.Term
   DFunId
   {- Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -321,12 +921,12 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   Type.$fShowTerm_$cshowsPrec
                   Type.$fShowTerm_$cshow
                   Type.$fShowTerm_$cshowList -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fShowTerm1 :: Type.Term -> GHC.Show.ShowS
   {- Arity: 2,
      Unfolding: (\ (w :: Type.Term) (w1 :: GHC.Base.String) ->
-                 Type.$w$cshowsPrec 0# w w1) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+                 Type.$w$cshowsPrec4 0# w w1) -}
+fb713e5fc7f296cf68ac8e595f28c88b
   $fShowTerm_$cshow :: Type.Term -> GHC.Base.String
   {- Arity: 1, Strictness: <S,1*U>,
      Unfolding: InlineRule (1, True, False)
@@ -335,11 +935,11 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    GHC.Show.shows22
                    x
                    (GHC.Types.[] @ GHC.Types.Char)) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fShowTerm_$cshowList :: [Type.Term] -> GHC.Show.ShowS
   {- Arity: 2,
      Unfolding: (GHC.Show.showList__ @ Type.Term Type.$fShowTerm1) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+fb713e5fc7f296cf68ac8e595f28c88b
   $fShowTerm_$cshowsPrec ::
     GHC.Types.Int -> Type.Term -> GHC.Show.ShowS
   {- Arity: 3, Strictness: <S(S),1*U(U)><S,1*U><L,U>,
@@ -349,8 +949,46 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    (w1 :: Type.Term)
                    (w2 :: GHC.Base.String) ->
                  case w of ww { GHC.Types.I# ww1 ->
-                 Type.$w$cshowsPrec ww1 w1 w2 }) -}
-9dc339e1c83370f86f802fbed15eacce
+                 Type.$w$cshowsPrec4 ww1 w1 w2 }) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fShowType :: GHC.Show.Show Type.Type
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Type
+                  Type.$fShowType_$cshowsPrec
+                  Type.$fShowType_$cshow
+                  Type.$fShowType_$cshowList -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fShowType1 :: Type.Type -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ (w :: Type.Type) (w1 :: GHC.Base.String) ->
+                 Type.$w$cshowsPrec1 0# w w1) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fShowType_$cshow :: Type.Type -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: Type.Type) ->
+                 Type.$fShowType_$cshowsPrec
+                   GHC.Show.shows22
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fShowType_$cshowList :: [Type.Type] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ Type.Type Type.$fShowType1) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $fShowType_$cshowsPrec ::
+    GHC.Types.Int -> Type.Type -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S(S),1*U(U)><S,1*U><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ (w :: GHC.Types.Int)
+                   (w1 :: Type.Type)
+                   (w2 :: GHC.Base.String) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Type.$w$cshowsPrec1 ww1 w1 w2 }) -}
+f1a1d9600c91402d3c3cb96094cb7c58
   $fShowVar :: GHC.Show.Show Type.Var
   DFunId
   {- Strictness: m, Inline: [ALWAYS] CONLIKE,
@@ -359,15 +997,12 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                   Type.$fShowVar_$cshowsPrec
                   Type.$fShowVar_$cshow
                   Type.$fShowVar_$cshowList -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fShowVar1 :: Type.Var -> GHC.Show.ShowS
   {- Arity: 2,
      Unfolding: (\ (w :: Type.Var) (w1 :: GHC.Base.String) ->
-                 Type.$w$cshowsPrec1 0# w w1) -}
-9ff5c4180856adeae4ea67d2c2370de7
-  $fShowVar2 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "V "#) -}
-9dc339e1c83370f86f802fbed15eacce
+                 Type.$w$cshowsPrec2 0# w w1) -}
+f1a1d9600c91402d3c3cb96094cb7c58
   $fShowVar_$cshow :: Type.Var -> GHC.Base.String
   {- Arity: 1, Strictness: <L,1*U>,
      Unfolding: InlineRule (1, True, False)
@@ -377,7 +1012,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                    (\ @ b
                       (c :: GHC.Types.Char -> b -> b)[OneShot]
                       (n :: b)[OneShot] ->
-                    GHC.Base.foldr @ GHC.Types.Char @ b c n Type.$fShowVar2)
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Type.$fShowContext3)
                    (GHC.Types.:
                       @ GHC.Types.Char
                       GHC.Show.shows6
@@ -387,11 +1022,11 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
                             @ GHC.Types.Char
                             GHC.Show.shows6
                             (GHC.Types.[] @ GHC.Types.Char))))) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fShowVar_$cshowList :: [Type.Var] -> GHC.Show.ShowS
   {- Arity: 2,
      Unfolding: (GHC.Show.showList__ @ Type.Var Type.$fShowVar1) -}
-9dc339e1c83370f86f802fbed15eacce
+f1a1d9600c91402d3c3cb96094cb7c58
   $fShowVar_$cshowsPrec ::
     GHC.Types.Int -> Type.Var -> GHC.Show.ShowS
   {- Arity: 3, Strictness: <S(S),1*U(U)><L,1*U><L,U>,
@@ -399,7 +1034,7 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
      Unfolding: InlineRule (3, True, False)
                 (\ (w :: GHC.Types.Int) (w1 :: Type.Var) (w2 :: GHC.Base.String) ->
                  case w of ww { GHC.Types.I# ww1 ->
-                 Type.$w$cshowsPrec1 ww1 w1 w2 }) -}
+                 Type.$w$cshowsPrec2 ww1 w1 w2 }) -}
 904f667c809a57a4ddafab57165c2bdf
   $tc'App :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
@@ -412,6 +1047,30 @@ import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
   $tc'App1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "'App"#) -}
+a5b37a42d41dcde61d760ced59db6ab4
+  $tc'Arrow :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   2470832875600125424##
+                   17800317143359756272##
+                   Type.$trModule
+                   Type.$tc'Arrow1) -}
+3070b014d1c7aefe2ebd93846ef4a273
+  $tc'Arrow1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Arrow"#) -}
+037f5d7a7c03a5ad4b1955580bbf5ce1
+  $tc'Context :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   7223584092656014429##
+                   9935088726923916497##
+                   Type.$trModule
+                   Type.$tc'Context1) -}
+3ad610782efe64d9b09b4516a598db73
+  $tc'Context1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Context"#) -}
 c265c7983114805b8bf33a600f0f78a8
   $tc'Lam :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
@@ -424,6 +1083,30 @@ c265c7983114805b8bf33a600f0f78a8
   $tc'Lam1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "'Lam"#) -}
+9940a4479f87641d781008cebd9ec4e3
+  $tc'TS :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   15058931074298084757##
+                   219931842607382724##
+                   Type.$trModule
+                   Type.$tc'TS1) -}
+4c2679b40f2b03c5c8d664257e326851
+  $tc'TS1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'TS"#) -}
+e5f7fc81bede2a3dc07f3348b7020add
+  $tc'Type :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   13992097125421929760##
+                   17071000896716938473##
+                   Type.$trModule
+                   Type.$tc'Type1) -}
+87ee21095cc056cec934f4d3656ba2b0
+  $tc'Type1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Type"#) -}
 ce83d556868132e90cb855992b83b986
   $tc'V :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
@@ -448,6 +1131,30 @@ f8e960959c73d4089934e285cf40746c
   $tc'Var1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "'Var"#) -}
+f8eaf2a0cc048a028edf7b2674faee56
+  $tcContext :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   1860889885555643513##
+                   15308954238908428738##
+                   Type.$trModule
+                   Type.$tcContext1) -}
+50fa8ef0a22d9a3e900fb017ae05848d
+  $tcContext1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Context"#) -}
+2f6b27c8920591f3bb05001bda9d0727
+  $tcTS :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   6765428181167000753##
+                   5778560762956661554##
+                   Type.$trModule
+                   Type.$tcTS1) -}
+fa006b6bb1e81b6dda6b032a0ebf4aa3
+  $tcTS1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "TS"#) -}
 54341a2b75904beb4472e45c9f8cafff
   $tcTerm :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
@@ -460,6 +1167,14 @@ f8e960959c73d4089934e285cf40746c
   $tcTerm1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "Term"#) -}
+5b148bb5d43ce5cc7c4b800823890393
+  $tcType :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   11966265075667080690##
+                   9383043340016607904##
+                   Type.$trModule
+                   Type.$trModule1) -}
 8e1a6e7009182e815f8e32ef31657792
   $tcVar :: GHC.Types.TyCon
   {- HasNoCafRefs, Strictness: m,
@@ -485,15 +1200,194 @@ ca360980d8eccbd1c86bd8e689b24083
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"#) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+d364b873c0bfdbc32b2a0cd62ba4890c
+  $w$c/= ::
+    Type.Var -> Type.Type -> Type.Var -> Type.Type -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><S,1*U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: Type.Var)
+                   (ww1 :: Type.Type)
+                   (ww2 :: Type.Var)
+                   (ww3 :: Type.Type) ->
+                 case GHC.Base.eqString
+                        ww `cast` (Type.N:Var[0])
+                        ww2 `cast` (Type.N:Var[0]) of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True
+                   -> case Type.$fEqType_$c== ww1 ww3 of wild1 {
+                        GHC.Types.False -> GHC.Types.True
+                        GHC.Types.True -> GHC.Types.False } }) -}
+9a1ecea81f0f6c0f8fbfd055d050a2ef
+  $w$c== ::
+    Type.Var -> Type.Type -> Type.Var -> Type.Type -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><S,1*U><L,1*U>, Inline: [0],
+     Unfolding: (\ (ww :: Type.Var)
+                   (ww1 :: Type.Type)
+                   (ww2 :: Type.Var)
+                   (ww3 :: Type.Type) ->
+                 case GHC.Base.eqString
+                        ww `cast` (Type.N:Var[0])
+                        ww2 `cast` (Type.N:Var[0]) of wild {
+                   GHC.Types.False -> GHC.Types.False
+                   GHC.Types.True -> Type.$fEqType_$c== ww1 ww3 }) -}
+a0f65bb8e1580d26acafd64f75d57550
   $w$creadPrec ::
     GHC.Prim.Int#
     -> forall b.
-       (Type.Term -> Text.ParserCombinators.ReadP.P b)
+       (Type.Context -> Text.ParserCombinators.ReadP.P b)
        -> Text.ParserCombinators.ReadP.P b
-  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0] -}
-9dc339e1c83370f86f802fbed15eacce
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   @ b
+                   (w :: Type.Context -> Text.ParserCombinators.ReadP.P b) ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<=# ww 10#) of wild2 {
+                   GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                   GHC.Types.True
+                   -> let {
+                        lvl81 :: Text.ParserCombinators.ReadP.P b
+                        = let {
+                            lvl82 :: Text.ParserCombinators.ReadP.P b
+                            = GHC.Read.list1
+                                @ (Type.Var, Type.Type)
+                                Type.$fReadContext6
+                                  `cast`
+                                (Trans
+                                     (<Text.ParserCombinators.ReadPrec.Prec>_R
+                                      ->_R Sym (Text.ParserCombinators.ReadP.N:ReadP[0]
+                                                    <(Type.Var, Type.Type)>_R))
+                                     (Sym (Text.ParserCombinators.ReadPrec.N:ReadPrec[0]
+                                               <(Type.Var, Type.Type)>_R)))
+                                Type.$fReadContext5
+                                @ b
+                                (\ (a1 :: [(Type.Var, Type.Type)]) ->
+                                 w a1 `cast` (Sym (Type.N:Context[0])))
+                          } in
+                          Text.Read.Lex.expect2
+                            @ b
+                            (\ (a1 :: Text.Read.Lex.Lexeme) ->
+                             case a1 of wild {
+                               DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                               Text.Read.Lex.Ident a2
+                               -> case GHC.Base.eqString a2 Type.$fReadContext4 of wild1 {
+                                    GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                    GHC.Types.True -> lvl82 } })
+                      } in
+                      let {
+                        k :: () -> Text.ParserCombinators.ReadP.P b
+                          {- Arity: 1, Strictness: <L,A>, Inline: INLINE[0],
+                             Unfolding: InlineRule (1, True, True) (\ (w4 :: ()) -> lvl81) -}
+                        = \ (w4 :: ()) -> lvl81
+                      } in
+                      Text.ParserCombinators.ReadP.Look
+                        @ b
+                        (\ (a :: GHC.Base.String) ->
+                         (Text.ParserCombinators.ReadP.skipSpaces_skip a)
+                           `cast`
+                         (Text.ParserCombinators.ReadP.N:ReadP[0] <()>_R)
+                           @ b
+                           k) }) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
   $w$creadPrec1 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.Type -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   @ b
+                   (w :: Type.Type -> Text.ParserCombinators.ReadP.P b) ->
+                 let {
+                   karg :: Text.ParserCombinators.ReadP.P b
+                   = case GHC.Prim.tagToEnum#
+                            @ GHC.Types.Bool
+                            (GHC.Prim.<=# ww 10#) of wild2 {
+                       GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                       GHC.Types.True
+                       -> let {
+                            lvl81 :: Text.ParserCombinators.ReadP.P b
+                            = let {
+                                lvl82 :: Text.ParserCombinators.ReadP.P b
+                                = Type.$woptional2
+                                    11#
+                                    @ b
+                                    (\ (a1 :: Type.Type) ->
+                                     Type.$woptional1
+                                       11#
+                                       @ b
+                                       (\ (a2 :: Type.Type) -> w (Type.Arrow a1 a2)))
+                              } in
+                              Text.Read.Lex.expect2
+                                @ b
+                                (\ (a1 :: Text.Read.Lex.Lexeme) ->
+                                 case a1 of wild {
+                                   DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                                   Text.Read.Lex.Ident a2
+                                   -> case GHC.Base.eqString a2 Type.$fReadType5 of wild1 {
+                                        GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                        GHC.Types.True -> lvl82 } })
+                          } in
+                          let {
+                            k :: () -> Text.ParserCombinators.ReadP.P b
+                              {- Arity: 1, Strictness: <L,A>, Inline: INLINE[0],
+                                 Unfolding: InlineRule (1, True, True) (\ (w4 :: ()) -> lvl81) -}
+                            = \ (w4 :: ()) -> lvl81
+                          } in
+                          Text.ParserCombinators.ReadP.Look
+                            @ b
+                            (\ (a :: GHC.Base.String) ->
+                             (Text.ParserCombinators.ReadP.skipSpaces_skip a)
+                               `cast`
+                             (Text.ParserCombinators.ReadP.N:ReadP[0] <()>_R)
+                               @ b
+                               k) }
+                 } in
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<=# ww 10#) of wild2 {
+                   GHC.Types.False
+                   -> Text.ParserCombinators.ReadP.$fAlternativeP_$c<|>
+                        @ b
+                        (Text.ParserCombinators.ReadP.Fail @ b)
+                        karg
+                   GHC.Types.True
+                   -> let {
+                        lvl81 :: Text.ParserCombinators.ReadP.P b
+                        = let {
+                            lvl82 :: Text.ParserCombinators.ReadP.P b
+                            = Type.$woptional 11# @ b (\ (a1 :: Type.Var) -> w (Type.Type a1))
+                          } in
+                          Text.Read.Lex.expect2
+                            @ b
+                            (\ (a1 :: Text.Read.Lex.Lexeme) ->
+                             case a1 of wild {
+                               DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                               Text.Read.Lex.Ident a2
+                               -> case GHC.Base.eqString a2 Type.$fReadType4 of wild1 {
+                                    GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                    GHC.Types.True -> lvl82 } })
+                      } in
+                      let {
+                        k :: () -> Text.ParserCombinators.ReadP.P b
+                          {- Arity: 1, Strictness: <L,A>, Inline: INLINE[0],
+                             Unfolding: InlineRule (1, True, True) (\ (w4 :: ()) -> lvl81) -}
+                        = \ (w4 :: ()) -> lvl81
+                      } in
+                      Text.ParserCombinators.ReadP.$fAlternativeP_$c<|>
+                        @ b
+                        (Text.ParserCombinators.ReadP.Look
+                           @ b
+                           (\ (a :: GHC.Base.String) ->
+                            (Text.ParserCombinators.ReadP.skipSpaces_skip a)
+                              `cast`
+                            (Text.ParserCombinators.ReadP.N:ReadP[0] <()>_R)
+                              @ b
+                              k))
+                        karg }) -}
+f1a1d9600c91402d3c3cb96094cb7c58
+  $w$creadPrec2 ::
     GHC.Prim.Int#
     -> forall b.
        (Type.Var -> Text.ParserCombinators.ReadP.P b)
@@ -512,7 +1406,7 @@ ca360980d8eccbd1c86bd8e689b24083
                         = let {
                             lvl82 :: Text.ParserCombinators.ReadP.P b
                             = GHC.Read.$fReadChar2
-                                Type.$fReadVar5
+                                Type.$fReadContext5
                                 @ b
                                 (\ (a1 :: Type.Name) -> w a1 `cast` (Sym (Type.N:Var[0])))
                           } in
@@ -540,12 +1434,102 @@ ca360980d8eccbd1c86bd8e689b24083
                          (Text.ParserCombinators.ReadP.N:ReadP[0] <()>_R)
                            @ b
                            k) }) -}
-6248cbcca85ecfa46b50bacefd50c8ab
+ab09ea83386043a5980140eaf27b4a31
+  $w$creadPrec3 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.TS -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   @ b
+                   (w :: Type.TS -> Text.ParserCombinators.ReadP.P b) ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.<=# ww 10#) of wild2 {
+                   GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                   GHC.Types.True
+                   -> let {
+                        lvl81 :: Text.ParserCombinators.ReadP.P b
+                        = let {
+                            lvl82 :: Text.ParserCombinators.ReadP.P b
+                            = Type.$woptional4
+                                11#
+                                @ b
+                                (\ (a1 :: Type.Var) ->
+                                 Type.$woptional3
+                                   11#
+                                   @ b
+                                   (\ (a2 :: Type.Type) -> w (Type.TS a1 a2)))
+                          } in
+                          Text.Read.Lex.expect2
+                            @ b
+                            (\ (a1 :: Text.Read.Lex.Lexeme) ->
+                             case a1 of wild {
+                               DEFAULT -> Text.ParserCombinators.ReadP.Fail @ b
+                               Text.Read.Lex.Ident a2
+                               -> case GHC.Base.eqString a2 Type.$fReadTS4 of wild1 {
+                                    GHC.Types.False -> Text.ParserCombinators.ReadP.Fail @ b
+                                    GHC.Types.True -> lvl82 } })
+                      } in
+                      let {
+                        k :: () -> Text.ParserCombinators.ReadP.P b
+                          {- Arity: 1, Strictness: <L,A>, Inline: INLINE[0],
+                             Unfolding: InlineRule (1, True, True) (\ (w4 :: ()) -> lvl81) -}
+                        = \ (w4 :: ()) -> lvl81
+                      } in
+                      Text.ParserCombinators.ReadP.Look
+                        @ b
+                        (\ (a :: GHC.Base.String) ->
+                         (Text.ParserCombinators.ReadP.skipSpaces_skip a)
+                           `cast`
+                         (Text.ParserCombinators.ReadP.N:ReadP[0] <()>_R)
+                           @ b
+                           k) }) -}
+fb713e5fc7f296cf68ac8e595f28c88b
+  $w$creadPrec4 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.Term -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,C(U)>, Inline: [0] -}
+a0f65bb8e1580d26acafd64f75d57550
   $w$cshowsPrec ::
-    GHC.Prim.Int# -> Type.Term -> GHC.Base.String -> GHC.Base.String
-  {- Arity: 3, Strictness: <S,U><S,1*U><L,U>, Inline: [0] -}
-9dc339e1c83370f86f802fbed15eacce
+    GHC.Prim.Int# -> Type.Context -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 3, Strictness: <S,U><L,1*U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (w :: Type.Context)
+                   (w1 :: GHC.Base.String) ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11#) of wild {
+                   GHC.Types.False
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        Type.$fShowContext4
+                        (GHC.Show.showList__
+                           @ (Type.Var, Type.Type)
+                           Type.$fShowContext2
+                           w `cast` (Type.N:Context[0])
+                           w1)
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows7
+                        (GHC.Base.++
+                           @ GHC.Types.Char
+                           Type.$fShowContext4
+                           (GHC.Show.showList__
+                              @ (Type.Var, Type.Type)
+                              Type.$fShowContext2
+                              w `cast` (Type.N:Context[0])
+                              (GHC.Types.: @ GHC.Types.Char GHC.Show.shows4 w1))) }) -}
+f7b099d40b1c44337b4bb4ef0279e1c1
   $w$cshowsPrec1 ::
+    GHC.Prim.Int# -> Type.Type -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 3, Strictness: <S,U><S,1*U><L,U>, Inline: [0] -}
+f1a1d9600c91402d3c3cb96094cb7c58
+  $w$cshowsPrec2 ::
     GHC.Prim.Int# -> Type.Var -> GHC.Base.String -> GHC.Base.String
   {- Arity: 3, Strictness: <S,U><L,1*U><L,U>, Inline: [0],
      Unfolding: (\ (ww :: GHC.Prim.Int#)
@@ -557,7 +1541,7 @@ ca360980d8eccbd1c86bd8e689b24083
                    GHC.Types.False
                    -> GHC.Base.++
                         @ GHC.Types.Char
-                        Type.$fShowVar2
+                        Type.$fShowContext3
                         (GHC.Types.:
                            @ GHC.Types.Char
                            GHC.Show.shows6
@@ -570,7 +1554,7 @@ ca360980d8eccbd1c86bd8e689b24083
                         GHC.Show.shows7
                         (GHC.Base.++
                            @ GHC.Types.Char
-                           Type.$fShowVar2
+                           Type.$fShowContext3
                            (GHC.Types.:
                               @ GHC.Types.Char
                               GHC.Show.shows6
@@ -580,16 +1564,95 @@ ca360980d8eccbd1c86bd8e689b24083
                                     @ GHC.Types.Char
                                     GHC.Show.shows6
                                     (GHC.Types.: @ GHC.Types.Char GHC.Show.shows4 w1))))) }) -}
+e000673a217d68cddbe70a7a9faba5f4
+  $w$cshowsPrec3 ::
+    GHC.Prim.Int#
+    -> Type.Var -> Type.Type -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 4, Strictness: <S,U><L,1*U><L,1*U><L,U>, Inline: [0],
+     Unfolding: (\ (ww :: GHC.Prim.Int#)
+                   (ww1 :: Type.Var)
+                   (ww2 :: Type.Type)
+                   (w :: GHC.Base.String) ->
+                 let {
+                   p :: GHC.Show.ShowS {- Arity: 1, Strictness: <L,U> -}
+                   = \ (x :: GHC.Base.String)[OneShot] ->
+                     GHC.Base.++
+                       @ GHC.Types.Char
+                       Type.$fShowTS2
+                       (Type.$w$cshowsPrec2
+                          11#
+                          ww1
+                          (GHC.Types.:
+                             @ GHC.Types.Char
+                             GHC.Show.showSpace1
+                             (Type.$w$cshowsPrec1 11# ww2 x)))
+                 } in
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11#) of wild {
+                   GHC.Types.False -> p w
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows7
+                        (p (GHC.Types.: @ GHC.Types.Char GHC.Show.shows4 w)) }) -}
+fb713e5fc7f296cf68ac8e595f28c88b
+  $w$cshowsPrec4 ::
+    GHC.Prim.Int# -> Type.Term -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 3, Strictness: <S,U><S,1*U><L,U>, Inline: [0] -}
+5f0bb6dc8537c40a2cf3a8dfce9274d1
+  $woptional ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.Var -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0] -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $woptional1 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.Type -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0] -}
+f7b099d40b1c44337b4bb4ef0279e1c1
+  $woptional2 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.Type -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0] -}
+61413208fda446b57b071972848ca016
+  $woptional3 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.Type -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0] -}
+2a5ba5a4b5980a636ee649bf423ee3c2
+  $woptional4 ::
+    GHC.Prim.Int#
+    -> forall b.
+       (Type.Var -> Text.ParserCombinators.ReadP.P b)
+       -> Text.ParserCombinators.ReadP.P b
+  {- Arity: 2, Strictness: <S,U><L,U>, Inline: [0] -}
+a0f65bb8e1580d26acafd64f75d57550
+  newtype Context = Context [(Type.Var, Type.Type)]
 69706716b66ef24c3b64f28fcefa9d6c
   type Name = GHC.Base.String
-6248cbcca85ecfa46b50bacefd50c8ab
+c9b3a2bc44966506a2166447f4ae8ddc
+  type Substitution = [Type.TS]
+ab09ea83386043a5980140eaf27b4a31
+  data TS = TS Type.Var Type.Type
+fb713e5fc7f296cf68ac8e595f28c88b
   data Term
     = Var {var :: Type.Var}
     | App {alg :: Type.Term, dat :: Type.Term}
     | Lam {var :: Type.Var, body :: Type.Term}
-9dc339e1c83370f86f802fbed15eacce
+f7b099d40b1c44337b4bb4ef0279e1c1
+  data Type = Type Type.Var | Arrow Type.Type Type.Type
+f1a1d9600c91402d3c3cb96094cb7c58
   newtype Var = V Type.Name
-1d5e1980dfb2bded78967c8cef8e3a56
+2ae56ee9d0cbb08d4053da0773b38d7f
   alg :: Type.Term -> Type.Term
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -597,10 +1660,10 @@ ca360980d8eccbd1c86bd8e689b24083
                 (\ (ds :: Type.Term) ->
                  case ds of wild {
                    DEFAULT -> Type.alg1 Type.App ds1 ds2 -> ds1 }) -}
-a9e8127325113ea2ab2c0edb4b91073c
+37b10fa7e967c4a83fdab238c52c00fc
   alg1 :: Type.Term
   {- Strictness: x -}
-b0b0ba94345a2f2398b7adf946f161ba
+c80ba14e90d5b6c052f6ea4220bcbc05
   body :: Type.Term -> Type.Term
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -608,10 +1671,10 @@ b0b0ba94345a2f2398b7adf946f161ba
                 (\ (ds :: Type.Term) ->
                  case ds of wild {
                    DEFAULT -> Type.body1 Type.Lam ds1 ds2 -> ds2 }) -}
-3ebbeaa4fc1a13359dfcc00ce8637fed
+d6f5f4d1292077a76eff81e9f7b7de31
   body1 :: Type.Term
   {- Strictness: x -}
-25a9679e49e755039ab608a9b5998a63
+e67fa37cd017dbf16ab700de3f0faa98
   dat :: Type.Term -> Type.Term
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -619,10 +1682,10 @@ b0b0ba94345a2f2398b7adf946f161ba
                 (\ (ds :: Type.Term) ->
                  case ds of wild {
                    DEFAULT -> Type.dat1 Type.App ds1 ds2 -> ds2 }) -}
-9c7ea117c40ed1ea04f9ecf8b9e4d2a9
+23e0933017494e4e2e27ad3a29300965
   dat1 :: Type.Term
   {- Strictness: x -}
-dcfefbb08c7eaa2cdd6f9f45826a821c
+3f5d07c985efabb8e7bab4070faa02f2
   var :: Type.Term -> Type.Var
   RecSel Left Type.Term
   {- Arity: 1, Strictness: <S,1*U>,
@@ -632,15 +1695,33 @@ dcfefbb08c7eaa2cdd6f9f45826a821c
                    Type.Var ds1 -> ds1
                    Type.App ipv ipv1 -> Type.var1
                    Type.Lam ds1 ds2 -> ds1 }) -}
-6fab4a60bd136a332b0db6734cec7b4d
+1037fcb53723b71bd4b4607ad23b3744
   var1 :: Type.Var
   {- Strictness: x -}
+instance [safe] GHC.Classes.Eq [Type.Context] = Type.$fEqContext
+instance [safe] GHC.Classes.Eq [Type.TS] = Type.$fEqTS
 instance [safe] GHC.Classes.Eq [Type.Term] = Type.$fEqTerm
+instance [safe] GHC.Classes.Eq [Type.Type] = Type.$fEqType
 instance [safe] GHC.Classes.Eq [Type.Var] = Type.$fEqVar
+instance [safe] GHC.Read.Read [Type.Context] = Type.$fReadContext
+instance [safe] GHC.Read.Read [Type.TS] = Type.$fReadTS
 instance [safe] GHC.Read.Read [Type.Term] = Type.$fReadTerm
+instance [safe] GHC.Read.Read [Type.Type] = Type.$fReadType
 instance [safe] GHC.Read.Read [Type.Var] = Type.$fReadVar
+instance [safe] GHC.Show.Show [Type.Context] = Type.$fShowContext
+instance [safe] GHC.Show.Show [Type.TS] = Type.$fShowTS
 instance [safe] GHC.Show.Show [Type.Term] = Type.$fShowTerm
+instance [safe] GHC.Show.Show [Type.Type] = Type.$fShowType
 instance [safe] GHC.Show.Show [Type.Var] = Type.$fShowVar
+"SPEC/Type $fEq(,) @ Var @ Type" [ALWAYS] forall ($dEq1 :: GHC.Classes.Eq
+                                                             Type.Type)
+                                                 ($dEq :: GHC.Classes.Eq Type.Var)
+  GHC.Classes.$fEq(,) @ Type.Var @ Type.Type $dEq $dEq1
+  = Type.$fEqContext_$s$fEq(,)
+"SPEC/Type $fEq[]_$c/= @ (Var, Type)" [ALWAYS] forall ($dEq :: GHC.Classes.Eq
+                                                                 (Type.Var, Type.Type))
+  GHC.Classes.$fEq[]_$c/= @ (Type.Var, Type.Type) $dEq
+  = Type.$fEqContext_$s$fEq[]_$c/=
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
