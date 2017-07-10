@@ -1,147 +1,105 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-09 11:06:32.6057042 UTC
+2017-07-10 18:40:13.582365 UTC
 
-interface proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx:Reduce 8002
-  interface hash: b0bcef38a39c906da72d3e33a45e0287
-  ABI hash: d55aea280a24a456ae88ce590f36af65
-  export-list hash: 06fb0f12d9bdfeda3c7825295bac866f
+interface proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Reduce 8002
+  interface hash: a197739861a1eae608a482fa2528cae5
+  ABI hash: 5ceb4a24b8e297553ac9c12b45554be7
+  export-list hash: e1e6ff9f4a8f51ebce8136df2f309592
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
-  flag hash: 9b927a2d36abe52536408c440c6086b5
+  flag hash: 26c0c808fd3a5a4217cc82e90b56d9ff
   sig of: Nothing
   used TH splices: False
   where
 exports:
   Reduce.alpha
-  Reduce.beta
-  Reduce.binded
-  Reduce.eta
+  Reduce.bound
   Reduce.free
-  Reduce.fresh
-  Reduce.reduce
-  Reduce.reduce'
-  Reduce.subs
 module dependencies: Type
-package dependencies: base-4.9.1.0* ghc-prim-0.5.0.0
+package dependencies: array-0.5.1.1@array-0.5.1.1 base-4.9.1.0*
+                      binary-0.8.3.0@binary-0.8.3.0
+                      bytestring-0.10.8.1@bytestring-0.10.8.1
+                      containers-0.5.7.1@containers-0.5.7.1
+                      deepseq-1.4.2.0@deepseq-1.4.2.0 ghc-prim-0.5.0.0
                       integer-gmp-1.0.0.1
+                      text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR
 orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
+         binary-0.8.3.0@binary-0.8.3.0:Data.Binary.Generic
+         bytestring-0.10.8.1@bytestring-0.10.8.1:Data.ByteString.Builder
+         text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text
+         text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text.Show
 family instance modules: base-4.9.1.0:Control.Applicative
-                         base-4.9.1.0:Data.Either base-4.9.1.0:Data.Functor.Const
-                         base-4.9.1.0:Data.Monoid base-4.9.1.0:Data.Type.Equality
-                         base-4.9.1.0:GHC.Generics base-4.9.1.0:GHC.IO.Exception
-                         base-4.9.1.0:GHC.TypeLits
-import  -/  base-4.9.1.0:Data.Foldable 254e836c2d813d34e47feb29bb8d40ed
-import  -/  base-4.9.1.0:Data.List 7349774f430841349c90dfd1144aea97
-import  -/  base-4.9.1.0:Data.OldList c9282ee91951bdcbd918d2960562c007
-import  -/  base-4.9.1.0:GHC.Base 4caea1123ecf4b46e27cbccd6d279377
-import  -/  base-4.9.1.0:GHC.List d11eb227c1c6fbfd89bb781d72eaea0d
-import  -/  base-4.9.1.0:GHC.Show eca5834daba3b6a2bbbe64ab52056707
+                         base-4.9.1.0:Data.Complex base-4.9.1.0:Data.Either
+                         base-4.9.1.0:Data.Functor.Const base-4.9.1.0:Data.Functor.Identity
+                         base-4.9.1.0:Data.List.NonEmpty base-4.9.1.0:Data.Monoid
+                         base-4.9.1.0:Data.Semigroup base-4.9.1.0:Data.Type.Equality
+                         base-4.9.1.0:Data.Version base-4.9.1.0:Data.Void
+                         base-4.9.1.0:GHC.Exts base-4.9.1.0:GHC.Generics
+                         base-4.9.1.0:GHC.IO.Exception base-4.9.1.0:GHC.TypeLits
+                         containers-0.5.7.1@containers-0.5.7.1:Data.IntMap.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.IntSet.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Map.Base
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Sequence
+                         containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base
+                         text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text
 import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
-import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
-import  -/  Type 4f415a5c7446bd912e332dc7e124bd82
-  exports: 3324492b52d478a440033a99b78b4052
-  App 22d4658b9e9fae1f26e7849d0723e036
-  Lam 5544a67d3e6e2486699453f0d6faf175
-  Term fb713e5fc7f296cf68ac8e595f28c88b
-  V 7283ee088aa08977c588e0985d559e11
-  Var 8412ffd8eafdb4dc73f9791aba986f5c
-  Var f1a1d9600c91402d3c3cb96094cb7c58
-  body c80ba14e90d5b6c052f6ea4220bcbc05
-  var 3f5d07c985efabb8e7bab4070faa02f2
-251f6a7b02fc0f8ce8937b2e6621d9a4
+import  -/  containers-0.5.7.1@containers-0.5.7.1:Data.Set 3ed2324fd1e757464a8ac2b636a64e5a
+import  -/  containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base 7066127ea77dde3a5a3f19fd2ed3d39a
+import  -/  Type 71eb38e3e23fdbc0ecc7452746656fe7
+  exports: 3a101c658448f9cbdcf2300f3098b7fc
+  App 3eb32c05dcb9f24a2669a95ceb59c7f7
+  Fa 53fb934dc668da14f5429fd4976dc7e7
+  Lam 4c1977c8cecdc0b5fca98227f0099f54
+  Term 3fa6513992eb8f4d5d199fa60ff97063
+  Uni 26d3b088fd4ea41017919e2b0b70232b
+  Var 73ff7c94785e24a64ce454ebcb723551
+  Var 6758d7e62873e90cf96f48a079ac3e43
+  alg 345062ea136578ac797abf7d64cd2e93
+  body 9ce4fa7e1dfe33171c59dd3e2edddea3
+  dat e99489163a520c397b5db9cf3ea388f1
+  tpe f5e8ce4c8f1b4f43163b488702d9ca4d
+  uni caa31898e4196bbe85b0fd9bb47ce779
+  var ffcbf9276628ea3a2de8c9c7a5fe2a6a
+f022277838deff1b39395f691efd0d47
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
      Unfolding: (GHC.Types.Module
                    Reduce.$trModule2
                    Reduce.$trModule1) -}
-48de5f2ab2d6d6c8d3065c16172707aa
+b5c46376badcdd65805a81cca314b7bf
   $trModule1 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "Reduce"#) -}
-40563f7ddf6b25c0f34316c52bd1e79e
+5b8908aa786c50a3c92be116e5c1881c
   $trModule2 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
-                   "proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"#) -}
-200ee1a6b5d5fc9a804f5d41fc7a371c
-  alpha :: Type.Term -> [Type.Var] -> Type.Term
-  {- Arity: 2, Strictness: <S,1*U><L,U> -}
-ea03cac059b52e3d73d130d9e2d27582
-  beta :: Type.Term -> Type.Term
+                   "proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl"#) -}
+d148e994f71b2a5cb38ef24c945367a8
+  $w$sgo1 ::
+    GHC.Prim.ByteArray#
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Int#
+    -> Data.Set.Base.Set Type.Var
+    -> Data.Set.Base.Set Type.Var
+  {- Arity: 4, Strictness: <L,U><L,U><L,U><S,1*U>, Inline: [0] -}
+28f5c60a87713a366f70dbfea601878e
+  $w$sgo5 ::
+    GHC.Prim.ByteArray#
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Int#
+    -> Data.Set.Base.Set Type.Var
+    -> Data.Set.Base.Set Type.Var
+  {- Arity: 4, Strictness: <L,U><L,U><L,U><S,1*U>, Inline: [0] -}
+bf6db79d7578f816a57d3d8e8198767a
+  alpha :: Type.Term -> Type.Term
   {- Arity: 1, Strictness: <S,1*U> -}
-7952d79144d14786f988b884e9199985
-  binded :: Type.Term -> [Type.Var]
-  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
-a23e9c970b2fda7a2322b1bd1341a5b2
-  eta :: Type.Term -> Type.Term
-  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
-bd5c395ef68d3aa46c35da6c6e36c52b
-  free :: Type.Term -> [Type.Var]
-  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
-6c2c26b61f8fe0a915e6a4c71e4f048e
-  fresh :: [Type.Var] -> Type.Var
-  {- Arity: 1, Strictness: <S,U>,
-     Unfolding: (\ (arr :: [Type.Var]) ->
-                 letrec {
-                   go :: [GHC.Integer.Type.Integer] -> Type.Var
-                     {- Arity: 1, Strictness: <S,1*U> -}
-                   = \ (ds :: [GHC.Integer.Type.Integer]) ->
-                     case ds of wild {
-                       [] -> GHC.List.badHead @ Type.Var
-                       : y ys
-                       -> let {
-                            lvl :: GHC.Base.String
-                            = case GHC.Show.$w$cshowsPrec1
-                                     0#
-                                     y
-                                     (GHC.Types.[] @ GHC.Types.Char) of ww2 { (#,#) ww3 ww4 ->
-                              GHC.Types.: @ GHC.Types.Char ww3 ww4 }
-                          } in
-                          let {
-                            z :: Type.Var = go ys
-                          } in
-                          letrec {
-                            go1 :: [GHC.Types.Char] -> Type.Var
-                              {- Arity: 1, Strictness: <S,1*U> -}
-                            = \ (ds1 :: [GHC.Types.Char]) ->
-                              case ds1 of wild1 {
-                                [] -> z
-                                : y1 ys1
-                                -> let {
-                                     x :: [GHC.Types.Char] = GHC.Types.: @ GHC.Types.Char y1 lvl
-                                   } in
-                                   case GHC.List.elem
-                                          @ Type.Var
-                                          Type.$fEqVar
-                                          x `cast` (Sym (Type.N:Var[0]))
-                                          arr of wild2 {
-                                     GHC.Types.False -> x `cast` (Sym (Type.N:Var[0]))
-                                     GHC.Types.True -> go1 ys1 } }
-                          } in
-                          go1 Reduce.fresh3 }
-                 } in
-                 go Reduce.fresh1) -}
-37c0180e0b980e310ed0cf499b7e7379
-  fresh1 :: [GHC.Integer.Type.Integer]
-  {- Unfolding: (case GHC.Enum.$wenumDeltaInteger
-                        Reduce.fresh2
-                        Reduce.fresh2 of ww { (#,#) ww1 ww2 ->
-                 GHC.Types.: @ GHC.Integer.Type.Integer ww1 ww2 }) -}
-027148920611b0c0f23f1c0e76868833
-  fresh2 :: GHC.Integer.Type.Integer
-  {- HasNoCafRefs, Unfolding: (1) -}
-95585d78f94e77c8e1f82273288d03f9
-  fresh3 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.Enum.eftChar 97# 122#) -}
-7229cad99cf181c54a12ccdf0b091ad5
-  reduce :: Type.Term -> Type.Term
-  {- Arity: 1, Strictness: <S,U> -}
-3e3d20542ee83adc1efe130fdabf3a18
-  reduce' :: Type.Term -> Type.Term
-  {- Arity: 1, Strictness: <S,U> -}
-36ae0ba70003b633002a2481293e1fda
-  subs :: Type.Term -> Type.Var -> Type.Term -> Type.Term
-  {- Arity: 3, Strictness: <S,1*U><L,U><L,U> -}
+95917c44b30e76be95ffb3f81cbc4210
+  bound :: Type.Term -> Data.Set.Base.Set Type.Var
+  {- Arity: 1, Strictness: <S,1*U> -}
+7a4683c2aaed2f1d20607b86415d523f
+  free :: Type.Term -> Data.Set.Base.Set Type.Var
+  {- Arity: 1, Strictness: <S,1*U> -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:

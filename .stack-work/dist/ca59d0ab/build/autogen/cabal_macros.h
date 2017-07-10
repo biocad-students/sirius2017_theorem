@@ -14,6 +14,27 @@
   (major1) == 4 && (major2) <  9 || \
   (major1) == 4 && (major2) == 9 && (minor) <= 1)
 
+/* package containers-0.5.7.1 */
+#define VERSION_containers "0.5.7.1"
+#define MIN_VERSION_containers(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  5 || \
+  (major1) == 0 && (major2) == 5 && (minor) <= 7)
+
+/* package text-1.2.2.1 */
+#define VERSION_text "1.2.2.1"
+#define MIN_VERSION_text(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  2 || \
+  (major1) == 1 && (major2) == 2 && (minor) <= 2)
+
+/* tool cpphs-1.20.8 */
+#define TOOL_VERSION_cpphs "1.20.8"
+#define MIN_TOOL_VERSION_cpphs(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  20 || \
+  (major1) == 1 && (major2) == 20 && (minor) <= 8)
+
 /* tool gcc-5.2.0 */
 #define TOOL_VERSION_gcc "5.2.0"
 #define MIN_TOOL_VERSION_gcc(major1,major2,minor) (\
@@ -42,6 +63,13 @@
   (major1) == 2 && (major2) <  17 || \
   (major1) == 2 && (major2) == 17 && (minor) <= 3)
 
+/* tool happy-1.19.5 */
+#define TOOL_VERSION_happy "1.19.5"
+#define MIN_TOOL_VERSION_happy(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  19 || \
+  (major1) == 1 && (major2) == 19 && (minor) <= 5)
+
 /* tool hpc-0.67 */
 #define TOOL_VERSION_hpc "0.67"
 #define MIN_TOOL_VERSION_hpc(major1,major2,minor) (\
@@ -56,6 +84,13 @@
   (major1) == 0 && (major2) <  68 || \
   (major1) == 0 && (major2) == 68 && (minor) <= 1)
 
+/* tool hscolour-1.24 */
+#define TOOL_VERSION_hscolour "1.24"
+#define MIN_TOOL_VERSION_hscolour(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  24 || \
+  (major1) == 1 && (major2) == 24 && (minor) <= 0)
+
 /* tool strip-2.25 */
 #define TOOL_VERSION_strip "2.25"
 #define MIN_TOOL_VERSION_strip(major1,major2,minor) (\
@@ -63,7 +98,7 @@
   (major1) == 2 && (major2) <  25 || \
   (major1) == 2 && (major2) == 25 && (minor) <= 0)
 
-#define CURRENT_COMPONENT_ID "proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"
+#define CURRENT_COMPONENT_ID "proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl"
 
-#define CURRENT_PACKAGE_KEY "proj-0.1.0.0-B4EokiQJmtYJtEnGQjIIKx"
+#define CURRENT_PACKAGE_KEY "proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl"
 
