@@ -28,6 +28,13 @@
   (major1) == 1 && (major2) <  2 || \
   (major1) == 1 && (major2) == 2 && (minor) <= 2)
 
+/* package hspec-2.4.3 */
+#define VERSION_hspec "2.4.3"
+#define MIN_VERSION_hspec(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  4 || \
+  (major1) == 2 && (major2) == 4 && (minor) <= 3)
+
 /* tool cpphs-1.20.8 */
 #define TOOL_VERSION_cpphs "1.20.8"
 #define MIN_TOOL_VERSION_cpphs(major1,major2,minor) (\

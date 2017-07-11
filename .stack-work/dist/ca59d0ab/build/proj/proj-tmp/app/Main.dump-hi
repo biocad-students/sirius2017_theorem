@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-10 18:39:36.5543653 UTC
+2017-07-11 15:30:41.667427 UTC
 
 interface main@main:Main 8002
-  interface hash: 7564b8cdf67b11b27dbb1c87bc1d2a30
-  ABI hash: b3d7deb1f11ae45f214ffa0d674a1841
+  interface hash: 4ea00edee0ec764ca28ba6d46abe2e8a
+  ABI hash: 0957b820b70b71b026b2a5478738f3d4
   export-list hash: ab326949536a736d52daa53c596b0d90
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: f297102f924d7c678f1b8acaa35ac921
@@ -25,6 +25,7 @@ package dependencies: array-0.5.1.1@array-0.5.1.1 base-4.9.1.0*
 orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
          binary-0.8.3.0@binary-0.8.3.0:Data.Binary.Generic
          bytestring-0.10.8.1@bytestring-0.10.8.1:Data.ByteString.Builder
+         proj-0.1.0.0@proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Reduce
          text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text
          text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text.Show
 family instance modules: base-4.9.1.0:Control.Applicative
@@ -41,12 +42,13 @@ family instance modules: base-4.9.1.0:Control.Applicative
                          containers-0.5.7.1@containers-0.5.7.1:Data.Sequence
                          containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base
                          text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text
+import  -/  base-4.9.1.0:GHC.Base 4caea1123ecf4b46e27cbccd6d279377
 import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
 import  -/  base-4.9.1.0:System.IO 5daf3f384209c11d9566e3409af8ec5d
 import  -/  ghc-prim-0.5.0.0:GHC.Types 89f8de4f08018c9177c98d979eae0e45
-import  -/  proj-0.1.0.0@proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Lib 83a1743eb110e1338debb655002e487f
-import  -/  proj-0.1.0.0@proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Reduce 5ceb4a24b8e297553ac9c12b45554be7
-import  -/  proj-0.1.0.0@proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Type 71eb38e3e23fdbc0ecc7452746656fe7
+import  -/  proj-0.1.0.0@proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Lib 710846b64dde2023b7d1b7cc8064ff22
+import  -/  proj-0.1.0.0@proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Reduce 714731c0c4448ee1069807f7596bfac3
+import  -/  proj-0.1.0.0@proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Type 6287656836a29819d220c78aa6d87906
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -59,44 +61,26 @@ d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule2 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "main"#) -}
-fc5553e6ab63d90d3a833b135ab68692
+d77a5ea92cad6dd0a8a4fa8a8338bb3e
   main :: GHC.Types.IO ()
   {- Arity: 1, Strictness: <S,U>,
      Unfolding: InlineRule (0, True, True)
                 Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-cfb6e03184c7a02b3c256f0188a038b2
+0244cbf9df09281e3f1147d1c528ee6c
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1, Strictness: <S,U>,
-     Unfolding: (\ (eta :: GHC.Prim.State#
-                             GHC.Prim.RealWorld)[OneShot] ->
-                 GHC.IO.Handle.Text.hPutStr2
-                   GHC.IO.Handle.FD.stdout
-                   Main.main2
-                   GHC.Types.True
-                   eta) -}
-0bf2ca2df29a9d946b4719fe4b5ca5c4
-  main2 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.Types.:
-                   @ GHC.Types.Char
-                   GHC.Show.shows6
-                   Main.main3) -}
-8c147e3b1ad0d232fb05b39fc2e8a8a4
-  main3 :: GHC.Base.String
-  {- Unfolding: (GHC.Show.showLitString Main.main5 Main.main4) -}
-f2bbeedb1edfa904939c20aabd91e10c
-  main4 :: [GHC.Types.Char]
-  {- HasNoCafRefs,
-     Unfolding: (GHC.Types.:
-                   @ GHC.Types.Char
-                   GHC.Show.shows6
-                   (GHC.Types.[] @ GHC.Types.Char)) -}
-d57918a4dd003f82514444aa3502133b
-  main5 :: [GHC.Types.Char]
-  {- Unfolding: (GHC.CString.unpackCString# "life is good"#) -}
-7f25ee6d8b73287e1b2bdc25b28c165b
-  main6 ::
+     Unfolding: InlineRule (1, True, False)
+                (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 case GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        (GHC.Types.[] @ GHC.Types.Char)
+                        GHC.Types.True
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 (# ipv, GHC.Tuple.() #) }) -}
+4ca521aaaba3d1037d9d3ac4c7d379c4
+  main2 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1,

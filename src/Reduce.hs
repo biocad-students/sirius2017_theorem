@@ -7,8 +7,8 @@ import Data.Text (pack)
 
 fresh :: Set Var -> Var
 fresh conflicts = head . dropWhile (`member` conflicts) $ nameGen 
-                    where nameGen = V . pack <$> [a : freshName b | b <- [0..] :: [Int], a <- ['a'..'z']]
-                          freshName b = if b == 0 then "" else show b
+		    where nameGen = V . pack <$> [a : freshName b | b <- [0..] :: [Int], a <- ['a'..'z']]
+			  freshName b = if b == 0 then "" else show b
 
 free :: Term -> Set Var
 free Var{..} = singleton var
@@ -27,20 +27,66 @@ bound Uni{..} = empty
 alpha :: Term -> Set Var -> Term 
 alpha term conflicts = 
     case term of 
-        v@Var{} -> v
-        App{..} -> App (alpha alg conflicts) (alpha dat conflicts)
-        Lam{..} -> f var tpe body
-        Fa {..} -> f var tpe body
-        Uni{..} -> Uni uni
-        where
-            f var tpe body =    
-                if  var `notMember` conflicts 
-                then 
-                    Lam var (alpha tpe conflicts) (alpha body conflicts)
-                else 
-                    let freshName = fresh $ free tpe `union` conflicts `union` free body 
-                        subsFreshName t = substitute t freshName (Var freshName)
-                    in  Lam freshName (subsFreshName tpe) (subsFreshName body)
+	Var{}                   -> term
+	Uni{}                   -> term
+	App{..}                 -> App (alpha alg conflicts) (alpha dat conflicts)
+	Lam{..} |  isConflict   -> Lam var' tpe body'
+		|  otherwise    -> Lam var tpe (alpha body conflicts)
+	Fa {..} |  isConflict   -> Fa var' tpe body'
+		|  otherwise    -> Fa var tpe (alpha body conflicts)
+	where 
+	    isConflict = var term `member` conflicts
+	    var'       = fresh $ conflicts `union` free (body term) `union` free (tpe term)
+	    body'      = substitute (body term) (var term) (Var var')
 
 substitute :: Term -> Var -> Term -> Term
-substitute = undefined
+substitute term name newTerm = 
+    case term of
+	Uni{}                               ->  term
+	Var{..} | var == name               ->  newTerm 
+		| otherwise                 ->  Var var 
+	App{..}                             ->  App (subsNewTerm alg) (subsNewTerm dat)
+	Lam{var = var'}     | var' == name  ->  term
+			    | otherwise     ->  let Lam{..} = term' 
+						in  Lam var (subsNewTerm tpe) (subsNewTerm body)
+	Fa {var = var'}     | var' == name  ->  term
+			    | otherwise     ->  let Fa {..} = term' 
+						in  Fa  var (subsNewTerm tpe) (subsNewTerm body)
+    where 
+	term' = alpha term $ free newTerm 
+	subsNewTerm oldTerm = substitute oldTerm name newTerm
+
+beta :: Term -> Term
+beta term = 
+    case term of
+        Uni{}               -> term 
+        Var{}               -> term 
+        (App Lam{..} dat )  -> substitute body var dat
+        App{..}             ->  let alg' = beta alg 
+                                    dat' = beta dat 
+                                in  if alg' /= alg 
+                                    then App alg' dat
+                                    else App alg dat'
+        Lam{..}             -> mkBeta
+        Fa {..}             -> mkBeta
+    where
+        mkBeta =    let tpe'    = beta $ tpe term
+                        body'   = beta $ body term
+                    in  if tpe term == tpe' 
+                        then term {tpe  = tpe'}
+                        else term {body = body'}
+eta :: Term -> Term
+eta term = case term of
+    Uni{} -> term
+    Var{} -> term
+    App{..} -> App (eta alg) (eta dat)
+    Lam{..} ->  case body of 
+                    App alg Var{var = v} | v == var && v `notMember` free alg   -> eta alg
+                    _                                                           -> Lam var (eta tpe) (eta body)
+    Fa {..} -> Fa var (eta tpe) (eta body)     
+
+reduce :: Term -> Term 
+reduce term =   let term' = beta term 
+                in  if   term' == term 
+                    then eta term 
+                    else reduce term'

@@ -1,11 +1,11 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-10 18:39:35.390561 UTC
+2017-07-11 15:30:39.4852359 UTC
 
 interface proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Lib 8002
-  interface hash: 19fc99819b5329ab85fad88f6a8bb068
-  ABI hash: 83a1743eb110e1338debb655002e487f
-  export-list hash: e1bdde282513ea72e1b5c50d7f5a9bad
+  interface hash: fb81249606eeb91bd79d2f1281e80ccf
+  ABI hash: 710846b64dde2023b7d1b7cc8064ff22
+  export-list hash: 83149e29d37a5e09bec6dbe064246b87
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 26c0c808fd3a5a4217cc82e90b56d9ff
   sig of: Nothing
@@ -23,6 +23,7 @@ package dependencies: array-0.5.1.1@array-0.5.1.1 base-4.9.1.0*
 orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
          binary-0.8.3.0@binary-0.8.3.0:Data.Binary.Generic
          bytestring-0.10.8.1@bytestring-0.10.8.1:Data.ByteString.Builder
+         proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Reduce
          text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text
          text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text.Show
 family instance modules: base-4.9.1.0:Control.Applicative
@@ -40,9 +41,9 @@ family instance modules: base-4.9.1.0:Control.Applicative
                          containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base
                          text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text
 import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
-import  -/  Reduce 5ceb4a24b8e297553ac9c12b45554be7
-  exports: e1e6ff9f4a8f51ebce8136df2f309592
-import  -/  Type 71eb38e3e23fdbc0ecc7452746656fe7
+import  -/  Reduce 714731c0c4448ee1069807f7596bfac3
+  exports: 69d0e4d9ed32f5ae13681e332234bef2
+import  -/  Type 6287656836a29819d220c78aa6d87906
   exports: 3a101c658448f9cbdcf2300f3098b7fc
 73450a0210e44363f63cacc783c56008
   $trModule :: GHC.Types.Module

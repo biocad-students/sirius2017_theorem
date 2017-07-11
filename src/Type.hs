@@ -26,7 +26,15 @@ data Term   = Var
             , body :: Term } 
             | Uni 
             { uni :: Uni }
-            deriving (Show, Eq)
+            deriving (Show)
+
+instance Eq Term where 
+    (Var x) == (Var y) = x == y
+    (App x y) == (App a b) = x == a && y == b
+    (Uni a) == (Uni b) = a == b
+    (Lam v1 t1 b1) == (Lam v2 t2 b2) = t1 == t2 && substitute b1 v1 (Var v2) == b2
+    (Fa v1 t1 b1) == (Fa v2 t2 b2) = t1 == t2 && substitute b1 v1 (Var v2) == b2
+    _ == _ = False
 
 axiom :: Uni -> Uni 
 axiom Star = Box 1

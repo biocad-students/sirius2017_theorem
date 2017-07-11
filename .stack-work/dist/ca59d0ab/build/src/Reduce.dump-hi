@@ -1,20 +1,25 @@
 
 ==================== FINAL INTERFACE ====================
-2017-07-10 18:40:13.582365 UTC
+2017-07-11 15:42:26.1798954 UTC
 
-interface proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Reduce 8002
-  interface hash: a197739861a1eae608a482fa2528cae5
-  ABI hash: 5ceb4a24b8e297553ac9c12b45554be7
-  export-list hash: e1e6ff9f4a8f51ebce8136df2f309592
-  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+interface proj-0.1.0.0-GViSLdnWNEqHe1z7eCQaTl:Reduce [orphan module] 8002
+  interface hash: f998f8905a9150f7cb1c95817e5a44fa
+  ABI hash: 714731c0c4448ee1069807f7596bfac3
+  export-list hash: 69d0e4d9ed32f5ae13681e332234bef2
+  orphan hash: d17bdb894e00e6bcc7928b95f5ba996c
   flag hash: 26c0c808fd3a5a4217cc82e90b56d9ff
   sig of: Nothing
   used TH splices: False
   where
 exports:
   Reduce.alpha
+  Reduce.beta
   Reduce.bound
+  Reduce.eta
   Reduce.free
+  Reduce.fresh
+  Reduce.reduce
+  Reduce.substitute
 module dependencies: Type
 package dependencies: array-0.5.1.1@array-0.5.1.1 base-4.9.1.0*
                       binary-0.8.3.0@binary-0.8.3.0
@@ -22,7 +27,7 @@ package dependencies: array-0.5.1.1@array-0.5.1.1 base-4.9.1.0*
                       containers-0.5.7.1@containers-0.5.7.1
                       deepseq-1.4.2.0@deepseq-1.4.2.0 ghc-prim-0.5.0.0
                       integer-gmp-1.0.0.1
-                      text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR
+                      text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR*
 orphans: base-4.9.1.0:GHC.Base base-4.9.1.0:GHC.Float
          binary-0.8.3.0@binary-0.8.3.0:Data.Binary.Generic
          bytestring-0.10.8.1@bytestring-0.10.8.1:Data.ByteString.Builder
@@ -42,24 +47,56 @@ family instance modules: base-4.9.1.0:Control.Applicative
                          containers-0.5.7.1@containers-0.5.7.1:Data.Sequence
                          containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base
                          text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text
+import  -/  base-4.9.1.0:Data.Functor 682cc832c233b71cec70179490a08631
+import  -/  base-4.9.1.0:GHC.Base 4caea1123ecf4b46e27cbccd6d279377
+import  -/  base-4.9.1.0:GHC.List d11eb227c1c6fbfd89bb781d72eaea0d
+import  -/  base-4.9.1.0:GHC.Show eca5834daba3b6a2bbbe64ab52056707
 import  -/  base-4.9.1.0:Prelude 74b3e204395920329f6de9d97206abe9
 import  -/  containers-0.5.7.1@containers-0.5.7.1:Data.Set 3ed2324fd1e757464a8ac2b636a64e5a
 import  -/  containers-0.5.7.1@containers-0.5.7.1:Data.Set.Base 7066127ea77dde3a5a3f19fd2ed3d39a
-import  -/  Type 71eb38e3e23fdbc0ecc7452746656fe7
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 16d48e012d23eaef9bca91ccdd572c02
+import  -/  Type 6287656836a29819d220c78aa6d87906
   exports: 3a101c658448f9cbdcf2300f3098b7fc
-  App 3eb32c05dcb9f24a2669a95ceb59c7f7
-  Fa 53fb934dc668da14f5429fd4976dc7e7
-  Lam 4c1977c8cecdc0b5fca98227f0099f54
-  Term 3fa6513992eb8f4d5d199fa60ff97063
-  Uni 26d3b088fd4ea41017919e2b0b70232b
-  Var 73ff7c94785e24a64ce454ebcb723551
+  App 1af8b6c4661eafdae598d200e409fcfa
+  Fa a5ddd510c2554bb164b691a9598c33c0
+  Lam 67b0d69d14069817be576819c74184b3
+  Term df7912e33d3eabd6145f24434205d5ef
+  Uni 53e67c110cea991fd3efa95e168699b3
+  V 6fe907451b8957a2be62fa09b0447f59
+  Var d7837857624a109afb0af64848957e99
   Var 6758d7e62873e90cf96f48a079ac3e43
-  alg 345062ea136578ac797abf7d64cd2e93
-  body 9ce4fa7e1dfe33171c59dd3e2edddea3
-  dat e99489163a520c397b5db9cf3ea388f1
-  tpe f5e8ce4c8f1b4f43163b488702d9ca4d
-  uni caa31898e4196bbe85b0fd9bb47ce779
-  var ffcbf9276628ea3a2de8c9c7a5fe2a6a
+  alg b6cd13c517f92b2a73f3163df95b3dd3
+  body 748df5e2e947e4cf822c435511911e2a
+  dat e793352b7cf3a3f10f0a7316c2bd6fb3
+  tpe acae8221d19b601468b828b89a99eb8f
+  uni cc6209ff2f05d13cc188a4572bf9c64d
+  var 9371c90602a4207df8c4a0cabf50b084
+import  -/  text-1.2.2.1@text-1.2.2.1-Ji7hMs2U4BkBwavd4taEVR:Data.Text 35f976519564888082d42815342d42ed
+1cf1b221e1e9543dcfd4e083379b665f
+  $fEqTerm :: GHC.Classes.Eq Type.Term
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Type.Term Reduce.$fEqTerm_$c== Reduce.$fEqTerm_$c/= -}
+c66cc0dedb39db526f5c1c518963c7b3
+  $fEqTerm_$c/= :: Type.Term -> Type.Term -> GHC.Types.Bool
+  {- Arity: 2, Strictness: <L,U><L,U>, Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (2, False, False)
+                (\ (x :: Type.Term) (y :: Type.Term) ->
+                 GHC.Classes.not (Reduce.$fEqTerm_$c== x y)) -}
+eedecd2a6a0635616556f52fbf98bf5c
+  $fEqTerm_$c== :: Type.Term -> Type.Term -> GHC.Types.Bool
+  {- Arity: 2, Strictness: <S,1*U><S,1*U> -}
+4c34f123a99252bafea82fad68a91748
+  $smember_go5 ::
+    Type.Var -> Data.Set.Base.Set Type.Var -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U(U,U,U)><S,1*U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Type.Var) (w1 :: Data.Set.Base.Set Type.Var) ->
+                 case w `cast`
+                      (Type.N:Var[0]) of ww { Data.Text.Internal.Text ww1 ww2 ww3 ->
+                 Reduce.$wgo5 ww1 ww2 ww3 w1 }) -}
 f022277838deff1b39395f691efd0d47
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -91,15 +128,52 @@ d148e994f71b2a5cb38ef24c945367a8
     -> Data.Set.Base.Set Type.Var
     -> Data.Set.Base.Set Type.Var
   {- Arity: 4, Strictness: <L,U><L,U><L,U><S,1*U>, Inline: [0] -}
-bf6db79d7578f816a57d3d8e8198767a
-  alpha :: Type.Term -> Type.Term
-  {- Arity: 1, Strictness: <S,1*U> -}
-95917c44b30e76be95ffb3f81cbc4210
+ee675d427b579bf5684d095d6cad8a7c
+  $wgo5 ::
+    GHC.Prim.ByteArray#
+    -> GHC.Prim.Int#
+    -> GHC.Prim.Int#
+    -> Data.Set.Base.Set Type.Var
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs, Strictness: <L,U><L,U><L,U><S,1*U>,
+     Inline: [0] -}
+d22dd8ec988f2086531926b03831851f
+  alpha :: Type.Term -> Data.Set.Base.Set Type.Var -> Type.Term
+  {- Arity: 2, Strictness: <S,U><L,U> -}
+e0c906cf9f5e38d9bdefa6e625caf9c9
+  beta :: Type.Term -> Type.Term
+  {- Arity: 1, Strictness: <S,U> -}
+61560d9147d6ee535a315299d8256e83
   bound :: Type.Term -> Data.Set.Base.Set Type.Var
   {- Arity: 1, Strictness: <S,1*U> -}
-7a4683c2aaed2f1d20607b86415d523f
+ef9ea83979a8ad1b32a173b202276380
+  eta :: Type.Term -> Type.Term
+  {- Arity: 1, Strictness: <S,1*U> -}
+acad1a8e016c21254348a43776dfcab5
   free :: Type.Term -> Data.Set.Base.Set Type.Var
   {- Arity: 1, Strictness: <S,1*U> -}
+684a58935cd52e0f4cbfbc0e1fdbeeae
+  fresh :: Data.Set.Base.Set Type.Var -> Type.Var
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (conflicts :: Data.Set.Base.Set Type.Var) ->
+                 case GHC.List.dropWhile
+                        @ Type.Var
+                        (\ (ds :: Type.Var) -> Reduce.$smember_go5 ds conflicts)
+                        Reduce.fresh1 of wild {
+                   [] -> GHC.List.badHead @ Type.Var : x ds1 -> x }) -}
+57fa7375591e98b2154c863ddf2b602a
+  fresh1 :: [Type.Var]
+  {- Unfolding: (Reduce.fresh_go 0#) -}
+39d626795c31033829628f2fa9b378d4
+  fresh_go :: GHC.Prim.Int# -> [Type.Var]
+  {- Arity: 1, Strictness: <L,U> -}
+35b823a282aa090d0c955572b7244464
+  reduce :: Type.Term -> Type.Term
+  {- Arity: 1, Strictness: <S,U> -}
+78be551470ea5dbf3cafc0f34a6f5652
+  substitute :: Type.Term -> Type.Var -> Type.Term -> Type.Term
+  {- Arity: 3, Strictness: <S,1*U><L,U(U,U,U)><L,U> -}
+instance [safe] GHC.Classes.Eq [Type.Term] = Reduce.$fEqTerm
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
