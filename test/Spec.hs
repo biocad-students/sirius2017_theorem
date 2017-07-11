@@ -35,7 +35,7 @@ testA :: Spec
 testA = it "(\\x y -> x) x = \\y -> x" $ reduce (App (Lam x st (Lam y st (Var x))) (Var x)) `shouldBe` reduce (Lam y st (Var x))
 
 testB :: Spec
-testB = it "(\\x y -> y x) y x = x x" $ reduce (App (App (Lam x st (Lam y st (App (Var y) (Var x)))) (Var y)) (Var x)) `shouldBe` reduce (App (Var x) (Var y))
+testB = it "(\\x y -> y x) y x = x y" $ reduce (App (App (Lam x st (Lam y st (App (Var y) (Var x)))) (Var y)) (Var x)) `shouldBe` reduce (App (Var x) (Var y))
 
 testC :: Spec
 testC = it "(\\x -> \\x -> x) y = \\x -> x" $ reduce (App (Lam x st (Lam x st (Var x))) (Var y)) `shouldBe` reduce (Lam x st (Var x))
