@@ -1,10 +1,10 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Reduce where
+module Lawer.Reduce (Term (..), reduce, substitute) where
 
 import Data.Set (singleton, union, empty, delete, insert, member, notMember, Set) 
-import Type
+import Lawer.Type
 import Data.Text (pack)
 
 instance Eq Term where 
@@ -98,7 +98,9 @@ eta term =
             case body of 
                 App alg Var{var = v} | v == var && v `notMember` free alg   -> eta alg
                 _                                                           -> Lam var (eta tpe) (eta body)
-        Fa {..} -> Fa var (eta tpe) (eta body)     
+        Fa {..} ->  if var == noname 
+                    then eta body 
+                    else Fa var (eta tpe) (eta body)     
 
 reduce :: Term -> Term 
 reduce term =   let term' = beta term 

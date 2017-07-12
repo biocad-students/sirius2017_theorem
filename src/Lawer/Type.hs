@@ -1,4 +1,4 @@
-module Type where
+module Lawer.Type where
 
 import Data.Text (Text, pack)
 
@@ -9,7 +9,7 @@ newtype Var = V Name
 
 data Uni    = Star
             | Box Integer
-            deriving (Eq)
+            deriving (Eq, Ord)
 
 data Term   = Var 
             { var :: Var }

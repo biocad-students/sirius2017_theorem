@@ -1,9 +1,10 @@
 module Main where
 
-import Reduce
-import Type
+import Lawer
 import Test.Hspec
+import Std
 import Data.Text (pack)
+import Prelude hiding (not)
 
 main :: IO ()
 main = hspec testsReduce 
@@ -18,18 +19,7 @@ testsReduce = describe "Reduction" $ do
     testE
 
 testBool :: Spec
-testBool = it "Bool" $  let a = V $ pack "a"
-                            b = V $ pack "b"
-                            bool = Fa a (Uni Star) (Lam noname (Var a) $ Lam noname (Var a) (Var a))
-                            true = Lam a bool (Lam noname bool (Var a))
-                            false = Lam noname bool (Lam b bool (Var b))
-                            not = Lam a bool (App (App (Var a) false) true)
-                        in reduce (App not false) `shouldBe` true
-
-x = V $ pack "x"
-y = V $ pack "y"
-z = V $ pack "z"
-st = Uni Star
+testBool = it (show nat) $ (reduce (App not false) `shouldBe` true) <* (typeOf (reduce (App not false)) `shouldBe` typeOf true)
 
 testA :: Spec
 testA = it "(\\x y -> x) x = \\y -> x" $ reduce (App (Lam x st (Lam y st (Var x))) (Var x)) `shouldBe` reduce (Lam y st (Var x))

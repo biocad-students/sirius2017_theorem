@@ -1,8 +1,8 @@
-module Context where
+module Lawer.Context where
 
-import           Type
+import           Lawer.Type
 import           Prelude            hiding (lookup)
-import qualified Prelude            as P (lookup)
+import qualified Prelude                    as P (lookup)
 
 newtype Context = Context 
                 { getCtx :: [(Var, Term)] }
