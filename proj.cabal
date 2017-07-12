@@ -18,6 +18,10 @@ library
   exposed-modules:     Lib
                      , Type
                      , Reduce
+                     , Check
+                     , Error
+                     , Context
+                     , Pretty    
   build-depends:       base >= 4.7 && < 5
                      , text
                      , containers

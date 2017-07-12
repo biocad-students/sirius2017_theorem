@@ -29,11 +29,13 @@ free Fa {..} = delete var $ free body `union` free tpe
 free Uni{..} = empty
 
 bound :: Term -> Set Var
-bound Var{..} = empty
-bound App{..} = bound alg `union` bound dat
-bound Lam{..} = insert var $ bound body `union` bound tpe
-bound Fa {..} = insert var $ bound body `union` bound tpe
-bound Uni{..} = empty
+bound term = 
+    case term of
+        Var{..} -> empty
+        App{..} -> bound alg `union` bound dat
+        Lam{..} -> insert var $ bound body `union` bound tpe
+        Fa {..} -> insert var $ bound body `union` bound tpe
+        Uni{..} -> empty
 
 alpha :: Term -> Set Var -> Term 
 alpha term conflicts = 

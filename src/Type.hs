@@ -5,11 +5,11 @@ import Data.Text (Text, pack)
 type Name = Text
 
 newtype Var = V Name
-    deriving (Show, Eq, Read, Ord)
+    deriving (Eq, Read, Ord)
 
 data Uni    = Star
             | Box Integer
-            deriving (Show, Eq)
+            deriving (Eq)
 
 data Term   = Var 
             { var :: Var }
@@ -26,7 +26,6 @@ data Term   = Var
             , body :: Term } 
             | Uni 
             { uni :: Uni }
-            deriving (Show)
 
 axiom :: Uni -> Uni 
 axiom Star = Box 1
