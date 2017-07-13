@@ -43,4 +43,4 @@ testHard :: Spec
 testHard = "Parse HARD" $ do
     parseTermM "(x:a)[y:b](c2)d" `shouldBe` Just (Fa (Var $ V $ pack "x") (Var $ V $ pack "a") 
                                                  (Lam (Var $ V $ pack "y") (Var $ V $ pack "b") 
-                                                 (App (Var $ V $ pack "c2") (Var $ V $ pack "d")))))
+                                                 (App (Var $ V $ pack "c2") (Var $ V $ pack "d"))))
