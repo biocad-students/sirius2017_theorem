@@ -5,7 +5,8 @@ import Control.Applicative   (many, some, (<|>))
 import Text.Megaparsec
 import Text.Megaparsec.Text  (Parser)
 import Text.Megaparsec.Lexer
-import Lawer
+import Lawer.Type
+import Lawer.Pretty
 import Data.Text
 
 
@@ -60,5 +61,6 @@ parserFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') pars
               term <- parserTerm
               return $ meta term
 
-parseTerm :: String -> IO ()
-parseTerm = parseTest parserTerm . pack
+
+parseTermM :: String -> Maybe Term
+parseTermM = parseMaybe parserTerm . pack

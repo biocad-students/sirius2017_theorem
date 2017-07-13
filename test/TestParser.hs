@@ -10,14 +10,7 @@ testsParser :: SpecWith ()
 testsParser = describe "Parser test" $ do
     testVar
 
-testVar :: Spec
-testVar = it "Parse var" $ True `shouldBe` True
-
--- v a= parseTest parseVar a
--- s a= parseTest parseStar a
--- b1 a= parseTest parseBox a
--- b2 a= parseTest parseBox a
--- a x= parseTest parseApp x
--- l a= parseTest parseLam a
--- f a= parseTest parseFa a
--- u a = parseTest parseTerm a
+testUni :: Spec
+testUni = it "Parse Uni" $ do
+	parseTermM "*" `shouldBe` Just (Uni Star)
+	parseTermM "[]" `shouldBe` Just (Uni $ Box 1)
