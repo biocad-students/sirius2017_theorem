@@ -3,7 +3,7 @@ module Lawer(
     typeOf, 
     reduce, substitute,
     Context(..), lookup, empty, insert,
-    CalculusError(..)
+    CalculusError(..), parseTermM
 ) where
 
 import Lawer.Type (axiom, noname, Name, Var(..), Uni(..), Term(..))
