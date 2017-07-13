@@ -27,7 +27,7 @@ parserTermInBr :: Parser Term
 parserTermInBr = between (char '(') (char ')') parserTerm
 
 parserTerm :: Parser Term
-parserTerm = try parserLam <|> try parserApp <|>  try parserTermInBr <|> try parserFa <|> try parserVar <|> try parserUni
+parserTerm = try parserLam <|> try parserApp <|>  try parserTermInBr <|> try parserFa <|> try parserVar <|> try parserUni <* parserSpaces
 
 parserStar :: Parser Term
 parserStar = do star <- (skipMany spaceChar) *> (char '*') <* (skipMany spaceChar)
@@ -55,6 +55,9 @@ parserLam :: Parser Term
 parserLam = do meta <- (skipMany spaceChar) *> between (char '[') (char ']') parserLamMeta
                term <- parserTerm
                return $ meta term
+
+parserSpaces :: Parser Char
+parserSpaces = (skipMany spaceChar) *> (char ' ')
 
 parserFa :: Parser Term
 parserFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') parserFaMeta
