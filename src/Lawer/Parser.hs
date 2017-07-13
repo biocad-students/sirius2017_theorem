@@ -5,60 +5,62 @@ import Control.Applicative   (many, some, (<|>))
 import Text.Megaparsec
 import Text.Megaparsec.Text  (Parser)
 import Text.Megaparsec.Lexer
-import Lawer
+import Lawer.Type
+import Lawer.Pretty
 import Data.Text
 
 
-parseBoxInt :: Parser Integer
-parseBoxInt = read <$> (some digitChar <|> pure "1")
+parserBoxInt :: Parser Integer
+parserBoxInt = read <$> (some digitChar <|> pure "1")
 
-parseVar :: Parser Term
-parseVar = do st <- (skipMany spaceChar) *> (some letterChar)
-              dg <- (many digitChar) <* (skipMany spaceChar)
-              return $ Var $ V $ pack (st ++ dg)
+parserVar :: Parser Term
+parserVar = do st <- (skipMany spaceChar) *> (some letterChar)
+               dg <- (many digitChar) <* (skipMany spaceChar)
+               return $ Var $ V $ pack (st ++ dg)
 
-parseApp :: Parser Term
-parseApp = do term1 <- (skipMany spaceChar) *> parseNotAppTerm
-              term2 <- (skipMany spaceChar) *> between (char '(') (char ')') ((skipMany spaceChar) *> parseTerm <* (skipMany spaceChar))
-              return $ App term1 term2
+parserApp :: Parser Term
+parserApp = do term1 <- (skipMany spaceChar) *> between (char '(') (char ')') ((skipMany spaceChar) *> parserTerm <* (skipMany spaceChar))
+               term2 <- (skipMany spaceChar) *> parserTerm
+               return $ App term1 term2
 
-parseTerm :: Parser Term
-parseTerm = try parseApp <|> try parseLam <|> try parseFa <|> try parseVar <|> try parseUni
+parserTermInBr :: Parser Term
+parserTermInBr = between (char '(') (char ')') parserTerm
 
-parseNotAppTerm :: Parser Term
-parseNotAppTerm = try parseLam <|> try parseUni <|> try parseVar
+parserTerm :: Parser Term
+parserTerm = try parserLam <|> try parserApp <|>  try parserTermInBr <|> try parserFa <|> try parserVar <|> try parserUni
 
-parseStar :: Parser Term
-parseStar = do star <- (skipMany spaceChar) *> (char '*') <* (skipMany spaceChar)
-               return $ Uni Star
+parserStar :: Parser Term
+parserStar = do star <- (skipMany spaceChar) *> (char '*') <* (skipMany spaceChar)
+                return $ Uni Star
 
-parseUni :: Parser Term
-parseUni = try parseStar <|> try parseBox
+parserUni :: Parser Term
+parserUni = try parserStar <|> try parserBox
 
-parseBox :: Parser Term
-parseBox = do num <- (skipMany spaceChar) *> (string "[") *> parseBoxInt <* (string "]") <* (skipMany spaceChar)
-              return $ Uni $ Box num
-
-
-parseLamMeta = do (Var var) <- parseVar
-                  tpe <- (string ":") *> parseTerm <* (skipMany spaceChar)
-                  return $ Lam var tpe
+parserBox :: Parser Term
+parserBox = do num <- (skipMany spaceChar) *> (string "[") *> parserBoxInt <* (string "]") <* (skipMany spaceChar)
+               return $ Uni $ Box num
 
 
-parseFaMeta = do (Var var) <- parseVar
-                 tpe <- (string ":") *> parseTerm <* (skipMany spaceChar)
-                 return $ Fa var tpe
+parserLamMeta = do (Var var) <- parserVar
+                   tpe <- (string ":") *> parserTerm <* (skipMany spaceChar)
+                   return $ Lam var tpe
 
 
-parseLam :: Parser Term
-parseLam = do meta <- (skipMany spaceChar) *> between (char '[') (char ']') parseLamMeta
-              term <- parseTerm
+parserFaMeta = do (Var var) <- parserVar
+                  tpe <- (string ":") *> parserTerm <* (skipMany spaceChar)
+                  return $ Fa var tpe
+
+
+parserLam :: Parser Term
+parserLam = do meta <- (skipMany spaceChar) *> between (char '[') (char ']') parserLamMeta
+               term <- parserTerm
+               return $ meta term
+
+parserFa :: Parser Term
+parserFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') parserFaMeta
+              term <- parserTerm
               return $ meta term
 
-parseFa :: Parser Term
-parseFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') parseFaMeta
-             term <- parseTerm
-             return $ meta term
 
-parseMyTerm :: String -> IO ()
-parseMyTerm = parseTest parseTerm . pack
+parseTermM :: String -> Maybe Term
+parseTermM = parseMaybe parserTerm . pack
