@@ -8,7 +8,7 @@ main = hspec testsParser
 
 testsParser :: SpecWith ()
 testsParser = describe "Parser test" $ do
-    testVar
+    testUni
 
 testUni :: Spec
 testUni = it "Parse Uni" $ do
