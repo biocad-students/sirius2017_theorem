@@ -11,8 +11,8 @@ instance Eq Term where
     (Var x) == (Var y) = x == y
     (App x y) == (App a b) = x == a && y == b
     (Uni a) == (Uni b) = a == b
-    (Lam v1 t1 b1) == (Lam v2 t2 b2) = t1 == t2 && substitute b1 v1 (Var v2) == b2
-    (Fa v1 t1 b1) == (Fa v2 t2 b2) = t1 == t2 && substitute b1 v1 (Var v2) == b2
+    (Lam v1 t1 b1)  == (Lam v2 t2 b2) = t1 == t2 && substitute b1 v1 (Var v2) == b2
+    (Fa v1 t1 b1)   == (Fa  v2 t2 b2) = t1 == t2 && substitute b1 v1 (Var v2) == b2
     _ == _ = False
 
 fresh :: Set Var -> Var
@@ -56,18 +56,19 @@ substitute :: Term -> Var -> Term -> Term
 substitute term name newTerm = 
     case term of
         Uni{}                               ->  term
-        Var{..} | var == name               ->  newTerm 
-            | otherwise                 ->  Var var 
+        Var{..}             | var == name   ->  newTerm 
+                            | otherwise     ->  Var var 
         App{..}                             ->  App (subsNewTerm alg) (subsNewTerm dat)
-        Lam{var = var'}     | var' == name  ->  term
+        Lam{..}             | var == name   ->  term
                             | otherwise     ->  let Lam{..} = term' 
                                                 in  Lam var (subsNewTerm tpe) (subsNewTerm body)
-        Fa {var = var'}     | var' == name  ->  term
+        Fa {..}             | var == name   ->  term
                             | otherwise     ->  let Fa {..} = term' 
                                                 in  Fa  var (subsNewTerm tpe) (subsNewTerm body)
     where 
-    term'               = alpha term $ free newTerm 
-    subsNewTerm oldTerm = substitute oldTerm name newTerm
+        cond = var term `member` free newTerm
+        term'               = alpha term $ free newTerm 
+        subsNewTerm oldTerm = substitute oldTerm name newTerm
 
 beta :: Term -> Term
 beta term = 
@@ -85,9 +86,10 @@ beta term =
     where
         mkBeta =    let tpe'    = beta $ tpe term
                         body'   = beta $ body term
-                    in  if  tpe term == tpe' 
+                    in  if  tpe term /= tpe' 
                         then term {tpe  = tpe'}
                         else term {body = body'}
+
 eta :: Term -> Term
 eta term = 
     case term of
