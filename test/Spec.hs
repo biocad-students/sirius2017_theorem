@@ -7,19 +7,32 @@ import Data.Text (pack)
 import Prelude hiding (not, succ)
 
 main :: IO ()
-main = hspec testsReduce 
+main = hspec testsReduceAndTypes 
 
-testsReduce :: SpecWith ()
-testsReduce = describe "Reduction" $ do
-    testBool
-    testA
-    testB
-    testC
-    testD
-    testE
+testsReduceAndTypes :: SpecWith ()
+testsReduceAndTypes = do
+    describe "Reduction" $ do
+        testA
+        testB
+        testC
+        testD
+        testE
+    describe "Nat" testNat
+    describe "Bool" testBool
+
+testNat :: Spec
+testNat = do
+    it "2 + 4 = 4 + 2" $ reduce (plus $$ two $$ four) `shouldBe` reduce (plus $$ four $$ two)
+    it "2 + 4 =types= 4 + 2" $ typeOf (reduce (App (App plus two) four)) `shouldBe` typeOf (reduce (App (App plus four) two))
+    it "0 + 0 = 0" $ reduce (plus `app` zero `app` zero) `shouldBe` reduce zero 
+    it "1 + 0 = 1" $ reduce (plus `app` (succ $$ zero) `app` zero) `shouldBe` reduce one
+    it "0 + 1 = 1" $ reduce (plus `app` zero `app` one) `shouldBe` reduce one
+    it "1 + 1 = 2" $ reduce (plus `app` one `app` one) `shouldBe` reduce two 
 
 testBool :: Spec
-testBool = it (show . typeOf $ zero) $ (reduce (App not false) `shouldBe` true) <* (typeOf (reduce (App not false)) `shouldBe` typeOf true)
+testBool = do 
+    it "not false = true" $ reduce (App not false) `shouldBe` true
+    it "not false =types= true" $ typeOf (reduce (App not false)) `shouldBe` typeOf true
 
 testA :: Spec
 testA = it "(\\x y -> x) x = \\y -> x" $ 
