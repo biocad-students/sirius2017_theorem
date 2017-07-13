@@ -9,59 +9,56 @@ import Lawer
 import Data.Text
 
 
-parseBoxInt :: Parser Integer
-parseBoxInt = read <$> (some digitChar <|> pure "1")
+parserBoxInt :: Parser Integer
+parserBoxInt = read <$> (some digitChar <|> pure "1")
 
-parseVar :: Parser Term
-parseVar = do st <- (skipMany spaceChar) *> (some letterChar)
-              dg <- (many digitChar) <* (skipMany spaceChar)
-              return $ Var $ V $ pack (st ++ dg)
+parserVar :: Parser Term
+parserVar = do st <- (skipMany spaceChar) *> (some letterChar)
+               dg <- (many digitChar) <* (skipMany spaceChar)
+               return $ Var $ V $ pack (st ++ dg)
 
-parseApp :: Parser Term
-parseApp = do term1 <- (skipMany spaceChar) *> between (char '(') (char ')') ((skipMany spaceChar) *> parseTerm <* (skipMany spaceChar))
-              term2 <- (skipMany spaceChar) *> parseTerm
-              return $ App term1 term2
+parserApp :: Parser Term
+parserApp = do term1 <- (skipMany spaceChar) *> between (char '(') (char ')') ((skipMany spaceChar) *> parserTerm <* (skipMany spaceChar))
+               term2 <- (skipMany spaceChar) *> parserTerm
+               return $ App term1 term2
 
-parseTermInBr :: Parser Term
-parseTermInBr = between (char '(') (char ')') parseTerm
+parserTermInBr :: Parser Term
+parserTermInBr = between (char '(') (char ')') parserTerm
 
-parseTerm :: Parser Term
-parseTerm = try parseLam <|> try parseApp <|>  try parseTermInBr <|> try parseFa <|> try parseVar <|> try parseUni
+parserTerm :: Parser Term
+parserTerm = try parserLam <|> try parserApp <|>  try parserTermInBr <|> try parserFa <|> try parserVar <|> try parserUni
 
-parseNotAppTerm :: Parser Term
-parseNotAppTerm = try parseLam <|> try parseUni <|> try parseVar
+parserStar :: Parser Term
+parserStar = do star <- (skipMany spaceChar) *> (char '*') <* (skipMany spaceChar)
+                return $ Uni Star
 
-parseStar :: Parser Term
-parseStar = do star <- (skipMany spaceChar) *> (char '*') <* (skipMany spaceChar)
-               return $ Uni Star
+parserUni :: Parser Term
+parserUni = try parserStar <|> try parserBox
 
-parseUni :: Parser Term
-parseUni = try parseStar <|> try parseBox
-
-parseBox :: Parser Term
-parseBox = do num <- (skipMany spaceChar) *> (string "[") *> parseBoxInt <* (string "]") <* (skipMany spaceChar)
-              return $ Uni $ Box num
+parserBox :: Parser Term
+parserBox = do num <- (skipMany spaceChar) *> (string "[") *> parserBoxInt <* (string "]") <* (skipMany spaceChar)
+               return $ Uni $ Box num
 
 
-parseLamMeta = do (Var var) <- parseVar
-                  tpe <- (string ":") *> parseTerm <* (skipMany spaceChar)
-                  return $ Lam var tpe
+parserLamMeta = do (Var var) <- parserVar
+                   tpe <- (string ":") *> parserTerm <* (skipMany spaceChar)
+                   return $ Lam var tpe
 
 
-parseFaMeta = do (Var var) <- parseVar
-                 tpe <- (string ":") *> parseTerm <* (skipMany spaceChar)
-                 return $ Fa var tpe
+parserFaMeta = do (Var var) <- parserVar
+                  tpe <- (string ":") *> parserTerm <* (skipMany spaceChar)
+                  return $ Fa var tpe
 
 
-parseLam :: Parser Term
-parseLam = do meta <- (skipMany spaceChar) *> between (char '[') (char ']') parseLamMeta
-              term <- parseTerm
+parserLam :: Parser Term
+parserLam = do meta <- (skipMany spaceChar) *> between (char '[') (char ']') parserLamMeta
+               term <- parserTerm
+               return $ meta term
+
+parserFa :: Parser Term
+parserFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') parserFaMeta
+              term <- parserTerm
               return $ meta term
 
-parseFa :: Parser Term
-parseFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') parseFaMeta
-             term <- parseTerm
-             return $ meta term
-
-parseMyTerm :: String -> IO ()
-parseMyTerm = parseTest parseTerm . pack
+parseTerm :: String -> IO ()
+parseTerm = parseTest parserTerm . pack
