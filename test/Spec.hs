@@ -4,7 +4,7 @@ import Lawer
 import Test.Hspec
 import Std
 import Data.Text (pack)
-import Prelude hiding (not)
+import Prelude hiding (not, succ)
 
 main :: IO ()
 main = hspec testsReduce 
@@ -19,7 +19,7 @@ testsReduce = describe "Reduction" $ do
     testE
 
 testBool :: Spec
-testBool = it (show nat) $ (reduce (App not false) `shouldBe` true) <* (typeOf (reduce (App not false)) `shouldBe` typeOf true)
+testBool = it (show $ fmap reduce $ typeOf zero) $ (reduce (App not false) `shouldBe` true) <* (typeOf (reduce (App not false)) `shouldBe` typeOf true)
 
 testA :: Spec
 testA = it "(\\x y -> x) x = \\y -> x" $ reduce (App (Lam x st (Lam y st (Var x))) (Var x)) `shouldBe` reduce (Lam y st (Var x))

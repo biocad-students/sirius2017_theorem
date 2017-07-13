@@ -10,7 +10,7 @@ import Control.Monad.Trans.Except          (Except, throwE)
 import Prelude                      hiding (lookup)
 
 typeOf :: Term -> Except CalculusError Term 
-typeOf t = reduce <$> typeWith empty t
+typeOf = typeWith empty
 
 typeWith :: Context -> Term -> Except CalculusError Term
 typeWith ctx term = 
@@ -20,14 +20,14 @@ typeWith ctx term =
                        Nothing -> throwE $ UnknownVariable var
         Uni{..} -> pure . Uni $ axiom uni
         App{..} -> 
-            do  algTpe <- typeWith ctx alg
+            do  algTpe <- reduce <$> typeWith ctx (reduce alg)
                 case algTpe of
                     Fa{..} -> 
                         do 
-                            bodyTpe <- typeWith ctx dat
-                            if reduce tpe == reduce bodyTpe
-                            then pure body  
-                            else throwE $ CannotEqualizeTypes (reduce tpe) (reduce bodyTpe)
+                            datTpe <- reduce <$> typeWith ctx dat
+                            if reduce tpe == reduce datTpe
+                            then pure body
+                            else throwE $ CannotEqualizeTypes (reduce tpe) (reduce datTpe)
                     _      -> throwE $ InvalidType algTpe "must be arrow"
         Lam{..} ->  let ctx' = insert var tpe ctx 
                     in Fa noname tpe . reduce <$> typeWith ctx' body <* typeWith ctx tpe
@@ -51,6 +51,7 @@ isIn _ _ _                              = False
                            
 toUni :: Term -> Except CalculusError Uni
 toUni (Uni u) = pure u
+toUni Fa{..}  | var == noname = toUni body
 toUni a       = throwE $ InvalidType a "must be uni"
 
 typeRule :: Uni -> Uni -> Uni 
