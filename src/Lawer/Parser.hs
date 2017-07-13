@@ -56,8 +56,8 @@ parserLam = do meta <- (skipMany spaceChar) *> between (char '[') (char ']') par
                term <- parserTerm
                return $ meta term
 
-parserSpaces :: Parser Char
-parserSpaces = (skipMany spaceChar) *> (char ' ')
+parserSpaces :: Parser ()
+parserSpaces = (skipMany spaceChar) *> eof
 
 parserFa :: Parser Term
 parserFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') parserFaMeta
@@ -67,3 +67,6 @@ parserFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') pars
 
 parseTermM :: String -> Maybe Term
 parseTermM = parseMaybe parserTerm . pack
+
+parseTerm :: String -> IO ()
+parseTerm = parseTest parserTerm . pack
