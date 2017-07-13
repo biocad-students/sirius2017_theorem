@@ -17,7 +17,7 @@ instance Show Uni where
 instance Show Term where
     show Uni{..} = show uni
     show Var{..} = show var
-    show App{..} = "(" ++ show alg ++ ") (" ++ show dat ++ ")"
-    show Lam{..} = "\\" ++ show var ++ " : (" ++ show tpe ++ ") -> (" ++ show body ++ ")"
-    show Fa{..} = "\\/" ++ show var ++ " : (" ++ show tpe ++ ") -> (" ++ show body ++ ")"
+    show App{..} = show alg ++ "(" ++ show dat ++ ")"
+    show Lam{..} = "[" ++ show var ++ ":" ++ show tpe ++ "]" ++ show body
+    show Fa{..} = "(" ++ show var ++ ":" ++ show tpe ++ ")" ++ show body
     
