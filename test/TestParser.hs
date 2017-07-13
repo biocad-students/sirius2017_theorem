@@ -31,16 +31,16 @@ testApp = it "Parse App" $ do
 
 testLam :: Spec
 testLam = it "Parse Lam" $ do
-    parseTermM "[x:a]b" `shouldBe` Just (Lam (Var $ V $ pack "x") (Var $ V $ pack "a") (Var $ V $ pack "b"))
+    parseTermM "[x:a]b" `shouldBe` Just (Lam (V $ pack "x") (Var $ V $ pack "a") (Var $ V $ pack "b"))
     parseTermM "[szx]x" `shouldBe` Nothing
 
 testFa :: Spec
-testFa = "Parse Fa" $ do
-    parseTermM "(x:a)b" `shouldBe` Just (Fa (Var $ V $ pack "x") (Var $ V $ pack "a") (Var $ V $ pack "b"))
+testFa = it "Parse Fa" $ do
+    parseTermM "(x:a)b" `shouldBe` Just (Fa (V $ pack "x") (Var $ V $ pack "a") (Var $ V $ pack "b"))
     parseTermM "((x)y:a)z" `shouldBe` Nothing
 
 testHard :: Spec
-testHard = "Parse HARD" $ do
-    parseTermM "(x:a)[y:b](c2)d" `shouldBe` Just (Fa (Var $ V $ pack "x") (Var $ V $ pack "a") 
-                                                 (Lam (Var $ V $ pack "y") (Var $ V $ pack "b") 
+testHard = it "Parse HARD" $ do
+    parseTermM "(x:a)[y:b](c2)d" `shouldBe` Just (Fa (V $ pack "x") (Var $ V $ pack "a") 
+                                                 (Lam (V $ pack "y") (Var $ V $ pack "b") 
                                                  (App (Var $ V $ pack "c2") (Var $ V $ pack "d"))))
