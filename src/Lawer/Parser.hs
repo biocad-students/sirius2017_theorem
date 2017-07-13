@@ -18,12 +18,15 @@ parseVar = do st <- (skipMany spaceChar) *> (some letterChar)
               return $ Var $ V $ pack (st ++ dg)
 
 parseApp :: Parser Term
-parseApp = do term1 <- (skipMany spaceChar) *> parseNotAppTerm
-              term2 <- (skipMany spaceChar) *> between (char '(') (char ')') ((skipMany spaceChar) *> parseTerm <* (skipMany spaceChar))
+parseApp = do term1 <- (skipMany spaceChar) *> between (char '(') (char ')') ((skipMany spaceChar) *> parseTerm <* (skipMany spaceChar))
+              term2 <- (skipMany spaceChar) *> parseTerm
               return $ App term1 term2
 
+parseTermInBr :: Parser Term
+parseTermInBr = between (char '(') (char ')') parseTerm
+
 parseTerm :: Parser Term
-parseTerm = try parseApp <|> try parseLam <|> try parseFa <|> try parseVar <|> try parseUni
+parseTerm = try parseLam <|> try parseApp <|>  try parseTermInBr <|> try parseFa <|> try parseVar <|> try parseUni
 
 parseNotAppTerm :: Parser Term
 parseNotAppTerm = try parseLam <|> try parseUni <|> try parseVar
