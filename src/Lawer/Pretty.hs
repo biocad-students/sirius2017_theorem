@@ -19,5 +19,6 @@ instance Show Term where
     show Var{..} = show var
     show App{..} = "(" ++ show alg ++ ") (" ++ show dat ++ ")"
     show Lam{..} = "[" ++ show var ++ ":" ++ show tpe ++ "]" ++ show body
-    show Fa{..} = "(" ++ show var ++ ":" ++ show tpe ++ ")" ++ show body
+    show Fa{..} | var == noname = "(" ++ show tpe ++ " -> " ++ show body ++ ")"
+                | otherwise = "(" ++ show var ++ ":" ++ show tpe ++ ")" ++ show body
     

@@ -12,32 +12,34 @@ import Prelude                      hiding (lookup)
 typeOf :: Term -> Except CalculusError Term 
 typeOf t = reduce <$> typeWith empty t
 
-typeWith :: Context -> Term -> Except CalculusError Term
+typeWith :: Context Term -> Term -> Except CalculusError Term
 typeWith ctx term = 
     case term of
         Var{..} -> case lookup var ctx of
-                       Just x  -> pure x
+                       Just x  -> return x
                        Nothing -> throwE $ UnknownVariable var
-        Uni{..} -> pure . Uni $ axiom uni
+        Uni{..} -> return . Uni $ axiom uni
         App{..} -> 
-            do  algTpe <- typeWith ctx alg
+            do  algTpe <- reduce <$> typeWith ctx (reduce alg)
                 case algTpe of
                     Fa{..} -> 
-                        do 
-                            bodyTpe <- typeWith ctx dat
-                            if reduce tpe == reduce bodyTpe
-                            then pure body  
-                            else throwE $ CannotEqualizeTypes (reduce tpe) (reduce bodyTpe)
+                        do
+                            datTpe <- reduce <$> typeWith ctx dat
+                            if isIn (reduce tpe) (reduce datTpe) ctx
+                            then return body
+                            else throwE $ CannotEqualizeTypes (reduce tpe) (reduce datTpe)
                     _      -> throwE $ InvalidType algTpe "must be arrow"
-        Lam{..} ->  let ctx' = insert var tpe ctx 
-                    in Fa noname tpe . reduce <$> typeWith ctx' body <* typeWith ctx tpe
-        Fa {..} ->  let ctx' = insert var tpe ctx
-                    in  do
-                            typeTpe <- reduce <$> typeWith ctx tpe >>= toUni
-                            bodyTpe <- reduce <$> typeWith ctx' body >>= toUni
-                            pure . Uni $ typeRule typeTpe bodyTpe
+        Lam{..} ->  do  let ctx' = insert var tpe ctx 
+                        bodyTpe <- typeWith ctx' body
+                        let lamTpe = Fa var tpe bodyTpe
+                        _ <- typeWith ctx lamTpe
+                        return lamTpe
+        Fa {..} ->  do  let ctx' = insert var tpe ctx
+                        typeTpe <- (reduce <$> typeWith ctx tpe) >>= toUni1
+                        bodyTpe <- (reduce <$> typeWith ctx' body) >>= toUni2
+                        return . Uni $ typeRule typeTpe bodyTpe
 
-isIn :: Term -> Term -> Context -> Bool
+isIn :: Term -> Term -> Context Term -> Bool
 isIn (Var x) (Var y) _                  = x == y
 isIn (Var x) u@Uni{} ctx                =   case lookup x ctx of
                                                 Just t -> isIn t u ctx 
@@ -49,9 +51,12 @@ isIn (Fa v1 t1 b1) (Fa v2 t2 b2) ctx    = isIn t1 t2 ctx && isIn (substitute b1 
 isIn _ _ _                              = False
 
                            
-toUni :: Term -> Except CalculusError Uni
-toUni (Uni u) = pure u
-toUni a       = throwE $ InvalidType a "must be uni"
+toUni1 :: Term -> Except CalculusError Uni
+toUni1 (Uni u) = pure u
+toUni1 a       = throwE $ InvalidType a "must be uni"                           
+toUni2 :: Term -> Except CalculusError Uni
+toUni2 (Uni u) = pure u
+toUni2 a       = throwE $ InvalidType a "must be uni2"
 
 typeRule :: Uni -> Uni -> Uni 
 typeRule Star u = u 
