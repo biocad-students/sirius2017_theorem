@@ -14,9 +14,13 @@ parserBoxInt :: Parser Integer
 parserBoxInt = read <$> (some digitChar <|> pure "1")
 
 parserVar :: Parser Term
-parserVar = do st <- skipMany spaceChar *> some letterChar
-               dg <- many digitChar <* skipMany spaceChar
-               return $ Var $ V $ pack (st ++ dg)
+parserVar = do var <- parserMetaVar
+               return $ Var var
+
+parserMetaVar :: Parser Var
+parserMetaVar = do st <- skipMany spaceChar *> some letterChar
+                   dg <- many digitChar <* skipMany spaceChar
+                   return $ V $ pack (st ++ dg)
 
 parserApp :: Parser Term
 parserApp = do term1 <- skipMany spaceChar *> between (char '(') (char ')') (skipMany spaceChar *> parserTerm <* skipMany spaceChar)
