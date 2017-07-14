@@ -27,7 +27,7 @@ parserTermInBr :: Parser Term
 parserTermInBr = between (char '(') (char ')') parserTerm
 
 parserTerm :: Parser Term
-parserTerm = try parserLam <|> try parserApp <|>  try parserTermInBr <|> try parserFa <|> try parserVar <|> try parserUni <* parserSpaces
+parserTerm = try parserLam <|> try parserApp <|>  try parserTermInBr <|> try parserFa <|> try parserVar <|> try parserUni
 
 parserStar :: Parser Term
 parserStar = do star <- skipMany spaceChar *> char '*' <* skipMany spaceChar
@@ -66,12 +66,15 @@ parserFa = do meta <- skipMany spaceChar *> between (char '(') (char ')') parser
 
 
 parseTermM :: String -> Maybe Term
-parseTermM = parseMaybe parserTerm . pack
+parseTermM = parseMaybe parserTermMeta . pack
+
+parserTermMeta :: Parser Term
+parserTermMeta = parserTerm <* parserSpaces
 
 parseTerm :: String -> Either String Term
-parseTerm s = case parse parserTerm "CoC parser" (pack s) of
+parseTerm s = case parse parserTermMeta "CoC parser" (pack s) of
   Right term ->Right term
   Left err -> Left $ parseErrorPretty err
 
 parseNprintTerm :: String -> IO ()
-parseNprintTerm = parseTest parserTerm . pack
+parseNprintTerm = parseTest parserTermMeta . pack

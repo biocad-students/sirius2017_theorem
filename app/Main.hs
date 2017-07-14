@@ -5,7 +5,7 @@ module Main where
 import Options.Generic
 import System.Console.Haskeline
 import Lawer
-
+import Control.Monad.Trans.Except          (runExcept)
 
 main :: IO ()
 main = runInputT defaultSettings loop
@@ -22,6 +22,8 @@ main = runInputT defaultSettings loop
 
 
 eval :: String -> String
-eval input = case parseTermM input of
-    Just term -> show term
-    Nothing -> show "!" 
+eval input = case parseTerm input of
+  Right term -> case runExcept (typeOf term) of
+    Right termType -> "Kind: " ++ show termType ++ "\nTerm: " ++ show term
+    Left err -> show err
+  Left err -> err
