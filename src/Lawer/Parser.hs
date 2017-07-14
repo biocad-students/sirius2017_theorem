@@ -68,7 +68,10 @@ parserFa = do meta <- (skipMany spaceChar) *> between (char '(') (char ')') pars
 parseTermM :: String -> Maybe Term
 parseTermM = parseMaybe parserTerm . pack
 
--- parseTerm :: String -> Either ??? Term
+parseTerm :: String -> Either String Term
+parseTerm s = case parse parserTerm "CoC parser" (pack s) of
+  Right term ->Right term
+  Left err -> Left $ parseErrorPretty err
 
-parseTerm :: String -> IO ()
-parseTerm = parseTest parserTerm . pack
+parseNprintTerm :: String -> IO ()
+parseNprintTerm = parseTest parserTerm . pack
