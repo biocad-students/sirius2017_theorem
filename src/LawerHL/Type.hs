@@ -23,6 +23,6 @@ data Algebraic = Algebraic
                , algParams :: [Name]
                , algConses :: Context [TypeApp]}
 
-data Type   = Ind Inductive 
-            | Alg Algebraic 
-            | Rec Record
+data Construction   = Ind Inductive 
+                    | Alg Algebraic 
+                    | Rec Record
