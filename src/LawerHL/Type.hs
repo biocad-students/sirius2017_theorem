@@ -7,10 +7,22 @@ import Lawer.Reduce
 data Record = Record 
                { recName :: Name
                , recParams :: Context Term
-               , recConss :: Context Term }
+               , recConses :: Context Term }
 
 
 data Inductive = Inductive 
                 { indName :: Name
                 , indParams :: Context Term
-                , indConss :: Context Term }
+                , indConses :: Context Term }
+
+data TypeApp = TVar Name 
+             | TApp TypeApp TypeApp
+
+data Algebraic = Algebraic 
+               { algName :: Name
+               , algParams :: [Name]
+               , algConses :: Context [TypeApp]}
+
+data Type   = Ind Inductive 
+            | Alg Algebraic 
+            | Rec Record

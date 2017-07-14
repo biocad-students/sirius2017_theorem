@@ -17,8 +17,8 @@ testsReduceAndTypes = do
         testC
         testD
         testE
-    describe "Nat" testNat
     describe "Bool" testBool
+    describe "Nat" testNat
 
 testNat :: Spec
 testNat = do
@@ -28,7 +28,7 @@ testNat = do
     it "1 + 1 = 2" $ reduce (plus `app` one `app` one) `shouldBe` reduce two 
     it "2 + 4 = 4 + 2" $ reduce (plus $$ two $$ four) `shouldBe` reduce (plus $$ four $$ two)
     it "2 + 4 =types= 4 + 2" $ typeOf (reduce (App (App plus two) four)) `shouldBe` typeOf (reduce (App (App plus four) two))
-
+    
 testBool :: Spec
 testBool = do 
     it "not false = true" $ reduce (App not false) `shouldBe` true
