@@ -22,12 +22,12 @@ testsReduceAndTypes = do
 
 testNat :: Spec
 testNat = do
-    it "2 + 4 = 4 + 2" $ reduce (plus $$ two $$ four) `shouldBe` reduce (plus $$ four $$ two)
-    it "2 + 4 =types= 4 + 2" $ typeOf (reduce (App (App plus two) four)) `shouldBe` typeOf (reduce (App (App plus four) two))
     it "0 + 0 = 0" $ reduce (plus `app` zero `app` zero) `shouldBe` reduce zero 
     it "1 + 0 = 1" $ reduce (plus `app` (succ $$ zero) `app` zero) `shouldBe` reduce one
     it "0 + 1 = 1" $ reduce (plus `app` zero `app` one) `shouldBe` reduce one
     it "1 + 1 = 2" $ reduce (plus `app` one `app` one) `shouldBe` reduce two 
+    it "2 + 4 = 4 + 2" $ reduce (plus $$ two $$ four) `shouldBe` reduce (plus $$ four $$ two)
+    it "2 + 4 =types= 4 + 2" $ typeOf (reduce (App (App plus two) four)) `shouldBe` typeOf (reduce (App (App plus four) two))
 
 testBool :: Spec
 testBool = do 
