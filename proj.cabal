@@ -17,7 +17,6 @@ library
   hs-source-dirs:      src
   exposed-modules:     Lawer
                      , LawerHL
-                     , LawerHL.ParserHL
   other-modules:       Lawer.Type
                      , Lawer.Reduce
                      , Lawer.Check
@@ -26,6 +25,8 @@ library
                      , Lawer.Pretty
                      , Lawer.Parser
                      , LawerHL.Type					 
+                     , LawerHL.Parser
+                     , LawerHL.Encoding
   build-depends:       base >= 4.7 && < 5
                      , text
                      , containers

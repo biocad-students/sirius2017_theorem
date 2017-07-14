@@ -1,13 +1,24 @@
 module Main where
 
 import Lawer
+import LawerHL
 import Test.Hspec
 import Std
 import Data.Text (pack)
 import Prelude hiding (not, succ)
 
 main :: IO ()
-main = hspec testsReduceAndTypes 
+main = hspec $ do
+    testsReduceAndTypes 
+    testHL
+
+testHL :: SpecWith ()
+testHL = do 
+    describe "Test Encoding" testEncoding
+
+testEncoding :: Spec
+testEncoding =  
+    it (show . head . getCtx . constructionToTerm . Alg $ Algebraic (pack "list") [pack "a"] (Context [(V $ pack "Nil", []), (V $ pack "Cons", [TVar $ pack "a", TVar $ pack "list"])])) $ bool `shouldBe` bool
 
 testsReduceAndTypes :: SpecWith ()
 testsReduceAndTypes = do

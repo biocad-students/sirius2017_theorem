@@ -1,11 +1,13 @@
 module Lawer.Context where
 
 import           Lawer.Type
+import           Lawer.Pretty
 import           Prelude            hiding (lookup)
-import qualified Prelude                    as P (lookup)
+import qualified Prelude              as P (lookup)
 
 newtype Context a = Context
                 { getCtx :: [(Var, a)] }
+                deriving(Show)
 
 lookup :: Var -> Context a -> Maybe a 
 lookup v (Context arr) = P.lookup v arr
