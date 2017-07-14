@@ -22,7 +22,8 @@ library
                      , Lawer.Error
                      , Lawer.Context
                      , Lawer.Pretty
-                     , Lawer.Parser					 
+                     , Lawer.Parser
+                     , LawerHL.Type					 
   build-depends:       base >= 4.7 && < 5
                      , text
                      , containers

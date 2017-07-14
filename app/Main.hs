@@ -1,4 +1,3 @@
-{-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main where
@@ -24,5 +23,5 @@ main = runInputT defaultSettings loop
 
 eval :: String -> String
 eval input = case parseTermM input of
-	Just term -> show term
-	Nothing -> show "!" 
+    Just term -> show term
+    Nothing -> show "!" 
