@@ -24,6 +24,6 @@ main = runInputT defaultSettings loop
 eval :: String -> String
 eval input = case parseTerm input of
   Right term -> case runExcept (typeOf term) of
-    Right term -> show term
+    Right termType -> "Kind: " ++ show termType ++ "\nTerm: " ++ show term
     Left err -> show err
   Left err -> err
