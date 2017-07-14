@@ -12,7 +12,7 @@ import Prelude                      hiding (lookup)
 typeOf :: Term -> Except CalculusError Term 
 typeOf t = reduce <$> typeWith empty t
 
-typeWith :: Context -> Term -> Except CalculusError Term
+typeWith :: Context Term -> Term -> Except CalculusError Term
 typeWith ctx term = 
     case term of
         Var{..} -> case lookup var ctx of
@@ -39,7 +39,7 @@ typeWith ctx term =
                         bodyTpe <- (reduce <$> typeWith ctx' body) >>= toUni2
                         return . Uni $ typeRule typeTpe bodyTpe
 
-isIn :: Term -> Term -> Context -> Bool
+isIn :: Term -> Term -> Context Term -> Bool
 isIn (Var x) (Var y) _                  = x == y
 isIn (Var x) u@Uni{} ctx                =   case lookup x ctx of
                                                 Just t -> isIn t u ctx 
