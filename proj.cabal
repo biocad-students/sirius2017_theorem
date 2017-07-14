@@ -16,6 +16,8 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Lawer
+                     , LawerHL
+                     , LawerHL.ParserHL
                      , Lawer.Type
                      , Lawer.Reduce
                      , Lawer.Check
