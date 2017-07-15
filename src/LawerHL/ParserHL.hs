@@ -12,6 +12,43 @@ import LawerHL.Pretty
 import LawerHL.Type
 import Data.Text
 
+parserName :: Parser Name
+parserName = do (V name) <- parserMetaVar
+                return name
+
+parserTAppInBr :: Parser TypeApp
+parserTAppInBr = do args <- skipMany spaceChar *> between (char '(') (char ')') (skipMany spaceChar *> parserTAppNorm <* skipMany spaceChar) <* skipMany spaceChar
+                    return $ makeTApp args
+                    where 
+                      makeTApp :: [TypeApp] -> TypeApp
+                      makeTApp (x:xs) = Prelude.foldl TApp x xs
+
+
+parserTAppNorm :: Parser [TypeApp]
+parserTAppNorm =  many parserTApp
+
+
+parserTAppVar :: Parser TypeApp
+parserTAppVar = do var <- parserName
+                   return $ TVar var
+
+parserTApp :: Parser TypeApp
+parserTApp = try parserTAppInBr <|> try parserTAppVar
+
+parserOneArg :: Parser (Var, [TypeApp])
+parserOneArg = do var <- parserName
+                  argss <- many parserTApp
+                  return  (V var, argss)
+
+parserManyArgs :: Parser [(Var, [TypeApp])]
+parserManyArgs =  parserOneArg `sepBy` char '|' <* parserSpaces
+
+parserAlgebraic :: Parser Algebraic
+parserAlgebraic = do name <- string "data" *> skipSome spaceChar *> parserName <* skipMany spaceChar
+                     tpeargs <- many parserName
+                     args <- char '=' *> skipMany spaceChar *> parserManyArgs <* skipMany spaceChar
+                     return $ Algebraic name tpeargs (Context args)
+
 parserVarTermPairMeta :: Parser (Var, Term)
 parserVarTermPairMeta = do var <- parserMetaVar
                            term <- (string ":") *> parserTerm
@@ -22,7 +59,7 @@ parserVarTermPair = do pair <- (skipMany spaceChar) *> between (char '(') (char 
                        return pair
 
 parseParams :: Parser [(Var, Term)]
-parseParams = do items <- some parserVarTermPair
+parseParams = do items <- many parserVarTermPair
                  return items
 
 parseInductive :: Parser Inductive
@@ -36,6 +73,9 @@ parseRecord = do (V name) <- skipMany spaceChar *> string "record" *> skipSome s
                  params <- parseParams
                  conss <- string "=" *> parseParams
                  return $ Record name (Context params) (Context conss)
+
+parseMyData :: String -> IO ()
+parseMyData = parseTest parserAlgebraic . pack
 
 parseMyInductive :: String -> IO ()
 parseMyInductive = parseTest parseInductive . pack

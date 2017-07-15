@@ -17,6 +17,7 @@ data Inductive = Inductive
 
 data TypeApp = TVar Name 
              | TApp TypeApp TypeApp
+     deriving(Show)
 
 data Algebraic = Algebraic 
                { algName :: Name

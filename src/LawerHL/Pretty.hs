@@ -5,7 +5,10 @@ import Lawer
 import LawerHL.Type
 
 instance Show Inductive where
-    show Inductive{..} = "inductive " ++ show indName ++ " " ++ show indParams ++ " = " ++ show indConss
-	
+    show Inductive{..} = "inductive " ++ show indName ++ " " ++ show indParams ++ " = " ++ show indConses
+
 instance Show Record where
-    show Record{..} = "record " ++ show recName ++ " " ++ show recParams ++ " = " ++ show recConss
+    show Record{..} = "record " ++ show recName ++ " " ++ show recParams ++ " = " ++ show recConses
+
+instance Show Algebraic where
+    show Algebraic{..} = "data " ++ show algName ++ " " ++ show algParams ++ " = " ++ show algConses
