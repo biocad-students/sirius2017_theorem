@@ -1,4 +1,4 @@
-module LawerHL.ParserHL where
+module LawerHL.Parser (parseMyPair, parserVarTermPair) where
 
 import Control.Applicative   (many, some, (<|>))
 import Text.Megaparsec
@@ -11,12 +11,12 @@ import Data.Text
 
 parserVarTermPairMeta :: Parser (Term, Term)
 parserVarTermPairMeta = do var <- parserVar
-                           term <- (string ":") *> parserTerm
+                           term <- string ":" *> parserTerm
                            return (var, term)
 
 parserVarTermPair :: Parser (Term, Term)
-parserVarTermPair = do pair <- (skipMany spaceChar) *> between (char '(') (char ')') parserVarTermPairMeta <* (skipMany spaceChar)
-                       return pair
+parserVarTermPair = skipMany spaceChar *> between (char '(') (char ')') parserVarTermPairMeta <* skipMany spaceChar
+
 					   
 parseMyPair :: String -> IO ()
 parseMyPair = parseTest parserVarTermPair . pack

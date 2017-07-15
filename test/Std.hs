@@ -1,8 +1,18 @@
 module Std where 
-
+    
 import Lawer
 import Data.Text
 import Prelude hiding (not, succ)
+
+infixr 9 `arrow`
+arrow = Fa noname 
+
+infixl 9 `app`
+app = App
+
+(-->) = arrow
+
+($$) = app
 
 a = V $ pack "a"
 b = V $ pack "b"
@@ -29,12 +39,3 @@ two = succ $$ one
 three = succ $$ two
 four = succ $$ three 
 
-(-->) = arrow
-
-infixr 9 `arrow`
-arrow = Fa noname 
-
-infixl 9 `app`
-app = App
-
-($$) = app
