@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Lawer.Parser (parseTermM, parseTerm, parserVar, parserTerm) where
+module Lawer.Parser (parseTermM, parseTerm, parserVar, parserTerm, parserMetaVar, parserSpaces) where
 
 import Control.Applicative   (many, some, (<|>))
 import Text.Megaparsec
