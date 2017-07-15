@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Lawer.Parser where
+module Lawer.Parser (parseTermM, parseTerm, parserVar, parserTerm) where
 
 import Control.Applicative   (many, some, (<|>))
 import Text.Megaparsec
@@ -77,8 +77,8 @@ parserTermMeta = parserTerm <* parserSpaces
 
 parseTerm :: String -> Either String Term
 parseTerm s = case parse parserTermMeta "CoC parser" (pack s) of
-  Right term ->Right term
   Left err -> Left $ parseErrorPretty err
+  Right t -> Right t
 
 parseNprintTerm :: String -> IO ()
 parseNprintTerm = parseTest parserTermMeta . pack

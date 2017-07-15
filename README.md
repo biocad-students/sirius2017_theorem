@@ -3,12 +3,13 @@
 Our TAP program uses Calculus of Constructions for proving theorems. CoC is a combination of lambda calculus that allows using variables and types equal in definision. 
 Every piece in CoC is named `Term`. It can be:
 * Variable, or `Var`
-* Application, or App (`A B` means that algorythm A applicates to data B)
-* Lambda-Abstraction, or Lam (`\x:a.M` means `M[x of type a]`)
-* For-All, or Fa (`Fa(x:a.M)` = for all x of type a do M)
+* Application, or `App` (`A B` means that algorythm A applicates to data B)
+* Lambda-Abstraction, or `Lam` (`\x:a.M` means `M[x of type a]`)
+* For-All, or `Fa` (`Fa(x:a.M)` = for all x of type a do M)
 * Star, Box (About star and box a bit later)
-All that can be easily listed like that: `P = V|P P|[x:a]M|(x:a)M|*|[] -- in order Var|App|Lam|Fa|Star|Box`
+All that can be easily listed like that: `P = V|P P|[x:a]M|(x:a)M|*|[i] -- in order Var|App|Lam|Fa|Star|Box i`
 Lambda-Abstraction and For-All are right-assotiative, application is left-assotiative.
+
 ## Syntax
 * Var can be parsed as one or more letters with or without numbers:
     `x --Var`
@@ -21,5 +22,6 @@ Lambda-Abstraction and For-All are right-assotiative, application is left-assoti
 * Box is parsed as `[] -- Box 1`
                    `[23] -- Box 23`
 ## How to use
-Actually, we do not know yet.
-Awkward
+`>stack build`
+`>stack exec repl`
+To quit input `:q` or `:quit`

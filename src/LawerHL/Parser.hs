@@ -1,4 +1,4 @@
-module LawerHL.ParserHL where
+module LawerHL.Parser where
 
 import Control.Applicative   (many, some, (<|>))
 import Text.Megaparsec
