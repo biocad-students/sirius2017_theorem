@@ -17,6 +17,6 @@ parserVarTermPairMeta = do var <- parserVar
 parserVarTermPair :: Parser (Term, Term)
 parserVarTermPair = skipMany spaceChar *> between (char '(') (char ')') parserVarTermPairMeta <* skipMany spaceChar
 
-					   
+                       
 parseMyPair :: String -> IO ()
 parseMyPair = parseTest parserVarTermPair . pack
