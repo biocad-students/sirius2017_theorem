@@ -3,7 +3,6 @@ module LawerHL.Type where
 import Lawer.Type 
 import Lawer.Context
 import Lawer.Reduce
-import Lawer.Pretty
 
 data Record = Record 
             { recName :: Name

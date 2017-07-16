@@ -1,4 +1,6 @@
 {-# LANGUAGE RecordWildCards #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 module LawerHL.Pretty where
 
 import Lawer
@@ -12,3 +14,8 @@ instance Show Record where
 
 instance Show Algebraic where
     show Algebraic{..} = "data " ++ show algName ++ " " ++ show algParams ++ " = " ++ show algConses
+
+instance Show Construction where
+    show a@Ind{} = show a
+    show a@Rec{} = show a
+    show a@Alg{} = show a
