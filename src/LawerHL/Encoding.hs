@@ -1,4 +1,5 @@
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE ExistentialQuantification #-}
 
 module LawerHL.Encoding (constructionToTerm) where
 
@@ -7,42 +8,101 @@ import Lawer.Type
 import Lawer.Context 
 import Lawer.Check 
 import Lawer.Reduce 
+import Lawer.Sugar 
 import Data.Text (pack)
 
 constructionToTerm :: Construction -> Context Term 
 constructionToTerm (Ind cons) = inductiveToTerm cons
 constructionToTerm (Rec cons) = recordToTerm cons
-constructionToTerm (Alg cons) = algebraicToTerm cons
+constructionToTerm (Alg cons) = encodeAlgebraic cons
 
 inductiveToTerm :: Inductive -> Context Term 
-inductiveToTerm Inductive{..} = Context $ (V indName, typeWithInd indParams indConses) : getCtx indParams
+inductiveToTerm = undefined
 
 recordToTerm :: Record -> Context Term 
 recordToTerm = undefined
 
-typeWithInd :: Context Term -> Context Term -> Term 
-typeWithInd ctx1 ctx2 = undefined
+encodeAlgebraic :: Algebraic -> Context Term
+encodeAlgebraic Algebraic{..} = insert (V algName) getAlgebraicType getConstructors 
+    where
+        algTypeApp = let nextTApp x = TApp x . TVar
+                     in  foldl nextTApp (TVar algName) algParams 
 
-algebraicToTerm :: Algebraic -> Context Term
-algebraicToTerm Algebraic{..} = insert (V algName) (typeWith algParams algConses) $ getAllConses algConses algParams
+        getAlgebraicType :: Term
+        getAlgebraicType =  foldParams $ 
+                            Fa uniVar (Uni Star) $ 
+                            foldConstructorsTypes (getCtx algConstructors) $
+                            Var uniVar
 
-typeWith :: [Name] -> Context [TypeApp] -> Term
-typeWith params conses = foldParams params $ Fa (V $ pack "at1") (Uni Star) $ foldConses conses (Var . V $ pack "at1")
+        foldParams :: Term -> Term
+        foldParams term = let nextLam x = Lam (V x) (Uni Star)
+                          in  foldr nextLam term algParams 
 
-foldParams :: [Name] -> Term -> Term
-foldParams arr t = foldr ((\x -> Lam x (Uni Star)) . V) t arr
+        foldConstructorsTypes :: [(Var, [TypeApp])] -> Term -> Term
+        foldConstructorsTypes []         t    = t
+        foldConstructorsTypes ((_,x):xs) t    = fromTypeApp x True --> 
+                                                foldConstructorsTypes xs t
 
-foldConses :: Context [TypeApp] -> Term -> Term
-foldConses (Context []) t = t
-foldConses (Context ((_,x):xs)) t = fromTypeApp x `arrow` foldConses (Context xs) t
+        fromTypeApp :: [TypeApp]  -> Bool -> Term
+        fromTypeApp [] _                                                  = Var uniVar
+        
+        fromTypeApp [TVar x] flag        | TVar x == algTypeApp && flag   = Var uniVar --> Var uniVar
+                                         | flag                           = Var (V x) --> Var uniVar
+                                         | otherwise                      = Var (V x) 
 
-fromTypeApp :: [TypeApp] -> Term
-fromTypeApp [] = Var . V $ pack "at1"
-fromTypeApp (TVar x:xs) = (Var $ V x) `arrow` fromTypeApp xs
-fromTypeApp (TApp x y:xs) = (fromTypeApp [x] `arrow` fromTypeApp [y]) `arrow` fromTypeApp xs
+        fromTypeApp (TVar x : xs) flag   | TVar x == algTypeApp && flag   = Var uniVar --> fromTypeApp xs flag
+                                         | otherwise                      = Var (V x)  --> fromTypeApp xs flag 
 
-getAllConses :: Context [TypeApp] -> [Name] -> Context Term
-getAllConses = undefined
+        fromTypeApp [TApp x y]    flag   | TApp x y == algTypeApp && flag = Var uniVar --> Var uniVar
+                                         | otherwise                      = fromTypeApp [x] flag $$ fromTypeApp [y] flag
 
-infixr 9 `arrow`
-arrow = Fa noname 
+        fromTypeApp (TApp x y : xs) flag | TApp x y == algTypeApp && flag = Var uniVar --> fromTypeApp xs flag
+                                         | otherwise                      = (fromTypeApp [x] flag $$ fromTypeApp [y] flag) --> 
+                                                                            fromTypeApp xs flag
+
+        getConstructors :: Context Term
+        getConstructors = Context . map getConstructor $ getCtx algConstructors
+
+        getConstructor :: (Var, [TypeApp]) -> (Var, Term)
+        getConstructor (name, args) =   let 
+                                            countArgs = length args
+                                            freshVars = fresh $ map V algParams 
+
+                                            foldArgs :: Term -> Term
+                                            foldArgs t = let nextLam (x, y) = Lam x (fromTypeApp [y] True)
+                                                         in  foldr nextLam t $ zip freshVars args
+
+                                            getResultTerm :: Term 
+                                            getResultTerm = let nextApp a b = a $$ getTerm b
+                                                            in  foldl nextApp (Var name) $ zip (take countArgs freshVars) args
+                                                            
+
+                                            getTerm :: (Var, TypeApp) -> Term 
+                                            getTerm (n, ta) | ta == algTypeApp = foldAppConstructors
+                                                            | otherwise        = Var n
+                                                where
+                                                    foldAppConstructors :: Term 
+                                                    foldAppConstructors = let nextApp term (v, _) = term $$ Var v
+                                                                              ctx                 = (n, []) : (uniVar, []) : getCtx algConstructors
+                                                                          in  foldl nextApp (Var . fst . head $ ctx) $ tail ctx
+
+                                            foldConstructors :: Term -> Term
+                                            foldConstructors t = let nextLam (x, y) = Lam x $ fromTypeApp y True
+                                                                 in  foldr nextLam t $ getCtx algConstructors
+        
+                                            in  (,) name $ 
+                                            foldParams $            -- -->
+                                            foldArgs $              -- -->
+                                            Lam uniVar (Uni Star) $ -- --> 
+                                            foldConstructors        -- -->
+                                            getResultTerm
+
+
+fresh :: [Var] -> [Var]
+fresh conflicts = dropWhile (`elem` conflicts) nameGen 
+    where 
+        nameGen = V . pack <$> [a : freshName b | b <- [0..] :: [Int], a <- ['a'..'z']]
+        freshName b = if b == 0 then "" else show b
+
+uniVar :: Var
+uniVar = V $ pack "r"

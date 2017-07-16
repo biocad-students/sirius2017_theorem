@@ -5,7 +5,8 @@ import LawerHL
 import Test.Hspec
 import Std
 import Data.Text (pack)
-import Prelude hiding (not, succ)
+import Prelude hiding (not, succ, and, or)
+import Control.Monad.Trans.Except (runExcept)
 
 main :: IO ()
 main = hspec $ do
@@ -14,11 +15,17 @@ main = hspec $ do
 
 testHL :: SpecWith ()
 testHL = do 
-    describe "Test Encoding" testEncoding
+    describe "Test Encoding" testAlgebraicEncoding
 
-testEncoding :: Spec
-testEncoding =  
-    it (show . head . getCtx . constructionToTerm . Alg $ Algebraic (pack "list") [pack "a"] (Context [(V $ pack "Nil", []), (V $ pack "Cons", [TVar $ pack "a", TVar $ pack "list"])])) $ bool `shouldBe` bool
+testAlgebraicEncoding :: Spec
+testAlgebraicEncoding = do
+    it (show . constructionToTerm $
+        algBool) $ bool `shouldBe` bool
+    it (show . constructionToTerm $ algList) $ 
+        1 `shouldBe` 1
+    it (show . constructionToTerm $ algNat) $ true `shouldBe` true
+    it (show . constructionToTerm $ algPair) $ true `shouldBe` true
+    
 
 testsReduceAndTypes :: SpecWith ()
 testsReduceAndTypes = do
@@ -37,13 +44,29 @@ testNat = do
     it "1 + 0 = 1" $ reduce (plus `app` (succ $$ zero) `app` zero) `shouldBe` reduce one
     it "0 + 1 = 1" $ reduce (plus `app` zero `app` one) `shouldBe` reduce one
     it "1 + 1 = 2" $ reduce (plus `app` one `app` one) `shouldBe` reduce two 
-    it "2 + 4 = 4 + 2" $ reduce (plus $$ two $$ four) `shouldBe` reduce (plus $$ four $$ two)
-    it "2 + 4 =types= 4 + 2" $ typeOf (reduce (App (App plus two) four)) `shouldBe` typeOf (reduce (App (App plus four) two))
-    
+
+    -- it "2 + 4 = 4 + 2" $ reduce (eq $$ (plus $$ two $$ four) $$ (plus $$ four $$ two)) `shouldBe` reduce (refl $$ (plus $$ four $$ two))
+    -- it (show $ reduce (succ $$ (plus $$ one $$ two))) $ typeOf (reduce (App (App plus two) four)) `shouldBe` typeOf (reduce (App (App plus four) two))
+    -- it (show . typeOf . reduce $ comm) $ reduce comm `shouldBe` reduce comm
+    -- it (show . typeOf $ reduce (commType $$ reduce (plus $$ (succ $$ one) $$ two) $$ reduce (succ $$ (plus $$ one $$ two)))) $ bool `shouldBe` bool
+
 testBool :: Spec
 testBool = do 
-    it "not false = true" $ reduce (App not false) `shouldBe` true
-    it "not false =types= true" $ typeOf (reduce (App not false)) `shouldBe` typeOf true
+    it "not false = true"           $ reduce (not $$ false)                 `shouldBe` true
+    it "true and false = false"     $ reduce (and $$ true $$ false)         `shouldBe` false
+    it "true or false = true"       $ reduce (or $$ true $$ false)          `shouldBe` true
+    it "not false =types= true"     $ typeOf (reduce (not $$ false))        `shouldBe` typeOf true
+    it "true and false =t= false"   $ typeOf(reduce (and $$ true $$ false)) `shouldBe` typeOf false
+    it "true or false =t= true\n"   $ typeOf(reduce (or $$ true $$ false))  `shouldBe` typeOf true
+
+    -- it ("bool = " ++ show bool) $ bool `shouldBe` bool
+    -- it ("true = " ++ show true) $ bool `shouldBe` bool
+    -- it ("false = " ++ show false) $ bool `shouldBe` bool
+    -- it ("not = " ++ show not) $ bool `shouldBe` bool
+    -- it ("and = " ++ show and) $ bool `shouldBe` bool
+    -- it ("or = " ++ show or ++ "\n") $ bool `shouldBe` bool
+
+    -- it "true == true" $ reduce (eq $$ true $$ true) `shouldBe` reduce (refl $$ true)
 
 testA :: Spec
 testA = it "(\\x y -> x) x = \\y -> x" $ 
