@@ -43,11 +43,19 @@ parserOneArg = do var <- parserName
 parserManyArgs :: Parser [(Var, [TypeApp])]
 parserManyArgs =  parserOneArg `sepBy` char '|' <* parserSpaces
 
-parserAlgebraic :: Parser Algebraic
-parserAlgebraic = do name <- string "data" *> skipSome spaceChar *> parserName <* skipMany spaceChar
+parserAlg :: Parser Algebraic
+parserAlg = do name <- skipMany spaceChar *> string "data" *> skipSome spaceChar *> parserName <* skipMany spaceChar
+               tpeargs <- many parserName
+               args <- char '=' *> skipMany spaceChar *> parserManyArgs <* skipMany spaceChar
+               return $ Algebraic name tpeargs (Context args)
+
+parserAlgSimple :: Parser Algebraic
+parserAlgSimple = do name <- skipMany spaceChar *> string "data" *> skipSome spaceChar *> parserName <* skipMany spaceChar
                      tpeargs <- many parserName
-                     args <- char '=' *> skipMany spaceChar *> parserManyArgs <* skipMany spaceChar
-                     return $ Algebraic name tpeargs (Context args)
+                     return $ Algebraic name tpeargs (Context [])
+
+parserAlgebraic :: Parser Algebraic
+parserAlgebraic = (try parserAlg <|> try parserAlgSimple) <* parserSpaces
 
 parserVarTermPairMeta :: Parser (Var, Term)
 parserVarTermPairMeta = do var <- parserMetaVar
@@ -58,30 +66,33 @@ parserVarTermPair :: Parser (Var, Term)
 parserVarTermPair = do pair <- (skipMany spaceChar) *> between (char '(') (char ')') parserVarTermPairMeta <* (skipMany spaceChar)
                        return pair
 
-parseParams :: Parser [(Var, Term)]
-parseParams = do items <- many parserVarTermPair
-                 return items
+parserParams :: Parser [(Var, Term)]
+parserParams = do items <- many parserVarTermPair
+                  return items
 
-parseInductive :: Parser Inductive
-parseInductive = do (V name) <- skipMany spaceChar *> string "inductive" *> skipSome spaceChar *> parserMetaVar <* skipMany spaceChar
-                    params <- parseParams
-                    conss <- string "=" *> parseParams
-                    return $ Inductive name (Context params) (Context conss)
+parserInductive :: Parser Inductive
+parserInductive = do (V name) <- skipMany spaceChar *> string "inductive" *> skipSome spaceChar *> parserMetaVar <* skipMany spaceChar
+                     params <- parserParams
+                     conss <- string "=" *> parserParams
+                     return $ Inductive name (Context params) (Context conss)
 
-parseRecord :: Parser Record
-parseRecord = do (V name) <- skipMany spaceChar *> string "record" *> skipSome spaceChar *> parserMetaVar <* skipMany spaceChar
-                 params <- parseParams
-                 conss <- string "=" *> parseParams
-                 return $ Record name (Context params) (Context conss)
+parserRecord :: Parser Record
+parserRecord = do (V name) <- skipMany spaceChar *> string "record" *> skipSome spaceChar *> parserMetaVar <* skipMany spaceChar
+                  params <- parserParams
+                  conss <- string "=" *> parserParams
+                  return $ Record name (Context params) (Context conss)
+
+parserConst :: Parser Construction
+parserConst = try (Alg <$> parserAlgebraic) <|> try (Ind <$> parserInductive) <|> try (Rec <$> parserRecord) <* parserSpaces
+
+parseConstruction :: String -> IO ()
+parseConstruction = parseTest parserConst . pack
 
 parseMyData :: String -> IO ()
 parseMyData = parseTest parserAlgebraic . pack
 
 parseMyInductive :: String -> IO ()
-parseMyInductive = parseTest parseInductive . pack
+parseMyInductive = parseTest parserInductive . pack
 
 parseMyRecord :: String -> IO ()
-parseMyRecord = parseTest parseRecord . pack
-
-parseMyPair :: String -> IO ()
-parseMyPair = parseTest parserVarTermPair . pack
+parseMyRecord = parseTest parserRecord . pack
