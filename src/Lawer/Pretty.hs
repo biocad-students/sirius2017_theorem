@@ -3,8 +3,8 @@
 
 module Lawer.Pretty where 
 
-import Lawer.Context
 import Lawer.Type
+import Lawer.Context
 import Data.Text (unpack)
 
 instance Show Var where
@@ -14,6 +14,9 @@ instance Show Uni where
     show Star = "*"
     show (Box 1) = "[]"
     show (Box i) = "[" ++ show i ++ "]" 
+
+instance (Show a) => Show (Context a) where
+    show (Context a) = show a
 
 instance Show Term where
     show Uni{..} = show uni
