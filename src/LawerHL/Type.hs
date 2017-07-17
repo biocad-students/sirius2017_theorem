@@ -9,14 +9,14 @@ data Record = Record
             { recName :: Name
             , recParams :: Context Term
             , recConstructors :: Context Term }
-            deriving(Show, Eq)
+            deriving(Eq)
 
 
 data Inductive  = Inductive 
                 { indName :: Name
                 , indParams :: Context Term
                 , indConstructors :: Context Term }
-                deriving(Show, Eq)
+                deriving(Eq)
 
 data TypeApp = TVar Name 
              | TApp TypeApp TypeApp
@@ -26,7 +26,7 @@ data Algebraic = Algebraic
                { algName :: Name
                , algParams :: [Name]
                , algConstructors :: Context [TypeApp]}
-               deriving(Show, Eq)
+               deriving(Eq)
 
 data Construction   = Ind Inductive 
                     | Alg Algebraic 

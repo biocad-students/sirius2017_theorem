@@ -7,13 +7,13 @@ import Lawer
 import LawerHL.Type
 
 instance Show Inductive where
-    show Inductive{..} = "inductive " ++ show indName ++ " " ++ show indParams ++ " = " ++ show indConses
+    show Inductive{..} = "inductive \n" ++ show indName ++ " " ++ show indParams ++ "\n" ++ show indConstructors
 
 instance Show Record where
-    show Record{..} = "record " ++ show recName ++ " " ++ show recParams ++ " = " ++ show recConses
+    show Record{..} = "record " ++ show recName ++ " " ++ show recParams ++ " = " ++ show recConstructors
 
 instance Show Algebraic where
-    show Algebraic{..} = "data " ++ show algName ++ " " ++ show algParams ++ " = " ++ show algConses
+    show Algebraic{..} = "data " ++ show algName ++ " " ++ show algParams ++ " = " ++ show algConstructors
 
 instance Show Construction where
     show a@Ind{} = show a
