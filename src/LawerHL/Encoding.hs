@@ -17,10 +17,54 @@ constructionToTerm (Rec cons) = recordToTerm cons
 constructionToTerm (Alg cons) = encodeAlgebraic cons
 
 inductiveToTerm :: Inductive -> Context Term 
-inductiveToTerm = undefined
+inductiveToTerm Inductive{..} = insert (V indName) getInductiveType getConstructors
+    where 
+        getInductiveType :: Term
+        getInductiveType = foldParams $
+                           Fa uniVar foldParamsTypes $
+                           foldConstructorsTypes Fa foldAppType
+        
+        foldParams :: Term -> Term 
+        foldParams term = let nextLam (v, t) = Lam v t
+                          in  foldr nextLam term $ getCtx indParams
+
+        foldParamsTypes :: Term 
+        foldParamsTypes = foldr1 (-->) $ map snd $ getCtx indParams ++ [(noname, Uni Star)]
+
+        foldConstructorsTypes :: (Var -> Term -> Term -> Term) -> Term -> Term
+        foldConstructorsTypes cons term = let nextCons (v, t) = cons v (substitute t (V indName) (Var uniVar))
+                                          in  foldr nextCons term $ getCtx indConstructors
+
+        foldAppType :: Term 
+        foldAppType = let ctx = (V indName, Var noname) : getCtx indParams
+                      in  foldl1 ($$) $ map (Var . fst) ctx
+
+        getConstructors :: Context Term 
+        getConstructors = Context . map getConstructor $ getCtx indConstructors
+
+        getConstructor :: (Var, Term) -> (Var, Term)
+        getConstructor (name, type') = (,) name $
+                                       fromTypeToArgs type' $ 
+                                       Lam uniVar foldParamsTypes $
+                                       foldConstructorsTypes Lam 
+                                       getResultTerm
+            where
+                fromTypeToArgs :: Term -> Term -> Term
+                fromTypeToArgs Fa{..} term = Lam var tpe $ fromTypeToArgs body term
+                fromTypeToArgs t      term = term 
+                
+                getResultTerm :: Term 
+                getResultTerm = fromTypeToApp $ Fa name (Var noname) type'
+
+                fromTypeToApp :: Term -> Term
+                fromTypeToApp Fa{..} = 
+                    case body of
+                        Fa{} -> Var var $$ fromTypeToApp body 
+                        _    -> Var var 
+        
 
 recordToTerm :: Record -> Context Term 
-recordToTerm = undefined
+recordToTerm Record{..} = inductiveToTerm (Inductive recName recParams recConstructors)
 
 encodeAlgebraic :: Algebraic -> Context Term
 encodeAlgebraic Algebraic{..} = insert (V algName) getAlgebraicType getConstructors 
@@ -82,15 +126,15 @@ encodeAlgebraic Algebraic{..} = insert (V algName) getAlgebraicType getConstruct
                                                             | otherwise        = Var n
                                                 where
                                                     foldAppConstructors :: Term 
-                                                    foldAppConstructors = let nextApp term (v, _) = term $$ Var v
-                                                                              ctx                 = (n, []) : (uniVar, []) : getCtx algConstructors
-                                                                          in  foldl nextApp (Var . fst . head $ ctx) $ tail ctx
+                                                    foldAppConstructors = let ctx = (n, []) : (uniVar, []) : getCtx algConstructors
+                                                                          in  foldl1 ($$) $ map (Var . fst) ctx
 
                                             foldConstructors :: Term -> Term
                                             foldConstructors t = let nextLam (x, y) = Lam x $ fromTypeApp y True
                                                                  in  foldr nextLam t $ getCtx algConstructors
         
-                                            in  (,) name $ 
+                                        in  
+                                            (,) name $ 
                                             foldParams $            -- -->
                                             foldArgs $              -- -->
                                             Lam uniVar (Uni Star) $ -- --> 

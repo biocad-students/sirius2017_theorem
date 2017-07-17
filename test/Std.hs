@@ -35,17 +35,46 @@ four = succ $$ three
 commType = Lam x nat $ Lam y nat $ eq $$ (plus $$ Var y $$ Var x) $$ (plus $$ Var x $$ Var y)
 comm     = refl
 
+-- eq =    Lam z st $ 
+--         Lam a (Var z) $ 
+--         Lam b (Var z) $ 
+--         Fa s (Var z --> Var z --> st) $ 
+--         Fa (V $ pack "refl") (Fa x (Var z) $ 
+--                 Var s $$ 
+--                 Var x $$ 
+--                 Var x) $ 
+--         Var s $$ Var a $$ Var b
+
+-- refl =  Lam z st $ 
+--         Lam y (Var z) $ 
+--         Lam s (Var z --> Var z --> st) $ 
+--         Lam (V $ pack "refl") 
+--                 (Fa n (Var z) (Var s $$ Var n $$ Var n)) $ 
+--         (Var . V $ pack "refl") $$ Var y
+
 eq =    Lam a st $ 
         Lam b st $ 
-        Fa n (st --> st --> st) $
-        Var n $$ Var a $$ Var b
-refl =  Fa x st $ eq $$ Var x $$ Var x
+        Fa s (st --> st --> st) $ 
+        Fa (V $ pack "refl") (Fa x st $ 
+                Var s $$ 
+                Var x $$ 
+                Var x) $ 
+        Var s $$ Var a $$ Var b
     
+refl =  Lam y st $ 
+        Lam s (st --> st --> st) $ 
+        Lam (V $ pack "refl") 
+                (Fa n st (Var s $$ Var n $$ Var n)) $ 
+        (Var . V $ pack "refl") $$ Var y
 
 algBool = Alg $ Algebraic (pack "Bool") [] $ Context [(V $ pack "True", []), (V $ pack "False", [])]
 
 algNat = Alg $ Algebraic (pack "Nat") [] $ Context [(V $ pack "Zero", []), (V $ pack "Succ", [TVar $ pack "Nat"])]
 
-algList = Alg $ Algebraic (pack "List") [pack "a"] $ Context [(V $ pack "Nil", []), (V $ pack "Cons", [TVar $ pack "a", TApp (TVar $ pack "list") (TVar $ pack "a")])]
+algList = Alg $ Algebraic (pack "List") [pack "a"] $ Context [(V $ pack "Nil", []), (V $ pack "Cons", [TVar $ pack "a", TApp (TVar $ pack "List") (TVar $ pack "a")])]
 
 algPair = Alg $ Algebraic (pack "Pair") [pack "a", pack "b"] $ Context [(V $ pack "P", [TVar $ pack "a", TVar $ pack "b"])]
+
+indEq = Ind $ Inductive (pack "Eq") (Context [(V $ pack "A", st), (V $ pack "a", Var . V $ pack "A"), (V $ pack "b", st)]) $ Context [(V $ pack "Refl", Fa x (Var . V $ pack "A") $ (Var . V $ pack "Eq") $$ Var x $$ Var x)]
+
+indList = Ind $ Inductive (pack "List") (Context [(V $ pack "a", st)]) $ Context [(V $ pack "Nil", (Var . V $ pack "List") $$ (Var . V $ pack "a")), (V $ pack "Cons", aa --> ((Var . V $ pack "List") $$ aa) --> ((Var . V $ pack "List") $$ aa))]

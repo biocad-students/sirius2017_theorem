@@ -11,21 +11,24 @@ import Control.Monad.Trans.Except (runExcept)
 main :: IO ()
 main = hspec $ do
     testsReduceAndTypes 
-    testHL
+    testEncoding
 
-testHL :: SpecWith ()
-testHL = do 
-    describe "Test Encoding" testAlgebraicEncoding
+testEncoding :: SpecWith ()
+testEncoding = describe "Test Encoding" $ do
+    testAlgebraicEncoding
+    testInductiveEncoding 
 
 testAlgebraicEncoding :: Spec
 testAlgebraicEncoding = do
-    it (show . constructionToTerm $
-        algBool) $ bool `shouldBe` bool
-    it (show . constructionToTerm $ algList) $ 
-        1 `shouldBe` 1
+    it (show . constructionToTerm $ algBool) $ bool `shouldBe` bool
+    it (show . constructionToTerm $ algList) $ 1 `shouldBe` 1
     it (show . constructionToTerm $ algNat) $ true `shouldBe` true
     it (show . constructionToTerm $ algPair) $ true `shouldBe` true
     
+testInductiveEncoding :: Spec 
+testInductiveEncoding = do 
+    it (show . constructionToTerm $ indEq) $ bool `shouldBe` bool
+    it (show . constructionToTerm $ indList) $ bool `shouldBe` bool
 
 testsReduceAndTypes :: SpecWith ()
 testsReduceAndTypes = do
@@ -43,7 +46,10 @@ testNat = do
     it "0 + 0 = 0" $ reduce (plus `app` zero `app` zero) `shouldBe` reduce zero 
     it "1 + 0 = 1" $ reduce (plus `app` (succ $$ zero) `app` zero) `shouldBe` reduce one
     it "0 + 1 = 1" $ reduce (plus `app` zero `app` one) `shouldBe` reduce one
-    it "1 + 1 = 2" $ reduce (plus `app` one `app` one) `shouldBe` reduce two 
+    it "1 + 1 = 2\n" $ reduce (plus `app` one `app` one) `shouldBe` reduce two 
+    it (show . typeOf . reduce $ nat) $ reduce comm `shouldBe` reduce comm
+    
+    it "1 + n == n + 1" $ runExcept (typeOf (Fa n nat $ refl $$ Var n)) `shouldBe` Right (reduce $ Fa n nat $ eq $$ (plus $$ zero $$ Var n) $$ Var n) 
 
     -- it "2 + 4 = 4 + 2" $ reduce (eq $$ (plus $$ two $$ four) $$ (plus $$ four $$ two)) `shouldBe` reduce (refl $$ (plus $$ four $$ two))
     -- it (show $ reduce (succ $$ (plus $$ one $$ two))) $ typeOf (reduce (App (App plus two) four)) `shouldBe` typeOf (reduce (App (App plus four) two))
@@ -59,6 +65,7 @@ testBool = do
     it "true and false =t= false"   $ typeOf(reduce (and $$ true $$ false)) `shouldBe` typeOf false
     it "true or false =t= true\n"   $ typeOf(reduce (or $$ true $$ false))  `shouldBe` typeOf true
 
+    it "bool = bool"                $ runExcept (typeOf (refl $$ bool)) `shouldBe` Right (reduce $ eq $$ bool $$ bool)
     -- it ("bool = " ++ show bool) $ bool `shouldBe` bool
     -- it ("true = " ++ show true) $ bool `shouldBe` bool
     -- it ("false = " ++ show false) $ bool `shouldBe` bool
