@@ -6,6 +6,7 @@ import qualified Prelude              as P (lookup)
 
 newtype Context a = Context
                 { getCtx :: [(Var, a)] }
+                deriving (Eq)
 
 lookup :: Var -> Context a -> Maybe a 
 lookup v (Context arr) = P.lookup v arr

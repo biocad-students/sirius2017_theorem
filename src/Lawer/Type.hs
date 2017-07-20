@@ -4,7 +4,7 @@ import Data.Text (Text, pack)
 
 type Name = Text
 
-newtype Var = V Name
+newtype Var = V {getName :: Name}
     deriving (Eq, Read, Ord)
 
 data Uni    = Star

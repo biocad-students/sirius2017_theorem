@@ -1,0 +1,19 @@
+
+
+data Bool = True | False
+
+
+data Maybe a = Just a | Nothing
+
+
+data List a =  Nil | Cons a (List a)
+
+
+data Either a b = Left a | Right b
+
+
+data Nat = Z | S Nat
+
+
+not :: (b : Bool) -> b -> b
+not = [b : Bool] -> b False True

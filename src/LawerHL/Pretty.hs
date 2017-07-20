@@ -14,4 +14,3 @@ import LawerHL.Type
 --
 --instance Show Algebraic where
 --    show Algebraic{..} = "data " ++ show algName ++ " " ++ show algParams ++ " = " ++ show algConses
-
