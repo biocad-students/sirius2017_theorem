@@ -1,14 +1,14 @@
 module Lawer(
     axiom, noname, Name, Var(..), Uni(..), Term(..),
     typeOf, 
-    reduce, substitute,
+    reduce, substitute, free,
     Context(..), lookup, empty, insert,
     CalculusError(..), parseTermM, parseTerm, parserMetaVar, parserSpaces,
     app, arrow, (-->), ($$)
 ) where
 
 import Lawer.Type (axiom, noname, Name, Var(..), Uni(..), Term(..))
-import Lawer.Reduce (reduce, substitute)
+import Lawer.Reduce (reduce, substitute, free)
 import Lawer.Pretty ()
 import Lawer.Error (CalculusError(..))
 import Lawer.Check (typeOf)

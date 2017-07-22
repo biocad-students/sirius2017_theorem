@@ -23,6 +23,9 @@ instance Show Term where
             v1@Var{..} -> case dat of
                 v2@Var{} -> show v1 ++ " " ++ show v2
                 _        -> show v1 ++ " (" ++ show dat ++ ")"
+            (App _ _) -> case dat of
+                v2@Var{} -> show alg ++ " " ++ show v2
+                _        -> show alg ++ " (" ++ show dat ++ ")"
             _          -> case dat of
                 v2@Var{} -> "(" ++ show alg ++ ") " ++ show v2
                 _        -> "(" ++ show alg ++ ") (" ++ show dat ++ ")"

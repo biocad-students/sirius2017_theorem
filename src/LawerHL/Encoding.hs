@@ -1,5 +1,6 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE ExistentialQuantification #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module LawerHL.Encoding (constructionToTerm) where
 
@@ -18,50 +19,96 @@ constructionToTerm (Alg cons) = encodeAlgebraic cons
 
 inductiveToTerm :: Inductive -> Context Term 
 inductiveToTerm Inductive{..} = insert (V indName) getInductiveType getConstructors
-    where 
-        getInductiveType :: Term
-        getInductiveType = foldParams $
-                           Fa uniVar foldParamsTypes $
-                           foldConstructorsTypes Fa foldAppType
+    where
+        typeParams = map fst $ getCtx indParams
         
-        foldParams :: Term -> Term 
-        foldParams term = let nextLam (v, t) = Lam v t
-                          in  foldr nextLam term $ getCtx indParams
+        toBind :: Term -> Context Term
+        toBind term =  let freeVars = free term
 
-        foldParamsTypes :: Term 
-        foldParamsTypes = foldr1 (-->) $ map snd $ getCtx indParams ++ [(noname, Uni Star)]
+                           removeFree :: Context Term 
+                           removeFree = Context $ filter (\a -> fst a `elem` freeVars) $ getCtx indParams                         
 
-        foldConstructorsTypes :: (Var -> Term -> Term -> Term) -> Term -> Term
-        foldConstructorsTypes cons term = let nextCons (v, t) = cons v (substitute t (V indName) (Var uniVar))
-                                          in  foldr nextCons term $ getCtx indConstructors
+                       in  removeFree 
 
-        foldAppType :: Term 
-        foldAppType = let ctx = (V indName, Var noname) : getCtx indParams
-                      in  foldl1 ($$) $ map (Var . fst) ctx
+        subsName :: Term -> Term 
+        subsName t = substitute t (V indName) $ Var uniVar
 
+        getInductiveType :: Term 
+        getInductiveType =  foldParams indParams $
+                            Fa uniVar foldParamsTypes $
+                            subsName $
+                            foldConstructorsTypes 
+                            foldResultType
+        
+        foldParams ::  Context Term -> Term -> Term
+        foldParams ctx term = foldr (uncurry Lam) term $ getCtx ctx
+
+        foldParamsTypes :: Term
+        foldParamsTypes = foldr ((-->) . snd) (Uni Star) $ getCtx indParams
+
+        foldConstructorsTypes :: Term -> Term
+        foldConstructorsTypes term = foldr ((-->) . snd) term $ getCtx indConstructors
+        
+        foldResultType :: Term 
+        foldResultType = let nextApp a b = ($$) a $ Var $ fst b
+                         in  foldl nextApp (Var uniVar) $ getCtx indParams
+        
         getConstructors :: Context Term 
-        getConstructors = Context . map getConstructor $ getCtx indConstructors
+        getConstructors = Context . map (uncurry getConstructor) $ getCtx indConstructors
 
-        getConstructor :: (Var, Term) -> (Var, Term)
-        getConstructor (name, type') = (,) name $
-                                       fromTypeToArgs type' $ 
-                                       Lam uniVar foldParamsTypes $
-                                       foldConstructorsTypes Lam 
-                                       getResultTerm
+        getConstructor :: Var -> Term -> (Var, Term)
+        getConstructor name type' = (,) name $
+                                    foldParams (toBind type') $
+                                    foldArgs type' typeParams $
+                                    Lam uniVar foldParamsTypes $
+                                    subsName $
+                                    foldConstructors 
+                                    foldResultTerm
             where
-                fromTypeToArgs :: Term -> Term -> Term
-                fromTypeToArgs Fa{..} term = Lam var tpe $ fromTypeToArgs body term
-                fromTypeToArgs t      term = term 
+                foldArgs :: Term -> [Var] -> Term -> Term 
+                foldArgs type' arr term = case type' of
+                    Fa (V "_") tpe body ->  let fName = head $ fresh arr 
+                                                arr'  = fName : arr 
+                                            in  Lam fName tpe $
+                                                foldArgs body arr' term
+                    Fa name    tpe body ->  Lam name tpe $
+                                            foldArgs body arr term 
+                    _                   ->  term
                 
-                getResultTerm :: Term 
-                getResultTerm = fromTypeToApp $ Fa name (Var noname) type'
+                foldConstructors :: Term -> Term 
+                foldConstructors term = foldr (uncurry Lam) term $ getCtx indConstructors
 
-                fromTypeToApp :: Term -> Term
-                fromTypeToApp Fa{..} = 
-                    case body of
-                        Fa{} -> Var var $$ fromTypeToApp body 
-                        _    -> Var var 
-        
+                -- foldResultTerm :: Term 
+                -- foldResultTerm = foldl ($$) (Var name) $ getArgs type' typeParams
+
+                getArgs :: Term -> [Var] -> [(Var, Term)] 
+                getArgs type' arr = case type' of
+                    Fa (V "_") tpe body ->  let fName = head $ fresh arr 
+                                                arr'  = fName : arr 
+                                            in  (fName, tpe) :
+                                                getArgs body arr'
+                    Fa name    tpe body ->  (name, tpe) :
+                                            getArgs body arr
+                    _                   ->  []
+
+                args = getArgs type' typeParams
+
+                foldAppParams :: Term
+                foldAppParams = foldl1 ($$) . map (Var . fst) $ getCtx indParams 
+                
+                foldResultTerm :: Term 
+                foldResultTerm = let nextApp a b = a $$ getTerm b
+                                 in  foldl nextApp (Var name) args
+                                
+
+                getTerm :: (Var, Term) -> Term 
+                getTerm (v, t) | t == (Var $ V indName)                   = let leftPart = foldl ($$) (Var uniVar) . map (Var . fst) $ getCtx ctx 
+                                                                                ctx      = insert v (Var noname) indParams
+                                                                            in  foldl ($$) leftPart $ map (Var . fst) $ getCtx indConstructors 
+                               | t == (Var $ V indName) $$ foldAppParams  = let leftPart = foldl ($$) (Var uniVar) . map (Var . fst) $ getCtx ctx 
+                                                                                ctx      = insert v (Var noname) indParams
+                                                                            in  foldl ($$) leftPart $ map (Var . fst) $ getCtx indConstructors 
+                               | otherwise                                = Var v
 
 recordToTerm :: Record -> Context Term 
 recordToTerm Record{..} = inductiveToTerm (Inductive recName recParams recConstructors)
@@ -113,7 +160,7 @@ encodeAlgebraic Algebraic{..} = insert (V algName) getAlgebraicType getConstruct
                                             freshVars = fresh $ map V algParams 
 
                                             foldArgs :: Term -> Term
-                                            foldArgs t = let nextLam (x, y) = Lam x (fromTypeApp [y] True)
+                                            foldArgs t = let nextLam (x, y) = Lam x (fromTypeApp [y] False)
                                                          in  foldr nextLam t $ zip freshVars args
 
                                             getResultTerm :: Term 
@@ -149,4 +196,4 @@ fresh conflicts = dropWhile (`elem` conflicts) nameGen
         freshName b = if b == 0 then "" else show b
 
 uniVar :: Var
-uniVar = V $ pack "r"
+uniVar = V "r"

@@ -25,7 +25,7 @@ typeWith ctx term =
                     Fa{..} -> 
                         do
                             datTpe <- reduce <$> typeWith ctx dat
-                            if isIn (reduce tpe) (reduce datTpe) ctx
+                            if isIn (reduce datTpe) (reduce tpe) ctx
                             then return $ substitute body var dat
                             else throwE $ CannotEqualizeTypes (reduce tpe) (reduce datTpe)
                     _      -> throwE $ InvalidType algTpe "must be arrow"

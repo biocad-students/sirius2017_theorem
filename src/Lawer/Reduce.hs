@@ -1,7 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Lawer.Reduce (Term (..), reduce, substitute) where
+module Lawer.Reduce (Term (..), reduce, substitute, free) where
 
 import Data.Set (singleton, union, empty, delete, insert, member, notMember, Set) 
 import Lawer.Type
