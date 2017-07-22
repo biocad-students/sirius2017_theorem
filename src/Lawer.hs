@@ -3,7 +3,7 @@ module Lawer(
     typeOf, 
     reduce, substitute, free,
     Context(..), lookup, empty, insert,
-    CalculusError(..), parseTermM, parseTerm, parserMetaVar, parserSpaces,
+    CalculusError(..), parseTermM, parseTerm, parserMetaVar, parserSpaces, indent,
     app, arrow, (-->), ($$)
 ) where
 
@@ -13,6 +13,6 @@ import Lawer.Pretty ()
 import Lawer.Error (CalculusError(..))
 import Lawer.Check (typeOf)
 import Lawer.Context (Context(..), lookup, empty, insert)
-import Lawer.Parser (parseTermM, parseTerm, parserMetaVar, parserSpaces)
+import Lawer.Parser (parseTermM, parseTerm, parserMetaVar, parserSpaces, indent)
 import Lawer.Sugar (app, arrow, (-->), ($$))
 import Prelude hiding (lookup)

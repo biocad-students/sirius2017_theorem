@@ -1,5 +1,7 @@
+{-# LANGUAGE RecordWildCards #-}
 module LawerHL.Type where
 
+import Lawer
 import Lawer.Type 
 import Lawer.Context
 import Lawer.Reduce
@@ -31,4 +33,14 @@ data Algebraic = Algebraic
 data Construction   = Ind Inductive 
                     | Alg Algebraic 
                     | Rec Record
-                    deriving (Eq)
+                    deriving(Show, Eq)
+
+instance Show Inductive where
+    show Inductive{..} = "inductive " ++ show indName ++ " " ++ show indParams ++ " = " ++ show indConstructors
+
+instance Show Record where
+    show Record{..} = "record " ++ show recName ++ " " ++ show recParams ++ " = " ++ show recConstructors
+
+instance Show Algebraic where
+    show Algebraic{..} = "data " ++ show algName ++ " " ++ show algParams ++ " = " ++ show algConstructors
+

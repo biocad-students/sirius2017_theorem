@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Lawer.Parser (parseTermM, parseTerm, parserVar, parserTerm, parserMetaVar, parserSpaces) where
+module Lawer.Parser (parseTermM, parseTerm, parserVar, parserTerm, parserMetaVar, parserSpaces, indent) where
 
 import Control.Applicative   (many, some, (<|>))
 import Text.Megaparsec
@@ -9,6 +9,8 @@ import Lawer.Type
 import Lawer.Pretty
 import Data.Text
 
+indent :: Parser Char
+indent = spaceChar <|> tab <|> newline
 
 parserBoxInt :: Parser Integer
 parserBoxInt = read <$> (some digitChar <|> pure "1")
@@ -18,13 +20,14 @@ parserVar = do var <- parserMetaVar
                return $ Var var
 
 parserMetaVar :: Parser Var
-parserMetaVar = do st <- skipMany spaceChar *> some letterChar
-                   dg <- many digitChar <* skipMany spaceChar
-                   return $ V $ pack (st ++ dg)
+parserMetaVar = do st <- some letterChar
+                   if st == "data" then fail "keywords connot be used for var's name" 
+                   else do dg <- many digitChar
+                           return $ V $ pack (st ++ dg)
 
 parserApp :: Parser Term
-parserApp = do term1 <- skipMany spaceChar *> between (char '(') (char ')') (skipMany spaceChar *> parserTerm <* skipMany spaceChar)
-               term2 <- skipMany spaceChar *> parserTerm
+parserApp = do term1 <- skipMany indent *> between (char '(') (char ')') (skipMany indent *> parserTerm <* skipMany indent)
+               term2 <- skipMany indent *> parserTerm
                return $ App term1 term2
 
 parserTermInBr :: Parser Term
@@ -34,37 +37,37 @@ parserTerm :: Parser Term
 parserTerm = try parserLam <|> try parserApp <|>  try parserTermInBr <|> try parserFa <|> try parserVar <|> try parserUni
 
 parserStar :: Parser Term
-parserStar = do star <- skipMany spaceChar *> char '*' <* skipMany spaceChar
+parserStar = do star <- skipMany indent *> char '*' <* skipMany indent
                 return $ Uni Star
 
 parserUni :: Parser Term
 parserUni = try parserStar <|> try parserBox
 
 parserBox :: Parser Term
-parserBox = do num <- skipMany spaceChar *> string "[" *> parserBoxInt <* string "]" <* skipMany spaceChar
+parserBox = do num <- skipMany indent *> string "[" *> parserBoxInt <* string "]" <* skipMany indent
                return $ Uni $ Box num
 
 
 parserLamMeta = do Var var <- parserVar
-                   tpe <- string ":" *> parserTerm <* skipMany spaceChar
+                   tpe <- string ":" *> parserTerm <* skipMany indent
                    return $ Lam var tpe
 
 
 parserFaMeta = do (Var var) <- parserVar
-                  tpe <- string ":" *> parserTerm <* skipMany spaceChar
+                  tpe <- string ":" *> parserTerm <* skipMany indent
                   return $ Fa var tpe
 
 
 parserLam :: Parser Term
-parserLam = do meta <- skipMany spaceChar *> between (char '[') (char ']') parserLamMeta
+parserLam = do meta <- skipMany indent *> between (char '[') (char ']') parserLamMeta
                term <- parserTerm
                return $ meta term
 
 parserSpaces :: Parser ()
-parserSpaces = skipMany spaceChar *> eof
+parserSpaces = skipMany indent *> eof
 
 parserFa :: Parser Term
-parserFa = do meta <- skipMany spaceChar *> between (char '(') (char ')') parserFaMeta
+parserFa = do meta <- skipMany indent *> between (char '(') (char ')') parserFaMeta
               term <- parserTerm
               return $ meta term
 

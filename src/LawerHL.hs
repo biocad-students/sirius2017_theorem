@@ -6,3 +6,4 @@ module LawerHL(
 import LawerHL.Parser (parserConst, parserAlgebraic, parserInductive)
 import LawerHL.Encoding (constructionToTerm)
 import LawerHL.Type (Record(..), Inductive(..), TypeApp(..), Algebraic(..), Construction(..))
+import LawerHL.Parser (parserRecord, parserConst, parserInductive, parserAlgebraic)
